@@ -1,0 +1,477 @@
+/* ====================================================================
+   FAB Button - Floating Action Button para Schedule
+   ==================================================================== */
+.fab-button--schedule {
+  position: fixed !important;
+  bottom: 32px !important;
+  right: 32px !important;
+  width: 64px;
+  height: 64px;
+  min-width: 64px;
+  min-height: 64px;
+  max-width: 64px;
+  max-height: 64px;
+  aspect-ratio: 1 / 1;
+  border-radius: 50% !important;
+  background: linear-gradient(135deg, #a9b71a 0%, #a9b71a 100%);
+  border: none;
+  color: white;
+  font-size: 0;
+  line-height: 0;
+  font-weight: 300;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(169, 183, 26, 0.4);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 45;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  flex-shrink: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+  will-change: transform;
+  transform-origin: center center;
+  transform: translateZ(0) translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  -webkit-font-smoothing: subpixel-antialiased;
+  contain: layout style paint;
+  isolation: isolate;
+}
+
+.fab-button--schedule:hover:not(:disabled) {
+  transform: scale(1.1);
+  box-shadow: 0 12px 32px rgba(169, 183, 26, 0.5);
+}
+
+.fab-button--schedule:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+.fab-button--schedule:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: 0 4px 12px rgba(169, 183, 26, 0.2);
+}
+
+.fab-button--schedule svg {
+  width: 24px !important;
+  height: 24px !important;
+  min-width: 24px !important;
+  min-height: 24px !important;
+  max-width: 24px !important;
+  max-height: 24px !important;
+  stroke-width: 2.5;
+  flex-shrink: 0;
+  display: block;
+  object-fit: contain;
+}
+
+/* ====================================================================
+   Modal Overlay
+   ==================================================================== */
+.modal-overlay--schedule {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ====================================================================
+   Modal Content
+   ==================================================================== */
+.modal-content--schedule {
+  background: var(--surface);
+  border-radius: 20px;
+  width: 100%;
+  max-width: 640px;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ====================================================================
+   Modal Header
+   ==================================================================== */
+.modal-header--schedule {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 28px;
+  border-bottom: 1px solid var(--border);
+}
+
+.modal-title--schedule {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.modal-title__icon--schedule {
+  font-size: 24px;
+}
+
+.modal-close--schedule {
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  min-height: 36px;
+  max-width: 36px;
+  max-height: 36px;
+  border-radius: 50% !important;
+  background: var(--surface-variant);
+  border: none;
+  color: var(--text-secondary);
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  line-height: 1;
+  padding: 0 !important;
+  flex-shrink: 0;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.modal-close--schedule:hover {
+  background: var(--surface-hover);
+  color: var(--text-primary);
+  transform: scale(1.1);
+}
+
+/* ====================================================================
+   Modal Form
+   ==================================================================== */
+.modal-form--schedule {
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-row--schedule {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.form-field--schedule {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-field__label--schedule {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.form-field__icon--schedule {
+  font-size: 16px;
+}
+
+.form-field__input--schedule,
+.form-field__select--schedule,
+.form-field__textarea--schedule {
+  width: 100%;
+  padding: 12px 14px;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+  color: var(--text-primary);
+  font-size: 15px;
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+
+/* Mejorar time/datetime inputs */
+input[type="time"].form-field__input--schedule {
+  color-scheme: light;
+}
+
+input[type="time"].form-field__input--schedule::placeholder {
+  color: var(--text-tertiary);
+  opacity: 0.7;
+}
+
+.form-field__input--schedule:focus,
+.form-field__select--schedule:focus,
+.form-field__textarea--schedule:focus {
+  outline: none;
+  border-color: #a9b71a;
+  box-shadow: 0 0 0 3px rgba(169, 183, 26, 0.1);
+}
+
+.form-field__input--schedule::placeholder,
+.form-field__textarea--schedule::placeholder {
+  color: var(--text-tertiary);
+}
+
+.form-field__textarea--schedule {
+  resize: vertical;
+  min-height: 70px;
+}
+
+.form-field__select--schedule {
+  cursor: pointer;
+}
+
+.form-error--schedule {
+  padding: 12px 16px;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 10px;
+  color: #ef4444;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.form-error--schedule::before {
+  content: '⚠️';
+  font-size: 16px;
+}
+
+/* ====================================================================
+   Modal Actions
+   ==================================================================== */
+.modal-actions--schedule {
+  display: flex;
+  gap: 12px;
+  padding-top: 8px;
+}
+
+.btn--schedule {
+  flex: 1;
+  padding: 14px 24px;
+  border-radius: 12px;
+  border: none;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.btn--primary-schedule {
+  background: linear-gradient(135deg, #a9b71a 0%, #a9b71a 100%);
+  color: white;
+  box-shadow: 0 4px 12px rgba(169, 183, 26, 0.3);
+}
+
+.btn--primary-schedule:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(169, 183, 26, 0.4);
+}
+
+.btn--primary-schedule:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn--secondary-schedule {
+  background: var(--surface-variant);
+  color: var(--text-secondary);
+}
+
+.btn--secondary-schedule:hover {
+  background: var(--surface-hover);
+  color: var(--text-primary);
+}
+
+/* ====================================================================
+   Dark Mode Overrides
+   ==================================================================== */
+body.theme-dark .modal-overlay--schedule {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+body.theme-dark .modal-content--schedule {
+  background: var(--surface);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+}
+
+body.theme-dark .modal-header--schedule {
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+body.theme-dark .modal-title--schedule,
+body.theme-dark .form-field__label--schedule {
+  color: #e2e8f0;
+}
+
+body.theme-dark .form-field__input--schedule,
+body.theme-dark .form-field__select--schedule,
+body.theme-dark .form-field__textarea--schedule {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #e2e8f0;
+}
+
+/* Dark mode time input improvements */
+body.theme-dark input[type="time"].form-field__input--schedule {
+  background: rgba(30, 41, 59, 0.8) !important;
+  color: #e2e8f0 !important;
+  border-color: rgba(148, 163, 184, 0.3) !important;
+  color-scheme: dark;
+}
+
+body.theme-dark input[type="time"].form-field__input--schedule::placeholder {
+  color: rgba(226, 232, 240, 0.5) !important;
+}
+
+body.theme-dark .form-field__input--schedule::placeholder,
+body.theme-dark .form-field__textarea--schedule::placeholder {
+  color: rgba(226, 232, 240, 0.4);
+}
+
+body.theme-dark .form-field__input--schedule:focus,
+body.theme-dark .form-field__select--schedule:focus,
+body.theme-dark .form-field__textarea--schedule:focus {
+  border-color: #a9b71a;
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 0 3px rgba(169, 183, 26, 0.15);
+}
+
+body.theme-dark .btn--secondary-schedule {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-secondary);
+}
+
+body.theme-dark .btn--secondary-schedule:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--text-primary);
+}
+
+body.theme-dark .modal-close--schedule {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+body.theme-dark .modal-close--schedule:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* ====================================================================
+   Responsive Mobile
+   ==================================================================== */
+@media (max-width: 640px) {
+  .fab-button--schedule {
+    width: 56px !important;
+    height: 56px !important;
+    min-width: 56px !important;
+    min-height: 56px !important;
+    max-width: 56px !important;
+    max-height: 56px !important;
+    bottom: 20px !important;
+    right: 20px !important;
+    border-radius: 50% !important;
+    font-size: 0 !important;
+    line-height: 0 !important;
+    z-index: 45;
+    aspect-ratio: 1 / 1;
+    flex-shrink: 0;
+    overflow: hidden;
+    padding: 0 !important;
+    margin: 0;
+    box-sizing: border-box;
+    will-change: transform;
+    transform-origin: center center;
+    transform: translateZ(0);
+    position: fixed;
+  }
+
+  .fab-button--schedule svg {
+    width: 20px !important;
+    height: 20px !important;
+    min-width: 20px !important;
+    min-height: 20px !important;
+    max-width: 20px !important;
+    max-height: 20px !important;
+  }
+
+  .modal-overlay--schedule {
+    padding: 0;
+    align-items: flex-end;
+  }
+
+  .modal-content--schedule {
+    border-radius: 20px 20px 0 0;
+    max-height: 90vh;
+  }
+
+  .modal-header--schedule {
+    padding: 20px 20px;
+  }
+
+  .modal-title--schedule {
+    font-size: 20px;
+  }
+
+  .modal-form--schedule {
+    padding: 20px;
+    gap: 16px;
+  }
+
+  .form-row--schedule {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .modal-actions--schedule {
+    flex-direction: column-reverse;
+  }
+
+  .btn--schedule {
+    width: 100%;
+  }
+}

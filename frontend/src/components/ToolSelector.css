@@ -1,0 +1,68 @@
+/* ============================================================
+   ToolSelector — herramientas recomendadas (tsx-*). Light + dark.
+   Estructura nueva: cabecera + podio de recomendadas + grid.
+   ============================================================ */
+.tsx {
+  position: fixed; inset: 0; z-index: 1000; overflow-y: auto;
+  display: flex; justify-content: center; align-items: flex-start;
+  padding: clamp(18px, 4vw, 52px) clamp(14px, 4vw, 40px);
+  font-family: 'DM Sans', system-ui, sans-serif; color: var(--sx-text);
+  background:
+    radial-gradient(820px 520px at 12% -6%, var(--sx-accent-soft), transparent 70%),
+    radial-gradient(680px 480px at 100% 106%, rgba(169, 183, 26,.10), transparent 70%),
+    var(--sx-bg);
+  opacity: 0; transform: translateY(8px); transition: opacity .35s ease, transform .35s ease;
+}
+.tsx--in { opacity: 1; transform: none; }
+.tsx--out { opacity: 0; transform: scale(.98); }
+
+.tsx__shell { width: min(980px, 100%); display: flex; flex-direction: column; gap: 26px; }
+
+/* Header */
+.tsx__head { text-align: center; }
+.tsx__greeting { font-size: .9rem; font-weight: 700; color: var(--sx-accent-700); }
+body.theme-dark .tsx__greeting { color: var(--sx-accent); }
+.tsx__title { font-size: clamp(1.7rem, 4vw, 2.5rem); font-weight: 800; letter-spacing: -.8px; margin: 8px 0 8px; }
+.tsx__sub { color: var(--sx-text-2); margin: 0; font-size: 1rem; }
+
+/* Featured / podium */
+.tsx__featured { background: var(--sx-card); border: 1px solid var(--sx-border); border-radius: 22px; padding: 22px; box-shadow: var(--sx-shadow); }
+.tsx__featured-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
+.tsx__featured-badge { font-weight: 800; font-size: 1rem; color: var(--sx-accent-700); }
+body.theme-dark .tsx__featured-badge { color: var(--sx-accent); }
+.tsx__featured-note { font-size: .78rem; color: var(--sx-text-3); }
+
+.tsx__podium { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.tsx__rec {
+  position: relative; cursor: pointer; text-align: left; display: flex; flex-direction: column; gap: 4px;
+  padding: 20px 18px 16px; border-radius: 18px; border: 1.5px solid var(--sx-border);
+  background: var(--sx-card-2); transition: transform .18s, border-color .18s, box-shadow .18s;
+  --c: var(--sx-accent);
+}
+.tsx__rec:hover:not(:disabled) { transform: translateY(-5px); border-color: var(--c); box-shadow: 0 22px 50px -26px var(--c); }
+.tsx__rec--0 { background: linear-gradient(160deg, color-mix(in srgb, var(--c) 16%, var(--sx-card)) 0%, var(--sx-card-2) 70%); border-color: color-mix(in srgb, var(--c) 40%, transparent); }
+.tsx__rec.is-chosen { border-color: var(--c); box-shadow: 0 0 0 3px color-mix(in srgb, var(--c) 30%, transparent); }
+.tsx__rec-medal { position: absolute; top: 14px; right: 14px; font-size: 1.3rem; }
+.tsx__rec-icon { font-size: 2rem; }
+.tsx__rec-name { font-weight: 800; font-size: 1.05rem; color: var(--sx-text); margin-top: 6px; }
+.tsx__rec-benefit { font-size: .82rem; color: var(--sx-text-2); flex: 1; }
+.tsx__rec-go { margin-top: 12px; font-weight: 700; font-size: .85rem; color: var(--c); }
+
+/* All grid */
+.tsx__all-title { font-size: 1.05rem; font-weight: 800; margin: 0 0 14px; }
+.tsx__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
+.tsx__card {
+  position: relative; cursor: pointer; text-align: left; display: flex; flex-direction: column; gap: 3px;
+  padding: 16px; border-radius: 15px; border: 1px solid var(--sx-border); background: var(--sx-card);
+  box-shadow: var(--sx-shadow); transition: transform .16s, border-color .16s; --c: var(--sx-accent);
+}
+.tsx__card:hover:not(:disabled) { transform: translateY(-3px); border-color: var(--c); }
+.tsx__card.is-chosen { border-color: var(--c); box-shadow: 0 0 0 3px color-mix(in srgb, var(--c) 28%, transparent); }
+.tsx__card-icon { font-size: 1.5rem; display: flex; gap: 2px; }
+.tsx__card-name { font-weight: 700; font-size: .95rem; color: var(--sx-text); margin-top: 6px; }
+.tsx__card-desc { font-size: .78rem; color: var(--sx-text-3); line-height: 1.4; }
+.tsx__card-star { position: absolute; top: 12px; right: 12px; color: var(--c); font-size: .9rem; }
+
+@media (max-width: 720px) {
+  .tsx__podium { grid-template-columns: 1fr; }
+}

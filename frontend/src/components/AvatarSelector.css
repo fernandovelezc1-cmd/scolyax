@@ -1,0 +1,379 @@
+/* ========================================
+   AVATAR SELECTOR - Selector de avatares animados
+   ======================================== */
+
+.avatar-selector-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  padding: 20px;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.avatar-selector {
+  background: white;
+  border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  max-width: 520px;
+  width: 100%;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  animation: slideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.avatar-selector__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 28px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.avatar-selector__title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatar-selector__title-icon {
+  font-size: 26px;
+  animation: sparkle 2s ease-in-out infinite;
+}
+
+@keyframes sparkle {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    transform: scale(1.2) rotate(180deg);
+  }
+}
+
+.avatar-selector__close {
+  background: #f3f4f6;
+  border: none;
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  min-height: 36px;
+  max-width: 36px;
+  max-height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  line-height: 1;
+  color: #6b7280;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-align: center;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.avatar-selector__close:hover {
+  background: #e5e7eb;
+  transform: rotate(90deg);
+  color: #374151;
+}
+
+.avatar-selector__grid {
+  padding: 24px 28px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 16px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.avatar-option {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  border: 3px solid transparent;
+  border-radius: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  overflow: hidden;
+}
+
+.avatar-option::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.2);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.avatar-option:hover::before {
+  opacity: 1;
+}
+
+.avatar-option:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+.avatar-option:active {
+  transform: translateY(-2px) scale(1.02);
+}
+
+.avatar-option--selected {
+  border-color: #c9d62f;
+  box-shadow: 0 0 0 4px rgba(201, 214, 47, 0.2),
+              0 12px 24px rgba(201, 214, 47, 0.3);
+  transform: scale(1.05);
+}
+
+.avatar-option--selected:hover {
+  transform: translateY(-2px) scale(1.08);
+}
+
+.avatar-option__emoji {
+  font-size: 44px;
+  position: relative;
+  z-index: 1;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.avatar-option:hover .avatar-option__emoji {
+  transform: scale(1.15) rotate(5deg);
+}
+
+.avatar-option--selected .avatar-option__emoji {
+  animation: bounce 0.6s ease;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.2);
+  }
+  50% {
+    transform: scale(0.95);
+  }
+  75% {
+    transform: scale(1.1);
+  }
+}
+
+.avatar-option__check {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background: #c9d62f;
+  color: white;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  opacity: 0;
+  transform: scale(0);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 2;
+  box-shadow: 0 2px 8px rgba(201, 214, 47, 0.4);
+}
+
+.avatar-option--selected .avatar-option__check {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.avatar-selector__footer {
+  display: flex;
+  gap: 12px;
+  padding: 20px 28px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.avatar-selector__button {
+  flex: 1;
+  padding: 14px 24px;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.avatar-selector__button--secondary {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.avatar-selector__button--secondary:hover {
+  background: #e5e7eb;
+  transform: translateY(-1px);
+}
+
+.avatar-selector__button--primary {
+  background: linear-gradient(135deg, #c9d62f 0%, #a9b71a 100%);
+  color: white;
+  box-shadow: 0 4px 12px rgba(201, 214, 47, 0.4);
+}
+
+.avatar-selector__button--primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(201, 214, 47, 0.5);
+}
+
+.avatar-selector__button--primary:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(201, 214, 47, 0.4);
+}
+
+.avatar-selector__button-icon {
+  font-size: 18px;
+}
+
+/* ========================================
+   DARK MODE
+   ======================================== */
+
+body.theme-dark .avatar-selector {
+  background: #1e293b;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+}
+
+body.theme-dark .avatar-selector__header {
+  border-bottom-color: #334155;
+}
+
+body.theme-dark .avatar-selector__title {
+  color: #f1f5f9;
+}
+
+body.theme-dark .avatar-selector__close {
+  background: #334155;
+  color: #cbd5e1;
+}
+
+body.theme-dark .avatar-selector__close:hover {
+  background: #475569;
+  color: #f1f5f9;
+}
+
+body.theme-dark .avatar-option--selected {
+  border-color: #a9b71a;
+  box-shadow: 0 0 0 4px rgba(169, 183, 26, 0.3),
+              0 12px 24px rgba(169, 183, 26, 0.4);
+}
+
+body.theme-dark .avatar-option__check {
+  background: #a9b71a;
+  box-shadow: 0 2px 8px rgba(169, 183, 26, 0.6);
+}
+
+body.theme-dark .avatar-selector__footer {
+  border-top-color: #334155;
+}
+
+body.theme-dark .avatar-selector__button--secondary {
+  background: #334155;
+  color: #cbd5e1;
+}
+
+body.theme-dark .avatar-selector__button--secondary:hover {
+  background: #475569;
+  color: #f1f5f9;
+}
+
+body.theme-dark .avatar-selector__button--primary {
+  background: linear-gradient(135deg, #a9b71a 0%, #a9b71a 100%);
+  box-shadow: 0 4px 12px rgba(169, 183, 26, 0.5);
+}
+
+body.theme-dark .avatar-selector__button--primary:hover {
+  box-shadow: 0 6px 16px rgba(169, 183, 26, 0.6);
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 480px) {
+  .avatar-selector {
+    max-width: 100%;
+    border-radius: 20px 20px 0 0;
+    max-height: 90vh;
+  }
+
+  .avatar-selector__header {
+    padding: 20px;
+  }
+
+  .avatar-selector__title {
+    font-size: 20px;
+  }
+
+  .avatar-selector__grid {
+    padding: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+    gap: 12px;
+  }
+
+  .avatar-option__emoji {
+    font-size: 36px;
+  }
+
+  .avatar-selector__footer {
+    padding: 16px 20px;
+    flex-direction: column;
+  }
+
+  .avatar-selector__button {
+    width: 100%;
+    padding: 16px;
+  }
+}

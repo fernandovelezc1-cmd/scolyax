@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scolyax</title>
+    <link rel="stylesheet" href="../src/styles.css" />
+    <style>
+      body {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 48px 24px 96px;
+        background: linear-gradient(160deg, #f3f4ff 0%, #ffffff 40%, #f6fbff 100%);
+      }
+      .login-preview {
+        border-radius: 32px;
+        background: rgba(255, 255, 255, 0.88);
+        border: 1px solid rgba(31, 38, 94, 0.12);
+        box-shadow: 0 22px 60px rgba(31, 38, 94, 0.14);
+        padding: 36px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      }
+      .login-preview header {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .login-preview h1 {
+        margin: 0;
+        font-size: 2rem;
+        color: #1f265e;
+      }
+      .login-preview p {
+        margin: 0;
+        color: #4b5581;
+        line-height: 1.5;
+      }
+      .login-preview__providers {
+        display: grid;
+        gap: 20px;
+      }
+      .login-preview__card {
+        border-radius: 24px;
+        padding: 24px;
+        border: 1px solid rgba(31, 38, 94, 0.14);
+        background: linear-gradient(140deg, rgba(66, 133, 244, 0.14), rgba(52, 211, 153, 0.08));
+        box-shadow: 0 18px 40px rgba(31, 38, 94, 0.12);
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+      .login-preview__card--microsoft {
+        background: linear-gradient(140deg, rgba(5, 99, 193, 0.18), rgba(242, 80, 34, 0.12));
+      }
+      .login-preview__card h2 {
+        margin: 0;
+        font-size: 1.2rem;
+        color: #1f265e;
+      }
+      .login-preview__card p {
+        color: #4b5581;
+        margin: 0;
+        line-height: 1.5;
+      }
+      .login-preview__actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .login-preview__pill {
+        border-radius: 999px;
+        padding: 10px 18px;
+        font-weight: 600;
+        font-size: 0.95rem;
+        background: #1f265e;
+        color: #ffffff;
+      }
+      .login-preview__pill--secondary {
+        background: rgba(255, 255, 255, 0.92);
+        color: #1f265e;
+        border: 1px solid rgba(31, 38, 94, 0.2);
+      }
+      .login-preview__footer {
+        border-radius: 20px;
+        padding: 18px;
+        background: rgba(52, 84, 209, 0.08);
+        border: 1px solid rgba(52, 84, 209, 0.2);
+        color: #1f265e;
+        font-size: 0.95rem;
+      }
+    </style>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+</head>
+  <body>
+    <article class="login-preview">
+      <header>
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+          <div class="brand-icon" aria-hidden="true" style="width:56px;height:56px;display:flex;align-items:center;justify-content:center;border-radius:12px;background:#6C5CE7;color:#fff;font-weight:700;font-size:20px">CC</div>
+          <h1 id="welcome-heading" class="overview__title">Scolyax</h1>
+        </div>
+        <p>Conecta tu cuenta de Google o Microsoft para sincronizar recordatorios por correo y entrar al tablero estudiantil.</p>
+      </header>
+      <p>
+        Elige el proveedor que usas para tus estudios. Podrás iniciar sesión o registrar una cuenta nueva y, tras autenticarnos,
+        te pediremos cómo quieres que te saludemos en el tablero.
+      </p>
+      <div class="login-preview__providers" aria-label="Opciones de acceso">
+        <article class="login-preview__card">
+          <h2>Google</h2>
+          <p>Sincroniza tus recordatorios con Gmail y Google Calendar desde un flujo oficial de OAuth.</p>
+          <div class="login-preview__actions">
+            <span class="login-preview__pill">Iniciar sesión</span>
+            
+          </div>
+        </article>
+        <article class="login-preview__card login-preview__card--microsoft">
+          <h2>Microsoft</h2>
+          <p>Conecta tus avisos académicos con Outlook y Microsoft 365 en pocos pasos.</p>
+          <div class="login-preview__actions">
+            <span class="login-preview__pill">Iniciar sesión</span>
+            
+          </div>
+        </article>
+      </div>
+      <div class="login-preview__footer">
+        ¿Sin conexión? Activa el modo demostración para seguir practicando mientras el backend se reconecta.
+      </div>
+    </article>
+  </body>
+</html>

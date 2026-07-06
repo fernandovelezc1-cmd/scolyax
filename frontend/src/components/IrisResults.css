@@ -1,0 +1,88 @@
+/* ============================================================
+   IrisResults — perfil/plan post-test (srx-*). Light + dark.
+   Estructura nueva: técnica protagonista + estilo + semana timeline + tips.
+   ============================================================ */
+.srx {
+  position: fixed; inset: 0; z-index: 1000; overflow-y: auto;
+  display: flex; justify-content: center; align-items: flex-start;
+  padding: clamp(16px, 4vw, 48px) clamp(14px, 4vw, 40px);
+  font-family: 'DM Sans', system-ui, sans-serif; color: var(--sx-text);
+  background:
+    radial-gradient(820px 520px at 88% -6%, var(--sx-accent-soft), transparent 70%),
+    radial-gradient(640px 460px at -5% 108%, rgba(169, 183, 26,.10), transparent 70%),
+    var(--sx-bg);
+  opacity: 0; transition: opacity .4s ease;
+}
+.srx--in { opacity: 1; }
+
+.srx__shell { width: min(880px, 100%); display: flex; flex-direction: column; gap: 18px; }
+
+/* Header */
+.srx__head { display: flex; align-items: center; gap: 14px; }
+.srx__badge { width: 52px; height: 52px; border-radius: 14px; overflow: hidden; flex-shrink: 0; box-shadow: 0 6px 18px -6px var(--sx-accent-ring); }
+.srx__badge img { width: 100%; height: 100%; display: block; }
+.srx__eyebrow { font-size: .74rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--sx-accent-700); }
+body.theme-dark .srx__eyebrow { color: var(--sx-accent); }
+.srx__title { font-size: clamp(1.5rem, 3.4vw, 2.1rem); font-weight: 800; letter-spacing: -.6px; margin: 4px 0 0; }
+.srx__title span { background: var(--sx-grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+
+/* Método protagonista */
+.srx__method {
+  display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;
+  background: var(--sx-grad); color: var(--sx-on-accent); border-radius: 22px; padding: clamp(20px, 3vw, 30px);
+  box-shadow: 0 24px 60px -28px var(--sx-accent-ring);
+}
+.srx__method-tag { font-size: .78rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; opacity: .8; }
+.srx__method-name { font-size: clamp(1.9rem, 4vw, 2.6rem); font-weight: 800; letter-spacing: -1px; margin: 6px 0 6px; color: var(--sx-on-accent); }
+.srx__method-desc { margin: 0; font-weight: 500; opacity: .85; max-width: 380px; }
+.srx__method-stats { display: flex; align-items: center; gap: 18px; background: rgba(255,255,255,.25); border-radius: 16px; padding: 16px 22px; }
+.srx__stat { display: flex; flex-direction: column; align-items: center; }
+.srx__stat-num { font-size: 2.2rem; font-weight: 800; line-height: 1; }
+.srx__stat-lbl { font-size: .72rem; font-weight: 600; opacity: .85; }
+.srx__stat-sep { width: 1px; align-self: stretch; background: rgba(0,0,0,.15); }
+
+/* Estilo */
+.srx__style { display: flex; gap: 14px; align-items: flex-start; background: var(--sx-card); border: 1px solid var(--sx-border); border-radius: 16px; padding: 16px 18px; box-shadow: var(--sx-shadow); }
+.srx__style-emoji { font-size: 1.6rem; }
+.srx__style-label { font-weight: 800; font-size: 1.02rem; text-transform: capitalize; }
+.srx__style-text { margin: 4px 0 0; color: var(--sx-text-2); font-size: .9rem; line-height: 1.5; }
+
+/* 2 columnas: semana + tips */
+.srx__cols { display: grid; grid-template-columns: 1.1fr .9fr; gap: 18px; align-items: start; }
+.srx__block { background: var(--sx-card); border: 1px solid var(--sx-border); border-radius: 18px; padding: 20px; box-shadow: var(--sx-shadow); }
+.srx__block-title { font-size: 1rem; font-weight: 800; margin: 0 0 16px; }
+
+/* Semana timeline */
+.srx__week { display: flex; flex-direction: column; }
+.srx__day { display: flex; gap: 14px; }
+.srx__day-rail { display: flex; flex-direction: column; align-items: center; }
+.srx__day-dot { width: 38px; height: 38px; border-radius: 12px; display: grid; place-items: center; font-size: 1.1rem; background: var(--sx-accent-soft); flex-shrink: 0; }
+.srx__day-line { flex: 1; width: 2px; background: var(--sx-border); margin: 4px 0; min-height: 14px; }
+.srx__day-card { padding-bottom: 16px; }
+.srx__day-name { display: block; font-weight: 700; font-size: .92rem; }
+.srx__day-focus { display: block; font-size: .82rem; color: var(--sx-text-2); margin-top: 2px; }
+
+/* Tips */
+.srx__tips { display: flex; flex-direction: column; gap: 12px; }
+.srx__tip { display: flex; gap: 12px; align-items: flex-start; background: var(--sx-card-2); border: 1px solid var(--sx-border); border-radius: 13px; padding: 14px; }
+.srx__tip-num { width: 26px; height: 26px; flex-shrink: 0; border-radius: 8px; display: grid; place-items: center; font-weight: 800; font-size: .85rem; background: var(--sx-grad); color: var(--sx-on-accent); }
+.srx__tip-text { margin: 0; font-size: .88rem; line-height: 1.5; color: var(--sx-text); }
+
+/* CTA */
+.srx__cta { text-align: center; margin-top: 6px; }
+.srx__cta-hint { font-size: .82rem; color: var(--sx-text-3); margin: 0 0 14px; }
+.srx__cta-btn {
+  display: inline-flex; align-items: center; gap: 10px; cursor: pointer;
+  padding: 15px 30px; border-radius: 14px; border: none; font-weight: 700; font-size: 1.02rem;
+  background: var(--sx-grad); color: var(--sx-on-accent); box-shadow: 0 16px 40px -14px var(--sx-accent-ring);
+}
+.srx__cta-arrow { transition: transform .2s; }
+.srx__cta-btn:hover .srx__cta-arrow { transform: translateX(5px); }
+.srx__cta-btn--pulse { animation: srx-pulse 1.8s ease-in-out infinite; }
+@keyframes srx-pulse { 0%,100% { box-shadow: 0 16px 40px -14px var(--sx-accent-ring); } 50% { box-shadow: 0 16px 50px -10px var(--sx-accent-ring), 0 0 0 6px rgba(201, 214, 47,.12); } }
+
+@media (max-width: 760px) {
+  .srx__cols { grid-template-columns: 1fr; }
+  .srx__method { flex-direction: column; align-items: flex-start; }
+}
+@media (prefers-reduced-motion: reduce) { .srx__cta-btn--pulse { animation: none; } }

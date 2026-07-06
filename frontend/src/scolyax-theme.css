@@ -1,0 +1,908 @@
+/* ============================================================
+   SCOLYAX — Design System v2 (UniMalla-inspired)
+   Light-first, clean, card/grid based. Full dark mode.
+   Loaded LAST in main.jsx so it overrides the legacy stylesheets.
+   ============================================================ */
+
+/* ============================================================
+   SCOLYAX — Design System v3 (EDITORIAL OSCURO + LIMA)
+   Dark único, acento acid-lime, tipografías Bebas/DM, bordes hairline.
+   ============================================================ */
+:root,
+body.theme-dark {
+  /* brand — acid lime */
+  --sx-on-accent:     #080c14;
+  --sx-accent:        #c9d62f;
+  --sx-accent-600:    #a9b71a;
+  --sx-accent-700:    #a9b71a;
+  --sx-accent-2:      #a9b71a;
+  --sx-grad:          linear-gradient(135deg, #c9d62f 0%, #a9b71a 100%);
+  --sx-accent-soft:   rgba(201, 214, 47, .10);
+  --sx-accent-ring:   rgba(201, 214, 47, .28);
+
+  /* surfaces — editorial */
+  --sx-bg:            #080c14;
+  --sx-bg-2:          #060a10;
+  --sx-card:          #0d1320;
+  --sx-card-2:        #0f1626;
+  --sx-rail:          #0a0f18;
+  --sx-border:        rgba(255, 255, 255, .07);
+  --sx-border-2:      rgba(255, 255, 255, .13);
+
+  /* text */
+  --sx-text:          #e8eaf0;
+  --sx-text-2:        #8892a4;
+  --sx-text-3:        #5a6278;
+
+  /* effects — planas */
+  --sx-shadow:        0 1px 0 rgba(255, 255, 255, .03);
+  --sx-shadow-lg:     0 24px 60px -28px rgba(0, 0, 0, .85);
+  --sx-radius:        12px;
+  --sx-radius-sm:     8px;
+  --sx-radius-lg:     16px;
+
+  /* fonts */
+  --font-display:     'Bebas Neue', 'DM Sans', system-ui, sans-serif;
+  --font-body:        'DM Sans', system-ui, -apple-system, sans-serif;
+  --font-mono:        'DM Mono', ui-monospace, 'Courier New', monospace;
+
+  /* legacy token overrides */
+  --background:       var(--sx-bg);
+  --surface:          var(--sx-card);
+  --surface-alt:      var(--sx-card-2);
+  --surface-strong:   #12192a;
+  --border:           var(--sx-border);
+  --accent:           var(--sx-accent);
+  --accent-strong:    var(--sx-accent-600);
+  --accent-secondary: var(--sx-accent-2);
+  --text-primary:     var(--sx-text);
+  --text-muted:       var(--sx-text-2);
+}
+
+/* ---------------- Tokens: LIGHT = blanco y negro (monocromo) ---------------- */
+body.theme-light {
+  --sx-accent:        #0a0a0a;
+  --sx-accent-600:    #000000;
+  --sx-accent-700:    #000000;
+  --sx-accent-2:      #0a0a0a;
+  --sx-grad:          linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
+  --sx-accent-soft:   rgba(0, 0, 0, .06);
+  --sx-accent-ring:   rgba(0, 0, 0, .16);
+  --sx-on-accent:     #ffffff;
+
+  --sx-bg:            #ffffff;
+  --sx-bg-2:          #f3f3f3;
+  --sx-card:          #ffffff;
+  --sx-card-2:        #fafafa;
+  --sx-rail:          #ffffff;
+  --sx-border:        rgba(0, 0, 0, .10);
+  --sx-border-2:      rgba(0, 0, 0, .20);
+
+  --sx-text:          #0a0a0a;
+  --sx-text-2:        #4a4a4a;
+  --sx-text-3:        #8a8a8a;
+
+  --sx-shadow:        0 1px 0 rgba(0, 0, 0, .04);
+  --sx-shadow-lg:     0 24px 60px -28px rgba(0, 0, 0, .22);
+
+  --background:       var(--sx-bg);
+  --surface:          var(--sx-card);
+  --surface-alt:      var(--sx-card-2);
+  --surface-strong:   #eeeeee;
+  --border:           var(--sx-border);
+  --accent:           var(--sx-accent);
+  --accent-strong:    #000000;
+  --accent-secondary: #0a0a0a;
+  --text-primary:     var(--sx-text);
+  --text-muted:       var(--sx-text-2);
+}
+
+/* ---------------- Base ---------------- */
+body,
+body.theme-light,
+body.theme-dark {
+  background: var(--sx-bg) !important;
+  color: var(--sx-text);
+  font-family: var(--font-body);
+}
+
+::selection { background: var(--sx-accent); color: var(--sx-bg); }
+
+/* ---------------- Editorial typography ---------------- */
+/* Bebas Neue en títulos grandes y números display */
+.sx-hero__title, .sx-section__title, .sx-cta__title, .sx-brand__name,
+.dash__hero-title, .dash__ring-num, .hp__hello,
+.ct__intro-title, .ct__question,
+.srx__title, .srx__method-name, .srx__stat-num,
+.tsx__title,
+.gm__level-num, .gm__stat-num, .gm__hero .gm__quote,
+.tk__title, .rmd__title, .rmd__next-title, .rmd__next-hour,
+.crisis-iris-message, .crisis-done-title, .crisis-question, .crisis-tasks-title,
+.ls-brand__name, .sx-auth__name, .sx-auth__title, .topnav__name,
+.dash__hero-emoji, h1.section-title {
+  font-family: var(--font-display) !important;
+  font-weight: 400 !important;
+  letter-spacing: .01em;
+  line-height: .98;
+}
+
+/* DM Mono en etiquetas / eyebrows / chips */
+.srx__eyebrow, .tsx__greeting, .topnav__tab, .ct__q-index, .sx-badge,
+.hp__kpi-label, .dash__card-note, .gm__stat-lbl, .gm__block-count, .gm__challenge-reward,
+.rmd__card-chip, .tk__chip, .tk__col-label, .tk__col-count, .hp__tile-hint,
+.sx-foot__copy, .sx-nav__cta, .srx__method-tag, .tsx__featured-note {
+  font-family: var(--font-mono) !important;
+  letter-spacing: .04em;
+}
+
+/* ---------------- Fondo con DISEÑO: rejilla técnica ---------------- */
+:root, body.theme-dark { --sx-grid: rgba(255, 255, 255, .04); --sx-glow: rgba(201, 214, 47, .07); --sx-dot: rgba(255, 255, 255, .055); }
+body.theme-light { --sx-grid: rgba(0, 0, 0, .05); --sx-glow: rgba(0, 0, 0, .03); --sx-dot: rgba(0, 0, 0, .06); }
+
+body::after {
+  content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background-image:
+    radial-gradient(820px 520px at 88% -6%, var(--sx-glow), transparent 60%),
+    linear-gradient(var(--sx-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--sx-grid) 1px, transparent 1px);
+  background-size: auto, 48px 48px, 48px 48px;
+}
+/* El shell deja ver la rejilla del body; cada herramienta pinta su propio fondo */
+.dashboard-container { background: transparent !important; }
+
+/* ---------------- Iconos / stickers TRANSPARENTES ---------------- */
+.dash__row-icon, .dash__quick-icon, .hp__tile-icon, .hp__kpi-glyph,
+.gm__badge-emoji, .gm__challenge-emoji, .rmd__card-icon,
+.srx__day-dot, .tsx__rec-icon, .tsx__card-icon, .ct__day-dot,
+.sx-feat__icon, .sx-auth__mark, .sidebar-logo__icon, .topnav__mark,
+.sx-brand__mark, .srx__badge, .ct__brand-mark {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+.sidebar-logo__icon img, .topnav__mark, .sx-brand__mark, .srx__badge img, .ct__brand-mark,
+.sx-auth__mark, .ls-logo__mark {
+  filter: drop-shadow(0 2px 6px var(--sx-accent-ring));
+}
+
+/* Stickers SVG: color de acento donde van sueltos */
+.dash__mini-glyph, .dash__tip-icon, .rmd__empty-icon, .tk__empty-icon,
+.feature-landing__icon, .sx-feat__icon, .gm__challenge .sx-sticker,
+.crisis-iris-avatar, .crisis-done-emoji, .dt-orb__emoji,
+.srx__style-emoji, .srx__day-dot {
+  color: var(--sx-accent);
+  display: inline-flex; align-items: center; justify-content: center;
+}
+/* Stickers en línea dentro de títulos de bloque (resultados) */
+.srx__block-title { display: inline-flex; align-items: center; gap: 8px; }
+.srx__block-title .sx-sticker { color: var(--sx-accent); }
+.sx-sticker { display: block; }
+
+/* Iconos de herramientas (ToolSelector) — toman el color de su tile */
+.tsx__rec-icon, .tsx__card-icon { color: var(--c, var(--sx-accent)); }
+.tsx__card-icon { display: inline-flex; gap: 4px; align-items: center; justify-content: center; }
+.tsx__rec-medal { color: var(--sx-accent); display: inline-flex; }
+
+/* Stickers en línea (badges, textos, botones) — alinear con el texto */
+.sx-badge .sx-sticker, .sx-mock__streak .sx-sticker, .sx-btn .sx-sticker,
+.tsx__greeting .sx-sticker, .tsx__featured-badge .sx-sticker {
+  display: inline-block; vertical-align: -.18em; margin-right: .12em;
+}
+.sx-mock__streak .sx-sticker { color: #fb923c; }
+body.theme-light .sx-mock__streak .sx-sticker { color: #0a0a0a; }
+.sidebar-footer__icon .sx-sticker, .topnav__icon-btn--crisis .sx-sticker { display: block; }
+
+/* ---------------- Modo claro = monocromo (acentos por tono → negro) ---------------- */
+body.theme-light .hp__tile, body.theme-light .dash__row, body.theme-light .dash__quick-btn,
+body.theme-light .tk__col, body.theme-light .rmd__card, body.theme-light .gm__badge,
+body.theme-light .tsx__rec, body.theme-light .tsx__card, body.theme-light .dash__row-icon,
+body.theme-light .dash__quick-icon {
+  --tone: #0a0a0a !important;
+  --tone-soft: rgba(0, 0, 0, .06) !important;
+  --c: #0a0a0a !important;
+}
+body.theme-light .gm__stat-num, body.theme-light .dash__ring-num,
+body.theme-light .ls-logo__ring circle { color: #0a0a0a !important; stroke: #0a0a0a !important; }
+
+/* Scrollbars */
+@media (min-width: 769px) {
+  ::-webkit-scrollbar { width: 11px; height: 11px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb {
+    background: var(--sx-border-2) !important;
+    border-radius: 999px; border: 3px solid transparent; background-clip: padding-box;
+  }
+  ::-webkit-scrollbar-thumb:hover { background: var(--sx-text-3) !important; }
+}
+
+/* ---------------- App shell ---------------- */
+.dashboard-container {
+  background: var(--sx-bg) !important;
+  gap: 0;
+}
+.dashboard-main,
+.dashboard-content { background: transparent !important; }
+body.theme-dark .dashboard-main::before,
+.dashboard-main::before { display: none !important; }
+
+/* Sidebar = clean UniMalla rail */
+.dashboard-sidebar {
+  background: var(--sx-rail) !important;
+  border-right: 1px solid var(--sx-border) !important;
+  box-shadow: none !important;
+  -webkit-backdrop-filter: none; backdrop-filter: none;
+}
+.sidebar-header { border-bottom: 1px solid var(--sx-border) !important; }
+
+/* Brand mark */
+.sidebar-logo__icon {
+  background: transparent !important; padding: 0 !important;
+  border-radius: 11px; overflow: hidden;
+  box-shadow: 0 4px 12px -4px var(--sx-accent-ring);
+}
+.sidebar-logo__icon img { width: 100%; height: 100%; object-fit: cover; border-radius: 11px; display: block; }
+.sidebar-logo__text {
+  background: var(--sx-grad); -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; font-weight: 800; letter-spacing: -.2px;
+}
+
+/* Nav items */
+.sidebar-nav__item {
+  border-radius: var(--sx-radius-sm) !important;
+  color: var(--sx-text-2) !important;
+  font-weight: 600 !important;
+  transition: background .16s, color .16s !important;
+  border: 1px solid transparent !important;
+  background: transparent !important;
+}
+.sidebar-nav__item:hover { background: var(--sx-bg-2) !important; color: var(--sx-text) !important; }
+.sidebar-nav__item .sidebar-nav__icon { color: var(--sx-text-3); }
+.sidebar-nav__item:hover .sidebar-nav__icon { color: var(--sx-text-2); }
+.sidebar-nav__item--active {
+  background: var(--sx-accent-soft) !important;
+  color: var(--sx-accent-700) !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+body.theme-dark .sidebar-nav__item--active { color: var(--sx-accent) !important; }
+.sidebar-nav__item--active .sidebar-nav__label { color: inherit !important; }
+.sidebar-nav__item--active .sidebar-nav__icon { color: var(--sx-accent) !important; }
+.sidebar-nav__item--active::before,
+.sidebar-nav__item--active::after { background: var(--sx-accent) !important; }
+
+/* Profile card */
+.sidebar-profile {
+  background: var(--sx-card-2) !important;
+  border: 1px solid var(--sx-border) !important;
+  border-radius: var(--sx-radius) !important;
+}
+.sidebar-profile__avatar-ring { background: var(--sx-grad) !important; }
+.sidebar-profile__name { color: var(--sx-text) !important; }
+.sidebar-profile__email { color: var(--sx-text-3) !important; }
+
+/* Sidebar footer buttons */
+.sidebar-footer { border-top: 1px solid var(--sx-border) !important; }
+.sidebar-footer__button {
+  color: var(--sx-text-2) !important; border-radius: var(--sx-radius-sm) !important;
+}
+.sidebar-footer__button:hover { background: var(--sx-bg-2) !important; color: var(--sx-text) !important; }
+.sidebar-footer__button--logout:hover { background: #fee2e2 !important; color: #dc2626 !important; }
+body.theme-dark .sidebar-footer__button--logout:hover { background: rgba(220,38,38,.16) !important; color: #fca5a5 !important; }
+
+/* Edge tab / collapse */
+.sidebar-edge-tab { color: var(--sx-accent) !important; background: var(--sx-card) !important; border: 1px solid var(--sx-border) !important; }
+.sidebar-collapse-btn { color: var(--sx-text-3) !important; }
+.sidebar-collapse-btn:hover { color: var(--sx-text) !important; background: var(--sx-bg-2) !important; }
+
+/* ---------------- Cards / panels ---------------- */
+.panel, .card, .overview__block, .glass,
+.stat-card, .quick-card, .widget, .info-card {
+  background: var(--sx-card) !important;
+  border: 1px solid var(--sx-border) !important;
+  border-radius: var(--sx-radius) !important;
+  box-shadow: var(--sx-shadow) !important;
+  -webkit-backdrop-filter: none !important; backdrop-filter: none !important;
+  color: var(--sx-text);
+}
+
+/* Section / panel headings */
+.panel h1, .panel h2, .panel h3,
+.dashboard-panel h1, .dashboard-panel h2, .dashboard-panel h3,
+.section-title, .panel__title {
+  color: var(--sx-text) !important;
+}
+
+/* Texto SOBRE superficies de acento: siempre oscuro (contraste con el lima).
+   Se duplican los selectores con prefijo body.theme-dark para empatar la
+   especificidad de la regla legacy `body.theme-dark .tab-panels *` (styles.css)
+   y ganar por orden de cascada (este archivo se importa de último). */
+.dash__hero, .dash__hero h1, .dash__hero-title, .dash__hero-sub, .dash__hero-emoji,
+.tk__new, .rmd__new, .feature-landing__button, .gcal__btn--add,
+body.theme-dark .dash__hero, body.theme-dark .dash__hero *,
+body.theme-dark .tk__new, body.theme-dark .tk__new *,
+body.theme-dark .rmd__new, body.theme-dark .rmd__new *,
+body.theme-dark .feature-landing__button, body.theme-dark .feature-landing__button *,
+body.theme-dark .gcal__btn--add, body.theme-dark .gcal__btn--add * {
+  color: var(--sx-on-accent) !important;
+}
+
+/* Hero del dashboard en oscuro: lima más profundo + sin destello blanco (menos brillo) */
+body.theme-dark .dash__hero {
+  background: linear-gradient(135deg, #c9d62f 0%, #a9b71a 100%);
+  box-shadow: 0 20px 50px -24px rgba(200, 220, 40, .35);
+}
+body.theme-dark .dash__hero-glow {
+  background: radial-gradient(420px 200px at 90% -20%, rgba(255, 255, 255, .16), transparent 70%);
+}
+
+/* ---------------- Buttons ---------------- */
+.btn-primary, button.primary, .button--primary, .cta-primary,
+.btn--primary, .primary-button {
+  background: var(--sx-grad) !important;
+  color: #042f2c !important;
+  border: none !important;
+  border-radius: var(--sx-radius-sm) !important;
+  font-weight: 700 !important;
+  box-shadow: 0 8px 20px -10px var(--sx-accent-ring) !important;
+}
+body.theme-dark .btn-primary, body.theme-dark button.primary,
+body.theme-dark .button--primary { color: var(--sx-on-accent) !important; }
+.btn-primary:hover, button.primary:hover, .button--primary:hover { filter: brightness(1.05); transform: translateY(-1px); }
+
+.btn-secondary, button.secondary, .button--secondary, .btn--ghost {
+  background: var(--sx-card) !important;
+  color: var(--sx-text) !important;
+  border: 1px solid var(--sx-border-2) !important;
+  border-radius: var(--sx-radius-sm) !important;
+}
+.btn-secondary:hover, button.secondary:hover { border-color: var(--sx-accent) !important; color: var(--sx-accent-700) !important; }
+
+/* ---------------- Inputs ---------------- */
+input, textarea, select {
+  background: var(--sx-card) !important;
+  border: 1px solid var(--sx-border-2) !important;
+  color: var(--sx-text) !important;
+  border-radius: var(--sx-radius-sm) !important;
+}
+input::placeholder, textarea::placeholder { color: var(--sx-text-3) !important; }
+input:focus, textarea:focus, select:focus {
+  outline: none !important;
+  border-color: var(--sx-accent) !important;
+  box-shadow: 0 0 0 3px var(--sx-accent-ring) !important;
+}
+
+/* ---------------- Badges / chips ---------------- */
+.badge, .chip, .tag, .pill {
+  border-radius: 999px !important;
+  border: 1px solid var(--sx-border) !important;
+  background: var(--sx-card-2) !important;
+  color: var(--sx-text-2) !important;
+}
+
+/* ---------------- Modals / overlays ---------------- */
+.modal, .modal-content, .dialog, .dialog__panel, .overlay__panel,
+.popup, .sheet {
+  background: var(--sx-card) !important;
+  border: 1px solid var(--sx-border) !important;
+  border-radius: var(--sx-radius-lg) !important;
+  box-shadow: var(--sx-shadow-lg) !important;
+  color: var(--sx-text);
+}
+.modal-overlay, .overlay, .backdrop, .dialog__backdrop {
+  background: rgba(12, 18, 32, .55) !important;
+  -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+}
+
+/* Links */
+a { color: var(--sx-accent-700); }
+body.theme-dark a { color: var(--sx-accent); }
+
+/* ============================================================
+   Top navigation (desktop) — replaces the sidebar on wide screens.
+   On mobile the sidebar drawer is kept; the topnav is hidden.
+   ============================================================ */
+.topnav { display: none; }
+
+@media (min-width: 769px) {
+  /* Layout: stack topnav + content, drop the sidebar */
+  .dashboard-container {
+    display: flex !important;
+    flex-direction: column !important;
+    grid-template-columns: none !important;
+  }
+  .dashboard-sidebar { display: none !important; }
+  .sidebar-edge-tab, .swipe-hint, .sidebar-overlay { display: none !important; }
+  .dashboard-main {
+    width: 100% !important; max-width: 100% !important;
+    flex: 1 1 auto; min-height: 0; overflow-y: auto !important;
+  }
+
+  .topnav {
+    display: flex; align-items: center; gap: 18px;
+    padding: 10px clamp(18px, 3vw, 36px);
+    background: var(--sx-rail); border-bottom: 1px solid var(--sx-border);
+    position: sticky; top: 0; z-index: 60; flex: 0 0 auto;
+  }
+  .topnav__brand { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+  .topnav__mark { width: 34px; height: 34px; border-radius: 9px; box-shadow: 0 4px 12px -4px var(--sx-accent-ring); }
+  .topnav__name { font-weight: 800; letter-spacing: -.2px; font-size: 1.05rem; background: var(--sx-grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+
+  .topnav__tabs { display: flex; align-items: center; gap: 2px; flex: 1; justify-content: center; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
+  .topnav__tabs::-webkit-scrollbar { display: none; }
+  .topnav__tab { white-space: nowrap; }
+  .topnav__tab {
+    display: inline-flex; align-items: center; gap: 8px; cursor: pointer;
+    padding: 9px 14px; border-radius: 11px; border: none; background: transparent;
+    color: var(--sx-text-2) !important; font-weight: 600; font-size: .92rem;
+    transition: background .15s, color .15s;
+  }
+  .topnav__tab:hover { background: var(--sx-bg-2); color: var(--sx-text) !important; }
+  .topnav__tab.is-active { background: var(--sx-accent-soft); color: var(--sx-accent-700) !important; }
+  body.theme-dark .topnav__tab.is-active { color: var(--sx-accent) !important; }
+  .topnav__tab-icon { display: inline-flex; }
+  .topnav__tab-icon svg { width: 19px; height: 19px; }
+
+  .topnav__actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+  .topnav__icon-btn {
+    width: 38px; height: 38px; display: grid; place-items: center; cursor: pointer;
+    border-radius: 11px; border: 1px solid var(--sx-border); background: var(--sx-card);
+    color: var(--sx-text-2) !important; font-size: 1rem; transition: .15s;
+  }
+  .topnav__icon-btn:hover { border-color: var(--sx-accent); color: var(--sx-accent-700) !important; }
+  .topnav__icon-btn--logout:hover { border-color: #ef4444; color: #ef4444 !important; background: #fee2e2; }
+  body.theme-dark .topnav__icon-btn--logout:hover { background: rgba(239,68,68,.15); color: #fca5a5 !important; }
+
+  .topnav__profile {
+    display: inline-flex; align-items: center; gap: 9px; cursor: pointer;
+    padding: 5px 12px 5px 5px; border-radius: 999px; border: 1px solid var(--sx-border); background: var(--sx-card);
+    color: var(--sx-text) !important; transition: .15s;
+  }
+  .topnav__profile:hover { border-color: var(--sx-accent); }
+  .topnav__avatar { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; background: var(--sx-grad); color: var(--sx-on-accent); font-weight: 800; font-size: .85rem; }
+  .topnav__profile-name { font-weight: 600; font-size: .88rem; max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+}
+
+/* Desktop up to 1320px: icon-only tabs (with tooltips) so all 7 fit in one row */
+@media (min-width: 769px) and (max-width: 1320px) {
+  .topnav__tab-label { display: none; }
+  .topnav__tab { padding: 9px 12px; }
+  .topnav__profile-name { display: none; }
+}
+/* Large screens: labels return with breathing room */
+@media (min-width: 1321px) {
+  .topnav__tab { padding: 9px 15px; }
+}
+
+/* ============================================================
+   Forms & Overlays — unified modern look (covers task / reminder /
+   schedule / settings / confirm modals + generic forms).
+   ============================================================ */
+
+/* Overlays / backdrops */
+.modal-overlay, .modal-overlay--task, .reminder-modal-overlay,
+.schedule-modal-overlay, .confirm-dialog-overlay, .rating-modal-overlay,
+[class*="modal-overlay"], [class*="-overlay"]:not(.crisis-overlay):not(.sidebar-overlay) {
+  background: rgba(10, 16, 28, .55) !important;
+  -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px);
+}
+
+/* Modal cards */
+.modal-content, .modal-content--task, .reminder-modal, .schedule-modal,
+.confirm-dialog, [class*="modal-content"] {
+  background: var(--sx-card) !important;
+  border: 1px solid var(--sx-border) !important;
+  border-radius: 20px !important;
+  box-shadow: var(--sx-shadow-lg) !important;
+  color: var(--sx-text) !important;
+}
+.modal-header--task, .modal-title--task, .reminder-modal__title, .schedule-modal__title {
+  color: var(--sx-text) !important; border-color: var(--sx-border) !important;
+}
+.modal-close--task, [class*="modal-close"] {
+  background: var(--sx-bg-2) !important; color: var(--sx-text-2) !important;
+  border: 1px solid var(--sx-border) !important; border-radius: 10px !important;
+}
+.modal-close--task:hover { background: var(--sx-border) !important; color: var(--sx-text) !important; }
+
+/* Form fields */
+.form-field__label--task, .form-field__label, label {
+  color: var(--sx-text-2) !important;
+}
+.form-field__input--task, .form-field__textarea--task,
+input[type="text"], input[type="email"], input[type="password"],
+input[type="datetime-local"], input[type="date"], input[type="time"],
+input[type="number"], input[type="search"], textarea, select {
+  background: var(--sx-card) !important;
+  border: 1.5px solid var(--sx-border-2) !important;
+  color: var(--sx-text) !important;
+  border-radius: 12px !important;
+  padding: 11px 13px !important;
+  font-size: .95rem !important;
+}
+.form-field__input--task:focus, .form-field__textarea--task:focus,
+input:focus, textarea:focus, select:focus {
+  outline: none !important;
+  border-color: var(--sx-accent) !important;
+  box-shadow: 0 0 0 3px var(--sx-accent-ring) !important;
+}
+
+/* Buttons inside forms/modals */
+.btn--primary-task, .btn--ai-estimate, [class*="btn--primary"],
+[class*="__submit"], [class*="--save"], [class*="--confirm"] {
+  background: var(--sx-grad) !important;
+  color: var(--sx-on-accent) !important; border: none !important;
+  border-radius: 12px !important; font-weight: 700 !important;
+  box-shadow: 0 8px 20px -10px var(--sx-accent-ring) !important;
+}
+.btn--secondary-task, [class*="btn--secondary"], [class*="--cancel"] {
+  background: var(--sx-card) !important; color: var(--sx-text) !important;
+  border: 1px solid var(--sx-border-2) !important; border-radius: 12px !important; font-weight: 600 !important;
+}
+.btn--secondary-task:hover { border-color: var(--sx-accent) !important; color: var(--sx-accent-700) !important; }
+
+/* AI estimate result card */
+.ai-estimate-result--task, .ai-estimate-section--task {
+  background: var(--sx-accent-soft) !important; border: 1px solid var(--sx-border) !important;
+  border-radius: 14px !important;
+}
+.pomodoro-count--task { color: var(--sx-accent-700) !important; }
+body.theme-dark .pomodoro-count--task { color: var(--sx-accent) !important; }
+.confidence-fill--task { background: var(--sx-grad) !important; }
+
+/* Danger confirm */
+[class*="--danger"], .confirm-dialog__confirm--danger {
+  background: #ef4444 !important; color: #fff !important; border: none !important; border-radius: 12px !important;
+}
+
+/* ============================================================
+   Fondos de sub-dashboards — "blueprint": matriz de puntos + halos
+   de color por herramienta + veladura diagonal. Light + dark.
+   ============================================================ */
+.dashboard-main[data-tab] {
+  --tab-glow: rgba(201, 214, 47, .15);
+  transition: background-color .45s ease;
+  background-color: var(--sx-bg) !important;
+  background-image:
+    radial-gradient(1100px 640px at 92% -12%, var(--tab-glow), transparent 60%),
+    radial-gradient(780px 540px at -10% 116%, color-mix(in srgb, var(--tab-glow) 55%, transparent), transparent 60%),
+    linear-gradient(115deg, transparent 40%, color-mix(in srgb, var(--tab-glow) 24%, transparent) 50%, transparent 60%),
+    radial-gradient(var(--sx-dot) 1px, transparent 1.6px) !important;
+  background-size: auto, auto, auto, 26px 26px !important;
+  background-position: 0 0, 0 0, 0 0, 0 0 !important;
+  background-attachment: fixed, fixed, fixed, fixed !important;
+}
+.dashboard-main[data-tab="tasks"]        { --tab-glow: rgba(59, 130, 246, .17); }
+.dashboard-main[data-tab="calendar"]     { --tab-glow: rgba(14, 165, 233, .17); }
+.dashboard-main[data-tab="reminders"]    { --tab-glow: rgba(245, 158, 11, .17); }
+.dashboard-main[data-tab="summary"]      { --tab-glow: rgba(6, 182, 212, .17); }
+.dashboard-main[data-tab="timer"]        { --tab-glow: rgba(169, 183, 26, .18); }
+.dashboard-main[data-tab="achievements"] { --tab-glow: rgba(244, 63, 94, .16); }
+.dashboard-main[data-tab="schedule"]     { --tab-glow: rgba(14, 165, 233, .16); }
+/* En claro los halos se atenúan para mantener el blanco/negro */
+body.theme-light .dashboard-main[data-tab] { --tab-glow: rgba(0, 0, 0, .05); }
+
+/* ============================================================
+   Calendario (gcal-*) — pasa del azul Google al acento de marca (teal).
+   ============================================================ */
+.gcal__connect-prompt {
+  background: var(--sx-card) !important; border: 1px solid var(--sx-border) !important;
+  border-radius: var(--sx-radius-lg) !important; box-shadow: var(--sx-shadow) !important; color: var(--sx-text);
+}
+.gcal__connect-icon { font-size: 3rem; }
+.gcal__connect-title { color: var(--sx-text) !important; }
+.gcal__connect-desc { color: var(--sx-text-2) !important; }
+.gcal__connect-btn {
+  background: var(--sx-grad) !important; color: var(--sx-on-accent) !important; border: none !important;
+  border-radius: 12px !important; font-weight: 700 !important; box-shadow: 0 10px 26px -12px var(--sx-accent-ring) !important;
+}
+.gcal__connect-btn:hover { transform: translateY(-1px); }
+
+/* Toolbar */
+.gcal__btn {
+  background: var(--sx-card) !important; color: var(--sx-text) !important;
+  border: 1px solid var(--sx-border-2) !important; border-radius: 10px !important;
+}
+.gcal__btn:hover { border-color: var(--sx-accent) !important; color: var(--sx-accent-700) !important; }
+body.theme-dark .gcal__btn:hover { color: var(--sx-accent) !important; }
+.gcal__btn--today { color: var(--sx-accent-700) !important; border-color: var(--sx-accent) !important; }
+body.theme-dark .gcal__btn--today { color: var(--sx-accent) !important; }
+.gcal__btn--add {
+  background: var(--sx-grad) !important; color: var(--sx-on-accent) !important; border: none !important;
+  box-shadow: 0 8px 20px -10px var(--sx-accent-ring) !important;
+}
+.gcal__btn--view-toggle.is-active, .gcal__btn--view-toggle[aria-pressed="true"] {
+  background: var(--sx-accent-soft) !important; color: var(--sx-accent-700) !important; border-color: var(--sx-accent) !important;
+}
+
+/* "Ahora" + día actual en teal */
+.gcal__now-line, .gcal__now-indicator { background: var(--sx-accent) !important; }
+.gcal__now-dot, .gcal__now-indicator::before { background: var(--sx-accent) !important; }
+.gcal__agenda-daynum--today, .gcal__month-day--today {
+  background: var(--sx-grad) !important; color: var(--sx-on-accent) !important;
+}
+.gcal__agenda-date--today, .gcal__month-cell--today { box-shadow: inset 0 0 0 1.5px var(--sx-accent) !important; }
+
+/* Eventos: chip de marca por defecto (los de color propio se respetan) */
+.gcal__agenda-dot, .gcal__month-event-dot { background: var(--sx-accent) !important; }
+.gcal__connect-icon { color: var(--sx-accent); display: inline-flex; justify-content: center; }
+
+/* ============================================================
+   FORMULARIOS MODERNOS — diseño unificado para todos los modales de
+   creación (tareas, recordatorios, horario). Gana al CSS legacy.
+   ============================================================ */
+.modal-overlay--task, .modal-overlay--reminder, .modal-overlay--schedule {
+  position: fixed !important; inset: 0 !important; z-index: 1000 !important;
+  display: flex !important; align-items: center; justify-content: center;
+  padding: 18px !important;
+  background: color-mix(in srgb, var(--sx-bg) 72%, transparent) !important;
+  backdrop-filter: blur(8px) saturate(1.1) !important;
+  animation: sxfade .18s ease !important;
+}
+@keyframes sxfade { from { opacity: 0 } to { opacity: 1 } }
+
+.modal-content--task, .modal-content--reminder, .modal-content--schedule {
+  width: min(560px, 100%) !important; max-width: min(560px, 100%) !important;
+  max-height: 90vh !important; overflow-y: auto !important;
+  background: var(--sx-card) !important;
+  border: 1px solid var(--sx-border) !important;
+  border-radius: 22px !important;
+  box-shadow: var(--sx-shadow-lg), 0 0 0 1px color-mix(in srgb, var(--sx-accent) 8%, transparent) !important;
+  padding: 0 !important;
+  animation: sxpop .22s cubic-bezier(.2,.8,.2,1) !important;
+}
+@keyframes sxpop { from { opacity: 0; transform: translateY(10px) scale(.98) } to { opacity: 1; transform: none } }
+
+.modal-header--task, .modal-header--reminder, .modal-header--schedule {
+  display: flex !important; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 20px 22px 16px !important;
+  border-bottom: 1px solid var(--sx-border) !important;
+  background: none !important;
+}
+.modal-title--task, .modal-title--reminder, .modal-title--schedule {
+  display: flex !important; align-items: center; gap: 12px;
+  margin: 0 !important; color: var(--sx-text) !important;
+  font-family: var(--font-display) !important; font-weight: 400 !important;
+  font-size: 1.7rem !important; letter-spacing: .01em !important; line-height: 1 !important;
+}
+.modal-title__icon--task, .modal-title__icon--reminder, .modal-title__icon--schedule {
+  width: 40px !important; height: 40px !important; flex-shrink: 0;
+  display: grid !important; place-items: center !important;
+  border-radius: 12px !important;
+  background: var(--sx-accent-soft) !important; color: var(--sx-accent) !important;
+  border: 1px solid var(--sx-border) !important; font-size: 1rem !important;
+}
+.modal-close--task, .modal-close--reminder, .modal-close--schedule {
+  width: 36px !important; height: 36px !important; flex-shrink: 0; cursor: pointer;
+  display: grid !important; place-items: center !important;
+  border-radius: 10px !important; border: 1px solid var(--sx-border) !important;
+  background: var(--sx-bg-2) !important; color: var(--sx-text-2) !important;
+  font-size: 1rem !important; line-height: 1 !important; transition: .15s;
+}
+.modal-close--task:hover, .modal-close--reminder:hover, .modal-close--schedule:hover {
+  background: var(--sx-card-2) !important; color: var(--sx-text) !important; border-color: var(--sx-border-2) !important;
+}
+
+.modal-form--task, .modal-form--reminder, .modal-form--schedule {
+  display: flex !important; flex-direction: column; gap: 16px !important;
+  padding: 20px 22px 22px !important; background: none !important;
+}
+.form-row--task, .form-row--reminder, .form-row--schedule {
+  display: grid !important; grid-template-columns: 1fr 1fr; gap: 14px !important;
+}
+.form-field--task, .form-field--reminder, .form-field--schedule {
+  display: flex !important; flex-direction: column; gap: 7px !important; margin: 0 !important;
+}
+.form-field__label--task, .form-field__label--reminder, .form-field__label--schedule {
+  display: inline-flex !important; align-items: center; gap: 8px;
+  font-family: var(--font-mono) !important; font-size: .72rem !important;
+  font-weight: 500 !important; letter-spacing: .08em !important; text-transform: uppercase !important;
+  color: var(--sx-text-2) !important;
+}
+.form-field__icon--task, .form-field__icon--reminder, .form-field__icon--schedule {
+  display: inline-flex !important; align-items: center; justify-content: center;
+  color: var(--sx-accent) !important; font-size: .95rem !important;
+}
+.form-field__input--task, .form-field__select--task, .form-field__textarea--task,
+.form-field__input--reminder, .form-field__select--reminder, .form-field__textarea--reminder,
+.form-field__input--schedule, .form-field__select--schedule, .form-field__textarea--schedule {
+  width: 100% !important; box-sizing: border-box !important;
+  background: var(--sx-bg-2) !important; color: var(--sx-text) !important;
+  border: 1px solid var(--sx-border-2) !important; border-radius: 13px !important;
+  padding: 12px 14px !important; font-family: var(--font-body) !important; font-size: .95rem !important;
+  outline: none !important; box-shadow: none !important; transition: border-color .15s, box-shadow .15s;
+}
+.form-field__textarea--task, .form-field__textarea--reminder, .form-field__textarea--schedule {
+  resize: vertical !important; min-height: 84px !important; line-height: 1.5;
+}
+.form-field__input--task::placeholder, .form-field__textarea--task::placeholder,
+.form-field__input--reminder::placeholder, .form-field__textarea--reminder::placeholder,
+.form-field__input--schedule::placeholder, .form-field__textarea--schedule::placeholder {
+  color: var(--sx-text-3) !important;
+}
+.form-field__input--task:focus, .form-field__select--task:focus, .form-field__textarea--task:focus,
+.form-field__input--reminder:focus, .form-field__select--reminder:focus, .form-field__textarea--reminder:focus,
+.form-field__input--schedule:focus, .form-field__select--schedule:focus, .form-field__textarea--schedule:focus {
+  border-color: var(--sx-accent) !important;
+  box-shadow: 0 0 0 3px var(--sx-accent-ring) !important;
+}
+
+/* Botón estimación IA */
+.btn--ai-estimate {
+  display: inline-flex !important; align-items: center; justify-content: center; gap: 8px;
+  width: 100% !important; cursor: pointer;
+  padding: 13px 16px !important; border-radius: 13px !important;
+  background: var(--sx-accent-soft) !important; color: var(--sx-accent-700) !important;
+  border: 1.5px dashed var(--sx-accent) !important;
+  font-family: var(--font-mono) !important; font-weight: 600 !important; font-size: .82rem !important;
+  letter-spacing: .04em !important; text-transform: uppercase !important; transition: .15s;
+}
+body.theme-dark .btn--ai-estimate { color: var(--sx-accent) !important; }
+.btn--ai-estimate:hover:not(:disabled) { background: color-mix(in srgb, var(--sx-accent) 16%, transparent) !important; }
+.btn--ai-estimate:disabled { opacity: .5 !important; cursor: default; }
+
+/* Resultado de IA */
+.ai-estimate-result--task {
+  background: var(--sx-accent-soft) !important; border: 1px solid var(--sx-border) !important;
+  border-radius: 14px !important; padding: 14px 16px !important;
+}
+.ai-estimate-icon--task { color: var(--sx-accent) !important; display: inline-flex !important; }
+.ai-estimate-title--task { color: var(--sx-text) !important; }
+.confidence-fill--task { background: var(--sx-grad) !important; }
+
+/* Acciones */
+.modal-actions--task, .modal-actions--reminder, .modal-actions--schedule {
+  display: flex !important; gap: 12px !important; justify-content: flex-end; margin-top: 2px !important;
+}
+.btn--task, .btn--reminder, .btn--schedule {
+  display: inline-flex !important; align-items: center; justify-content: center; gap: 7px;
+  padding: 12px 20px !important; border-radius: 12px !important; cursor: pointer;
+  font-family: var(--font-body) !important; font-weight: 700 !important; font-size: .92rem !important;
+  border: 1px solid transparent !important; transition: .15s;
+}
+.btn--primary-task, .btn--primary-reminder, .btn--primary-schedule {
+  background: var(--sx-grad) !important; color: var(--sx-on-accent) !important; border: none !important;
+  box-shadow: 0 10px 24px -12px var(--sx-accent-ring) !important;
+}
+.btn--primary-task:hover:not(:disabled), .btn--primary-reminder:hover:not(:disabled),
+.btn--primary-schedule:hover:not(:disabled) { transform: translateY(-1px); filter: brightness(1.04); }
+.btn--secondary-task, .btn--secondary-reminder, .btn--secondary-schedule {
+  background: var(--sx-bg-2) !important; color: var(--sx-text) !important;
+  border: 1px solid var(--sx-border-2) !important;
+}
+.btn--secondary-task:hover, .btn--secondary-reminder:hover, .btn--secondary-schedule:hover {
+  background: var(--sx-card-2) !important; border-color: var(--sx-text-3) !important;
+}
+.btn--task:disabled, .btn--reminder:disabled, .btn--schedule:disabled { opacity: .55 !important; cursor: default; }
+
+/* Stickers dentro de botones de formulario alineados al texto */
+.btn--ai-estimate .sx-sticker, .btn--task .sx-sticker, .btn--reminder .sx-sticker,
+.btn--schedule .sx-sticker, .suggestions-title--task .sx-sticker { display: inline-block; vertical-align: -.16em; }
+.suggestions-title--task { display: inline-flex; align-items: center; gap: 7px; }
+.suggestions-title--task .sx-sticker { color: var(--sx-accent); }
+
+/* Botones de recordatorio usan la clase base .btn (sin .btn--reminder) */
+.btn--primary-reminder, .btn--secondary-reminder {
+  display: inline-flex !important; align-items: center; justify-content: center; gap: 7px;
+  padding: 12px 20px !important; border-radius: 12px !important;
+  font-family: var(--font-body) !important; font-weight: 700 !important; font-size: .92rem !important;
+  transition: .15s;
+}
+
+/* Chips de tarjeta de tarea con sticker */
+.tk__chip { display: inline-flex !important; align-items: center; gap: 5px; }
+.tk__chip .sx-sticker { display: inline-block; color: var(--sx-text-2); flex-shrink: 0; }
+.tk__chip--due.is-overdue .sx-sticker { color: inherit; }
+
+/* Icono del header de Horario */
+.schedule-header__icon { color: var(--sx-accent); display: inline-flex; align-items: center; }
+
+/* ============================================================
+   Stickers de Study Flow
+   ============================================================ */
+.sf .sx-sticker { display: inline-block; vertical-align: -.16em; }
+/* Iconos "héroe" y de stat → acento */
+.sf__phase-icon, .sf__search-icon, .sf__empty-icon, .sf__checkpoint-icon,
+.sf__break-icon, .sf__anticheat-icon, .sf__cp-blocked-icon, .sf__completed-icon {
+  color: var(--sx-accent) !important; display: inline-flex !important;
+  align-items: center; justify-content: center;
+}
+.sf__comp-stat-icon, .sf__section-label .sx-sticker, .sf__cp-label .sx-sticker,
+.sf__cp-examples h4 .sx-sticker, .sf__ai-rec-label .sx-sticker { color: var(--sx-accent); }
+/* Iconos sobre tiles con gradiente → blancos */
+.sf__qmethod-icon .sx-sticker, .sf__method-icon .sx-sticker, .sf__run-method-icon .sx-sticker { color: #fff; }
+/* Chips de plataforma e iris-badge / recomendado → toman el color del texto */
+.sf__platform-chip .sx-sticker, .sf__platform-cat-header .sx-sticker,
+.sf__qmethod-iris-badge .sx-sticker, .sf__method-rec-badge .sx-sticker,
+.sf__task-course .sx-sticker, .sf__task-due .sx-sticker { color: inherit; }
+
+/* ============================================================
+   Stickers de Modo Crisis
+   ============================================================ */
+.crisis-overlay .sx-sticker { display: inline-block; vertical-align: -.16em; }
+.crisis-trigger-emoji, .crisis-breathing-emoji, .crisis-retake-icon, .crisis-studyplan-day-emoji {
+  color: var(--sx-accent); display: inline-flex !important; align-items: center; justify-content: center;
+}
+.crisis-studyplan-title .sx-sticker, .crisis-studyplan-section-label .sx-sticker { color: var(--sx-accent); }
+
+/* ============================================================
+   Configuración — pulido editorial + stickers
+   ============================================================ */
+.settings-panel__title {
+  display: flex !important; align-items: center; gap: 12px;
+  font-family: var(--font-display) !important; font-weight: 400 !important;
+  font-size: 1.75rem !important; letter-spacing: .02em !important; line-height: 1 !important;
+}
+.settings-panel__title-icon {
+  width: 40px !important; height: 40px !important; flex-shrink: 0;
+  display: grid !important; place-items: center !important; border-radius: 12px !important;
+  background: var(--sx-accent-soft) !important; border: 1px solid var(--sx-border) !important;
+  color: var(--sx-accent-700) !important; font-size: 1rem !important;
+}
+body.theme-dark .settings-panel__title-icon { color: var(--sx-accent) !important; }
+.settings-section__title {
+  font-family: var(--font-mono) !important; font-size: .7rem !important; font-weight: 500 !important;
+  letter-spacing: .12em !important; text-transform: uppercase !important;
+  color: var(--sx-text-3) !important;
+}
+.settings-account__label { display: inline-flex !important; align-items: center; gap: 7px; }
+.settings-account__label .sx-sticker { color: #f43f5e; flex-shrink: 0; }
+.settings-confirm__title { display: flex !important; align-items: center; gap: 10px; }
+.settings-confirm__title .sx-sticker { color: #f59e0b; flex-shrink: 0; }
+.settings-confirm__list li { display: flex; align-items: center; gap: 10px; list-style: none; }
+.settings-confirm__list .sx-sticker { color: var(--sx-accent-700); flex-shrink: 0; }
+body.theme-dark .settings-confirm__list .sx-sticker { color: var(--sx-accent); }
+.settings-delete-btn .sx-sticker, .settings-confirm-btn .sx-sticker {
+  display: inline-block; vertical-align: -.16em; margin-right: 3px;
+}
+.preview-icon { display: inline-flex !important; align-items: center; }
+.preview-stat-value .sx-sticker { display: inline-block; vertical-align: -.1em; }
+
+/* Hint del test cognitivo (bombillo) */
+.ct__hint { display: inline-flex; align-items: center; gap: 8px; }
+.ct__hint .sx-sticker { color: var(--sx-accent-700); flex-shrink: 0; }
+body.theme-dark .ct__hint .sx-sticker { color: var(--sx-accent); }
+
+/* Badges del login + icono del banner de notificaciones */
+.sx-benefit { display: inline-flex; align-items: center; gap: 7px; }
+.sx-benefit .sx-sticker { color: var(--sx-accent-700); flex-shrink: 0; }
+body.theme-dark .sx-benefit .sx-sticker { color: var(--sx-accent); }
+.notification-banner__icon { display: inline-flex !important; align-items: center; justify-content: center; }
+.notification-banner__icon .sx-sticker { color: currentColor; }
+
+/* ============================================================
+   Inicio SIN scroll en escritorio: en alturas de laptop el bento
+   se compacta para que todo el contenido quepa en el viewport.
+   ============================================================ */
+@media (min-width: 769px) and (max-height: 860px) {
+  .dashboard-main[data-tab="home"] .dashboard-content { padding: 14px 28px !important; }
+  .dash { padding: 4px 8px; gap: 14px; }
+  .dash__main { gap: 12px; }
+  .dash__hero { padding: 14px 22px; border-radius: 18px; }
+  .dash__hero-emoji svg { width: 22px; height: 22px; }
+  .dash__hero-title { font-size: 1.45rem; margin: 3px 0 1px; }
+  .dash__hero-sub { font-size: .85rem; }
+  .dash__card { padding: 4px; border-radius: 16px; }
+  .dash__card-head { padding: 10px 12px 4px; }
+  .dash__card-title { font-size: 1rem; }
+  .dash__row { padding: 8px 12px; gap: 12px; border-radius: 12px; }
+  .dash__row-icon { width: 34px; height: 34px; border-radius: 10px; }
+  .dash__row-icon svg { width: 17px; height: 17px; }
+  .dash__row-label { font-size: .89rem; }
+  .dash__row-sub { font-size: .72rem; }
+  .dash__row-value { font-size: 1.25rem; }
+  .dash__quick { gap: 10px; }
+  .dash__quick-btn { flex-direction: row; align-items: center; padding: 10px 13px; gap: 9px; border-radius: 13px; }
+  .dash__quick-icon { width: 32px; height: 32px; border-radius: 9px; }
+  .dash__quick-icon svg { width: 16px; height: 16px; }
+  .dash__quick-label { font-size: .84rem; }
+  .dash__side { gap: 12px; }
+  .dash__ringcard { padding: 12px 16px; border-radius: 16px; }
+  .dash__ring { width: 100px; height: 100px; margin-bottom: 6px; }
+  .dash__ring-num { font-size: 1.8rem; }
+  .dash__ring-xp { font-size: .88rem; }
+  .dash__ring-total { font-size: .72rem; margin-top: 2px; }
+  .dash__minis { gap: 10px; }
+  .dash__mini { padding: 10px 12px; border-radius: 13px; }
+  .dash__mini-num { font-size: 1.2rem; }
+  .dash__tip { padding: 10px 12px; border-radius: 13px; }
+  .dash__tip p { font-size: .78rem; }
+}

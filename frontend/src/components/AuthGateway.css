@@ -1,0 +1,59 @@
+/* ============================================================
+   Scolyax — Auth / Login (UniMalla-style, light + dark via DS tokens)
+   ============================================================ */
+.sx-auth-bg {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(700px 460px at 85% -10%, var(--sx-accent-soft), transparent 70%),
+    var(--sx-bg);
+}
+.sx-auth {
+  position: relative; z-index: 1; width: 100%;
+  border-radius: 22px; padding: clamp(26px, 5vw, 40px);
+  background: var(--sx-card);
+  border: 1px solid var(--sx-border);
+  box-shadow: var(--sx-shadow-lg);
+  color: var(--sx-text);
+  font-family: 'DM Sans', system-ui, sans-serif;
+}
+.sx-auth__brand { display: flex; align-items: center; gap: 13px; margin-bottom: 24px; }
+.sx-auth__mark { width: 44px; height: 44px; border-radius: 12px; box-shadow: 0 6px 16px -6px var(--sx-accent-ring); }
+.sx-auth__name { font-size: 1.35rem; font-weight: 800; letter-spacing: -.2px; line-height: 1; background: var(--sx-grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.sx-auth__tagline { display: block; font-size: .78rem; color: var(--sx-text-3); margin-top: 3px; }
+
+.sx-auth__title { font-size: clamp(1.45rem, 4vw, 1.9rem); font-weight: 800; margin: 0 0 6px; letter-spacing: -.5px; color: var(--sx-text); }
+.sx-auth__subtitle { color: var(--sx-text-2); margin: 0 0 24px; font-size: .96rem; }
+
+.sx-auth__providers { display: flex; flex-direction: column; gap: 11px; }
+.sx-prov {
+  display: flex; align-items: center; gap: 12px; width: 100%;
+  padding: 13px 17px; border-radius: 12px; cursor: pointer; text-decoration: none;
+  background: var(--sx-card); border: 1px solid var(--sx-border-2);
+  color: var(--sx-text); font-weight: 600; font-size: .96rem; transition: .18s;
+}
+.sx-prov:hover { border-color: var(--sx-accent); background: var(--sx-accent-soft); transform: translateY(-1px); }
+.sx-prov__icon { width: 22px; height: 22px; display: grid; place-items: center; flex-shrink: 0; }
+.sx-prov__text { flex: 1; }
+.sx-prov--loading { opacity: .7; pointer-events: none; }
+
+.sx-spin { width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--sx-border-2); border-top-color: var(--sx-accent); animation: sx-rot .7s linear infinite; }
+@keyframes sx-rot { to { transform: rotate(360deg); } }
+
+.sx-auth__divider { display: flex; align-items: center; gap: 14px; margin: 22px 0; color: var(--sx-text-3); font-size: .78rem; }
+.sx-auth__divider::before, .sx-auth__divider::after { content: ''; flex: 1; height: 1px; background: var(--sx-border); }
+
+.sx-auth__benefits { display: flex; flex-wrap: wrap; gap: 9px; }
+.sx-benefit { display: flex; align-items: center; gap: 7px; font-size: .8rem; color: var(--sx-text-2); padding: 7px 12px; border-radius: 999px; background: var(--sx-card-2); border: 1px solid var(--sx-border); }
+
+.sx-alert { display: flex; gap: 12px; padding: 14px 16px; border-radius: 12px; margin-bottom: 20px; background: #fff7ed; border: 1px solid #fed7aa; color: #9a3412; }
+body.theme-dark .sx-alert { background: rgba(245,158,11,.1); border-color: rgba(245,158,11,.3); color: #fcd9a8; }
+.sx-alert__title { display: block; font-weight: 700; font-size: .9rem; }
+.sx-alert__text { margin: 3px 0 0; font-size: .82rem; opacity: .85; }
+
+.sx-demo { display: flex; align-items: center; justify-content: center; gap: 9px; width: 100%; margin-top: 11px; padding: 13px; border-radius: 12px; cursor: pointer; font-weight: 700; color: var(--sx-on-accent); background: var(--sx-grad); border: none; box-shadow: 0 12px 30px -14px var(--sx-accent-ring); }
+.sx-feedback { display: flex; align-items: center; gap: 8px; margin-top: 13px; padding: 11px 14px; border-radius: 11px; font-size: .85rem; color: var(--sx-accent-700); background: var(--sx-accent-soft); border: 1px solid var(--sx-border); }
+body.theme-dark .sx-feedback { color: var(--sx-accent); }
+.sx-auth__footer { margin-top: 24px; text-align: center; font-size: .77rem; color: var(--sx-text-3); }
+.sx-auth__footer a { color: var(--sx-accent-700); text-decoration: none; }
+body.theme-dark .sx-auth__footer a { color: var(--sx-accent); }
+.sx-auth__footer a:hover { text-decoration: underline; }

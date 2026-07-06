@@ -1,0 +1,33 @@
+{
+  "manifest_version": 3,
+  "name": "Scolyax Anti-Distracciones",
+  "short_name": "Scolyax",
+  "version": "1.1.0",
+  "description": "Bloquea Netflix, YouTube y redes sociales durante tus sesiones de estudio en Scolyax. Iris controla qué plataformas se bloquean.",
+  "homepage_url": "https://scolyax.vercel.app",
+  "permissions": ["tabs", "storage"],
+  "icons": {
+    "16":  "icons/icon-16.png",
+    "48":  "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://scolyax.vercel.app/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "action": {
+    "default_title": "Scolyax Anti-Distracciones",
+    "default_icon": {
+      "16":  "icons/icon-16.png",
+      "48":  "icons/icon-48.png",
+      "128": "icons/icon-128.png"
+    }
+  }
+}

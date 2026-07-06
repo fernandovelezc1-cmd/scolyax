@@ -1,0 +1,92 @@
+/* ============================================================
+   Cognitive Test — Scolyax onboarding (UniMalla stepper, ct-* )
+   Light + dark via DS tokens.
+   ============================================================ */
+.ct {
+  position: fixed; inset: 0; z-index: 1000;
+  display: grid; place-items: center; padding: clamp(14px, 3vw, 32px);
+  font-family: 'DM Sans', system-ui, sans-serif; color: var(--sx-text);
+  background:
+    radial-gradient(700px 460px at 88% -10%, var(--sx-accent-soft), transparent 70%),
+    var(--sx-bg);
+  overflow: auto;
+}
+.ct__shell {
+  width: min(1000px, 100%);
+  display: grid; grid-template-columns: 320px 1fr;
+  background: var(--sx-card); border: 1px solid var(--sx-border);
+  border-radius: 24px; overflow: hidden; box-shadow: var(--sx-shadow-lg);
+}
+
+/* ---- Rail ---- */
+.ct__rail {
+  display: flex; flex-direction: column; gap: 22px;
+  padding: 28px 26px;
+  background:
+    linear-gradient(160deg, color-mix(in srgb, var(--sx-accent) 14%, var(--sx-card)) 0%, var(--sx-card-2) 60%);
+  border-right: 1px solid var(--sx-border);
+}
+.ct__brand { display: flex; align-items: center; gap: 10px; }
+.ct__brand-mark { width: 34px; height: 34px; border-radius: 9px; box-shadow: 0 4px 12px -4px var(--sx-accent-ring); }
+.ct__brand-name { font-weight: 800; letter-spacing: -.2px; background: var(--sx-grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.ct__intro-title { font-size: 1.45rem; font-weight: 800; letter-spacing: -.5px; margin: 0 0 8px; }
+.ct__intro-sub { font-size: .9rem; color: var(--sx-text-2); line-height: 1.6; margin: 0; }
+
+.ct__steps { list-style: none; margin: 4px 0; padding: 0; display: flex; flex-direction: column; gap: 2px; flex: 1; }
+.ct__step { position: relative; display: flex; align-items: center; min-height: 26px; padding-left: 2px; }
+.ct__step::before { /* connector */
+  content: ''; position: absolute; left: 12px; top: 26px; bottom: -2px; width: 2px; background: var(--sx-border);
+}
+.ct__step:last-child::before { display: none; }
+.ct__step-dot {
+  width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center;
+  font-size: .7rem; font-weight: 700; flex-shrink: 0;
+  background: var(--sx-card); border: 2px solid var(--sx-border-2); color: var(--sx-text-3); z-index: 1;
+}
+.ct__step.is-done .ct__step-dot { background: var(--sx-grad); border-color: transparent; color: var(--sx-on-accent); }
+.ct__step.is-done::before { background: var(--sx-accent); }
+.ct__step.is-current .ct__step-dot { border-color: var(--sx-accent); color: var(--sx-accent-700); box-shadow: 0 0 0 4px var(--sx-accent-ring); }
+body.theme-dark .ct__step.is-current .ct__step-dot { color: var(--sx-accent); }
+
+.ct__rail-foot { margin-top: auto; }
+.ct__count { font-size: .85rem; font-weight: 700; color: var(--sx-text); margin-bottom: 8px; }
+.ct__count span { color: var(--sx-text-3); font-weight: 600; }
+.ct__bar { height: 8px; border-radius: 999px; background: var(--sx-bg-2); overflow: hidden; }
+.ct__bar-fill { height: 100%; border-radius: 999px; background: var(--sx-grad); transition: width .35s ease; }
+
+/* ---- Main ---- */
+.ct__main { padding: clamp(28px, 4vw, 48px); display: flex; flex-direction: column; transition: opacity .25s, transform .25s; }
+.ct__main.is-leaving { opacity: 0; transform: translateY(8px); }
+.ct__q-index { align-self: flex-start; font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--sx-accent-700); background: var(--sx-accent-soft); padding: 5px 11px; border-radius: 999px; margin-bottom: 18px; }
+body.theme-dark .ct__q-index { color: var(--sx-accent); }
+.ct__question { font-size: clamp(1.3rem, 2.6vw, 1.75rem); font-weight: 800; letter-spacing: -.5px; line-height: 1.25; margin: 0 0 26px; color: var(--sx-text); }
+
+.ct__options { display: flex; flex-direction: column; gap: 12px; }
+.ct__option {
+  display: flex; align-items: center; gap: 14px; width: 100%; text-align: left;
+  padding: 16px 18px; border-radius: 14px; cursor: pointer;
+  background: var(--sx-card); border: 1.5px solid var(--sx-border); color: var(--sx-text);
+  font-size: 1rem; transition: border-color .15s, background .15s, transform .15s;
+}
+.ct__option:hover:not(:disabled) { border-color: var(--sx-accent); background: var(--sx-accent-soft); transform: translateY(-1px); }
+.ct__option:disabled { cursor: default; }
+.ct__option.is-selected { border-color: var(--sx-accent); background: var(--sx-accent-soft); }
+.ct__option-badge {
+  width: 32px; height: 32px; flex-shrink: 0; border-radius: 9px; display: grid; place-items: center;
+  font-weight: 800; font-size: .9rem; background: var(--sx-bg-2); color: var(--sx-text-2); border: 1px solid var(--sx-border);
+}
+.ct__option:hover .ct__option-badge, .ct__option.is-selected .ct__option-badge { background: var(--sx-grad); color: var(--sx-on-accent); border-color: transparent; }
+.ct__option-text { flex: 1; line-height: 1.4; }
+.ct__option-mark { width: 22px; text-align: center; color: var(--sx-accent-700); font-weight: 800; }
+body.theme-dark .ct__option-mark { color: var(--sx-accent); }
+
+.ct__hint { margin: 26px 0 0; font-size: .82rem; color: var(--sx-text-3); }
+
+/* ---- Responsive ---- */
+@media (max-width: 760px) {
+  .ct__shell { grid-template-columns: 1fr; }
+  .ct__rail { flex-direction: column; gap: 16px; padding: 22px; border-right: none; border-bottom: 1px solid var(--sx-border); }
+  .ct__steps { flex-direction: row; flex-wrap: wrap; gap: 8px; }
+  .ct__step { min-height: 0; }
+  .ct__step::before { display: none; }
+}

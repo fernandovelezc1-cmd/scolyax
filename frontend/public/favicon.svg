@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="64" height="64" role="img" aria-label="Scolyax">
+  <defs>
+    <linearGradient id="fxBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0d1320"/>
+      <stop offset="1" stop-color="#060a10"/>
+    </linearGradient>
+    <linearGradient id="fxMark" x1="0.1" y1="0" x2="0.9" y2="1">
+      <stop offset="0" stop-color="#dde77a"/>
+      <stop offset="0.5" stop-color="#c9d62f"/>
+      <stop offset="1" stop-color="#a9b71a"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="116" fill="url(#fxBg)"/>
+  <g fill="none" stroke="url(#fxMark)" stroke-width="44" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="150,228 256,168 362,228"/>
+    <polyline points="150,304 256,244 362,304" opacity="0.9"/>
+    <polyline points="150,380 256,320 362,380" opacity="0.72"/>
+  </g>
+</svg>

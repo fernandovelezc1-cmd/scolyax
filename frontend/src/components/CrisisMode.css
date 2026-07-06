@@ -1,0 +1,108 @@
+/* ============================================================
+   CrisisMode — overlay calmado (crisis-*). Light + dark via tokens.
+   ============================================================ */
+.crisis-overlay {
+  position: fixed; inset: 0; z-index: 2000; overflow-y: auto;
+  display: flex; align-items: center; justify-content: center; padding: clamp(20px, 5vw, 48px);
+  font-family: 'DM Sans', system-ui, sans-serif; color: var(--sx-text);
+  background:
+    radial-gradient(900px 600px at 50% -10%, rgba(201, 214, 47,.22), transparent 65%),
+    radial-gradient(700px 600px at 100% 110%, rgba(169, 183, 26,.14), transparent 60%),
+    var(--sx-bg);
+  animation: crisis-fade .4s ease;
+}
+@keyframes crisis-fade { from { opacity: 0 } to { opacity: 1 } }
+
+.crisis-close {
+  position: fixed; top: 18px; right: 18px; z-index: 3; width: 42px; height: 42px; border-radius: 12px;
+  cursor: pointer; font-size: 1.1rem; background: var(--sx-card); color: var(--sx-text-2);
+  border: 1px solid var(--sx-border); box-shadow: var(--sx-shadow);
+}
+.crisis-close:hover { color: var(--sx-text); border-color: var(--sx-accent); }
+
+.crisis-phase { width: min(560px, 100%); display: flex; flex-direction: column; align-items: center; text-align: center; gap: 14px; animation: crisis-rise .4s ease; }
+@keyframes crisis-rise { from { opacity: 0; transform: translateY(12px) } to { opacity: 1; transform: none } }
+
+/* Welcome */
+.crisis-iris-avatar { font-size: 4rem; animation: crisis-bob 3s ease-in-out infinite; }
+@keyframes crisis-bob { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-8px) } }
+.crisis-iris-message { font-size: clamp(1.4rem, 3.4vw, 1.9rem); font-weight: 800; letter-spacing: -.4px; margin: 0; line-height: 1.3; }
+.crisis-subtitle { color: var(--sx-text-2); margin: 0; }
+
+.crisis-primary-btn {
+  cursor: pointer; padding: 15px 32px; border-radius: 14px; border: none; font-weight: 700; font-size: 1.02rem;
+  background: var(--sx-grad); color: var(--sx-on-accent); box-shadow: 0 16px 40px -14px var(--sx-accent-ring); margin-top: 6px;
+}
+.crisis-primary-btn:hover { transform: translateY(-2px); }
+.crisis-studyplan-btn, .crisis-skip-btn {
+  cursor: pointer; padding: 11px 22px; border-radius: 12px; font-weight: 600; font-size: .9rem;
+  background: var(--sx-card); color: var(--sx-text); border: 1px solid var(--sx-border-2);
+}
+.crisis-studyplan-btn:hover, .crisis-skip-btn:hover { border-color: var(--sx-accent); color: var(--sx-accent-700); }
+body.theme-dark .crisis-studyplan-btn:hover, body.theme-dark .crisis-skip-btn:hover { color: var(--sx-accent); }
+
+/* Retake card */
+.crisis-retake-card { margin-top: 18px; width: 100%; padding: 20px; border-radius: 18px; background: var(--sx-card); border: 1px solid var(--sx-border); box-shadow: var(--sx-shadow); }
+.crisis-retake-logo { display: inline-flex; align-items: center; gap: 8px; }
+.crisis-retake-icon { font-size: 1.3rem; }
+.crisis-retake-label { font-weight: 800; background: var(--sx-grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.crisis-retake-desc { color: var(--sx-text-2); font-size: .86rem; margin: 10px 0 14px; line-height: 1.5; }
+.crisis-retake-btn { cursor: pointer; padding: 10px 18px; border-radius: 11px; font-weight: 700; font-size: .88rem; background: var(--sx-accent-soft); color: var(--sx-accent-700); border: 1px solid var(--sx-border); }
+body.theme-dark .crisis-retake-btn { color: var(--sx-accent); }
+
+/* Trigger */
+.crisis-question { font-size: clamp(1.4rem, 3.2vw, 1.8rem); font-weight: 800; margin: 0 0 8px; }
+.crisis-trigger-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 100%; }
+.crisis-trigger-btn { display: flex; flex-direction: column; align-items: center; gap: 8px; cursor: pointer; padding: 20px 14px; border-radius: 16px; background: var(--sx-card); border: 1.5px solid var(--sx-border); color: var(--sx-text); transition: .15s; }
+.crisis-trigger-btn:hover { transform: translateY(-3px); border-color: var(--sx-accent); }
+.crisis-trigger-emoji { font-size: 2rem; }
+.crisis-trigger-label { font-weight: 600; font-size: .88rem; }
+
+/* Breathing */
+.crisis-breathing-instruction { font-weight: 800; font-size: 1.2rem; margin: 0; }
+.crisis-breathing-circle { position: relative; width: 220px; height: 220px; border-radius: 50%; display: grid; place-items: center; background: var(--sx-card); border: 1px solid var(--sx-border); box-shadow: 0 0 0 10px color-mix(in srgb, var(--sx-accent) 12%, transparent), var(--sx-shadow-lg); overflow: hidden; }
+.crisis-breathing-fill { position: absolute; inset: 0; border-radius: 50%; background: var(--sx-grad); opacity: .25; transform: scale(calc(0.4 + var(--progress, 0%) / 160)); transition: transform 1s linear; }
+.crisis-breathing-content { position: relative; display: flex; flex-direction: column; align-items: center; gap: 4px; z-index: 1; }
+.crisis-breathing-emoji { font-size: 2rem; }
+.crisis-breathing-label { font-weight: 800; font-size: 1.2rem; }
+.crisis-breathing-timer { font-size: 2.4rem; font-weight: 800; color: var(--sx-accent-700); }
+body.theme-dark .crisis-breathing-timer { color: var(--sx-accent); }
+.crisis-breathing-cycle { color: var(--sx-text-2); font-weight: 600; margin: 0; }
+
+/* Micro-tasks */
+.crisis-tasks-title { font-size: clamp(1.4rem, 3.2vw, 1.8rem); font-weight: 800; margin: 0; }
+.crisis-micro-task-card { width: 100%; padding: 26px 22px; border-radius: 20px; background: var(--sx-card); border: 1px solid var(--sx-border); box-shadow: var(--sx-shadow-lg); position: relative; }
+.crisis-micro-task-number { font-size: .75rem; font-weight: 700; color: var(--sx-accent-700); background: var(--sx-accent-soft); padding: 4px 10px; border-radius: 999px; }
+body.theme-dark .crisis-micro-task-number { color: var(--sx-accent); }
+.crisis-micro-task-title { font-size: 1.25rem; font-weight: 700; margin: 14px 0 10px; line-height: 1.4; }
+.crisis-micro-task-time { font-size: .85rem; color: var(--sx-text-3); }
+.crisis-source-task { font-size: .8rem; color: var(--sx-text-3); margin: 0; }
+.crisis-no-tasks { color: var(--sx-text-2); }
+.crisis-loading { display: flex; flex-direction: column; align-items: center; gap: 12px; color: var(--sx-text-2); }
+.crisis-loading-spinner { width: 36px; height: 36px; border-radius: 50%; border: 3px solid var(--sx-border-2); border-top-color: var(--sx-accent); animation: crisis-spin .8s linear infinite; }
+@keyframes crisis-spin { to { transform: rotate(360deg) } }
+
+/* Done */
+.crisis-done-emoji { font-size: 4.5rem; animation: crisis-bob 2.5s ease-in-out infinite; }
+.crisis-done-title { font-size: 2rem; font-weight: 800; margin: 0; background: var(--sx-grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.crisis-done-subtitle { color: var(--sx-text-2); margin: 0; max-width: 380px; line-height: 1.5; }
+
+/* Study plan phase */
+.crisis-studyplan { align-items: stretch; text-align: left; }
+.crisis-studyplan-title { font-size: 1.5rem; font-weight: 800; text-align: center; margin: 0 0 6px; }
+.crisis-studyplan-method { text-align: center; }
+.crisis-studyplan-badge { display: inline-block; font-weight: 800; color: var(--sx-on-accent); background: var(--sx-grad); padding: 6px 16px; border-radius: 999px; }
+.crisis-studyplan-method-desc { color: var(--sx-text-2); font-size: .86rem; margin: 8px 0 0; }
+.crisis-studyplan-body { display: grid; gap: 16px; margin-top: 6px; }
+.crisis-studyplan-section-label { font-weight: 800; font-size: .9rem; margin: 0 0 10px; }
+.crisis-studyplan-tip { display: flex; gap: 10px; align-items: flex-start; background: var(--sx-card); border: 1px solid var(--sx-border); border-radius: 12px; padding: 11px; margin-bottom: 8px; }
+.crisis-studyplan-tip-num { width: 24px; height: 24px; flex-shrink: 0; border-radius: 7px; display: grid; place-items: center; font-weight: 800; font-size: .8rem; background: var(--sx-grad); color: var(--sx-on-accent); }
+.crisis-studyplan-tip-text { font-size: .85rem; line-height: 1.45; }
+.crisis-studyplan-day { display: flex; gap: 10px; align-items: center; background: var(--sx-card); border: 1px solid var(--sx-border); border-radius: 12px; padding: 10px; margin-bottom: 8px; }
+.crisis-studyplan-day-emoji { font-size: 1.3rem; }
+.crisis-studyplan-day-name { display: block; font-weight: 700; font-size: .88rem; }
+.crisis-studyplan-day-focus { display: block; font-size: .8rem; color: var(--sx-text-2); }
+.crisis-studyplan-empty { color: var(--sx-text-2); text-align: center; }
+
+@media (max-width: 480px) { .crisis-trigger-grid { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { .crisis-iris-avatar, .crisis-done-emoji, .crisis-breathing-fill { animation: none !important; } }

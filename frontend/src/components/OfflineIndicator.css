@@ -1,0 +1,124 @@
+/* Indicador de estado offline/online */
+.offline-indicator {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  padding: 12px 20px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: white;
+  animation: slide-down 0.3s ease-out;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.offline-indicator.offline {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+}
+
+.offline-indicator.syncing {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+}
+
+@keyframes slide-down {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.offline-indicator__content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.offline-indicator__icon {
+  font-size: 18px;
+  animation: pulse-icon 2s ease-in-out infinite;
+}
+
+@keyframes pulse-icon {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+.offline-indicator.syncing .offline-indicator__icon {
+  animation: rotate-icon 1s linear infinite;
+}
+
+@keyframes rotate-icon {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.offline-indicator__text {
+  font-weight: 600;
+}
+
+.offline-indicator__badge {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  backdrop-filter: blur(10px);
+}
+
+/* Ajustes para dark mode */
+body.theme-dark .offline-indicator.offline {
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+}
+
+body.theme-dark .offline-indicator.syncing {
+  background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .offline-indicator {
+    padding: 10px 16px;
+    font-size: 13px;
+  }
+
+  .offline-indicator__icon {
+    font-size: 16px;
+  }
+
+  .offline-indicator__badge {
+    width: 100%;
+    margin-top: 4px;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  .offline-indicator {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+
+  .offline-indicator__content {
+    gap: 6px;
+  }
+
+  .offline-indicator__badge {
+    font-size: 10px;
+  }
+}

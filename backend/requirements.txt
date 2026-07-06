@@ -1,0 +1,33 @@
+fastapi==0.110.0
+uvicorn[standard]==0.27.1
+python-multipart==0.0.9
+
+# Document processing libraries
+PyPDF2==3.0.1
+python-docx==1.1.0
+python-pptx==0.6.23
+
+httpx>=0.26.0
+python-dotenv>=1.0.1
+supabase==2.23.2
+pydantic>=2.0.0
+websockets>=12.0
+postgrest>=2.23.2
+realtime>=2.23.2
+gunicorn>=21.2.0
+
+# Timezone support
+pytz>=2024.1
+
+# Scheduler for background tasks
+APScheduler>=3.10.0
+
+# Optional: AI and TTS
+google-genai>=1.0.0  # Google Genai SDK (Gemini 2.5 Flash) - gratuito
+google-cloud-texttospeech>=2.14.0  # TTS realista con voces WaveNet (gratuito)
+gTTS>=2.5.0  # Fallback TTS gratuito sin necesidad de API key
+edge-tts>=7.0.0  # Microsoft Edge Neural Voices — voces humanas, gratis, rápido
+
+# Web Push Notifications
+pywebpush>=2.0.0
+py-vapid>=1.9.0

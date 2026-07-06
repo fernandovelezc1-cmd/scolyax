@@ -1,0 +1,29 @@
+# Dependencias
+node_modules/
+.venv/
+__pycache__/
+*.pyc
+
+# Builds
+frontend/dist/
+dist-extension/
+*.zip
+
+# Entornos y credenciales (nunca commitear)
+.env
+.env.local
+.env.*.local
+*.env.backup
+backend/.env
+backend/credentials/
+credentials/
+
+# Datos locales
+backend/app/data/*.db
+backend/app/data/outbox/*.eml
+
+# Sistema / editor
+.DS_Store
+Thumbs.db
+.vscode/
+*.log

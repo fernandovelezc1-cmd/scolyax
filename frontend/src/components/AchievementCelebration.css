@@ -1,0 +1,480 @@
+/* ============================= */
+/* ACHIEVEMENT CELEBRATION MODAL */
+/* ============================= */
+
+.achievement-celebration {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.achievement-celebration--active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Backdrop semi-transparente con blur */
+.achievement-celebration__backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  animation: backdropFadeIn 0.3s ease-out;
+  z-index: -1;
+}
+
+@keyframes backdropFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Modal principal */
+.achievement-celebration__modal {
+  position: relative;
+  background: linear-gradient(135deg, #c9d62f 0%, #c8de1f 100%);
+  border-radius: 24px;
+  padding: 3rem 2rem;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25),
+              0 0 100px rgba(201, 214, 47, 0.5);
+  animation: modalBounce 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+@keyframes modalBounce {
+  0% {
+    transform: scale(0.3) translateY(-50px);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Efecto de glow de fondo */
+.achievement-celebration__glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  border-radius: 24px;
+  animation: glowPulse 2s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Contenedor del trofeo */
+.achievement-celebration__trophy-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  animation: trophyBounce 0.8s ease-in-out infinite;
+}
+
+@keyframes trophyBounce {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-20px) scale(1.1);
+  }
+}
+
+.achievement-celebration__trophy-emoji {
+  font-size: 4rem;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2));
+  z-index: 2;
+}
+
+.achievement-celebration__trophy-glow {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.4) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: trophyGlowPulse 1.5s ease-in-out infinite;
+  z-index: 1;
+}
+
+@keyframes trophyGlowPulse {
+  0%, 100% {
+    transform: scale(0.8);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.6;
+  }
+}
+
+/* Líneas decorativas */
+.achievement-celebration__decorative-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+}
+
+.achievement-celebration__decorative-line--top {
+  top: 140px;
+  animation: lineSlideIn 0.6s ease-out 0.2s both;
+}
+
+.achievement-celebration__decorative-line--bottom {
+  bottom: 90px;
+  animation: lineSlideIn 0.6s ease-out 0.3s both;
+}
+
+@keyframes lineSlideIn {
+  from {
+    width: 0;
+    opacity: 0;
+  }
+  to {
+    width: 100%;
+    opacity: 1;
+  }
+}
+
+/* Contenido */
+.achievement-celebration__content {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  animation: fadeInUp 0.6s ease-out 0.2s both;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Título */
+.achievement-celebration__title {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: white;
+  margin: 0 0 1rem 0;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  animation: titleScale 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes titleScale {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Badge del logro */
+.achievement-celebration__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  margin: 1.5rem 0;
+  animation: badgeRotate 0.8s ease-in-out infinite;
+  box-shadow: 0 8px 32px rgba(255, 255, 255, 0.2);
+}
+
+@keyframes badgeRotate {
+  0%, 100% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(5deg) scale(1.05);
+  }
+}
+
+.achievement-celebration__achievement-emoji {
+  font-size: 3.5rem;
+  animation: emojiPulse 0.6s ease-in-out infinite;
+  display: block;
+}
+
+@keyframes emojiPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+}
+
+/* Nombre del logro */
+.achievement-celebration__achievement-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white;
+  margin: 1rem 0 0.5rem 0;
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Descripción */
+.achievement-celebration__achievement-description {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0.5rem 0 1.5rem 0;
+  line-height: 1.5;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Estrellas animadas */
+.achievement-celebration__stars {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1.5rem 0;
+  height: 40px;
+}
+
+.achievement-celebration__star {
+  font-size: 1.5rem;
+  display: inline-block;
+  animation: starFloat 2s ease-in-out infinite;
+}
+
+.achievement-celebration__star--1 {
+  animation-delay: 0s;
+  animation-duration: 2s;
+}
+
+.achievement-celebration__star--2 {
+  animation-delay: -0.3s;
+  animation-duration: 1.8s;
+}
+
+.achievement-celebration__star--3 {
+  animation-delay: -0.6s;
+  animation-duration: 2.2s;
+}
+
+@keyframes starFloat {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-15px) scale(1.2);
+    opacity: 1;
+  }
+}
+
+/* Botón continuar */
+.achievement-celebration__close-button {
+  background: linear-gradient(135deg, #a9b71a 0%, #a9b71a 100%);
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(13, 148, 136, 0.4);
+  margin-top: 1rem;
+}
+
+.achievement-celebration__close-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(13, 148, 136, 0.6);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.achievement-celebration__close-button:active {
+  transform: translateY(0);
+}
+
+/* Partículas de fondo */
+.achievement-celebration__particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.achievement-celebration__particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  left: 50%;
+  top: 50%;
+  animation: particleBurst 1.5s ease-out forwards;
+  animation-delay: var(--particle-delay);
+}
+
+@keyframes particleBurst {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(
+      calc(cos(var(--particle-index) * 30deg) * 100px),
+      calc(sin(var(--particle-index) * 30deg) * 100px)
+    ) scale(0);
+    opacity: 0;
+  }
+}
+
+/* Confeti container */
+.confetti-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998;
+}
+
+.confetti-particle {
+  position: fixed;
+  font-size: 1.5rem;
+  pointer-events: none;
+  animation: confettiFall var(--duration, 3s) ease-in forwards;
+  animation-delay: var(--delay, 0s);
+  left: var(--left, 0);
+  top: -10vh;
+}
+
+@keyframes confettiFall {
+  0% {
+    transform: translateY(0) rotateZ(0deg) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(120vh) rotateZ(720deg) scale(0);
+    opacity: 0;
+  }
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .achievement-celebration__modal {
+    padding: 2rem 1.5rem;
+    border-radius: 20px;
+  }
+
+  .achievement-celebration__title {
+    font-size: 1.5rem;
+  }
+
+  .achievement-celebration__achievement-name {
+    font-size: 1.25rem;
+  }
+
+  .achievement-celebration__trophy-emoji {
+    font-size: 3.5rem;
+  }
+
+  .achievement-celebration__achievement-emoji {
+    font-size: 3rem;
+  }
+
+  .achievement-celebration__badge {
+    width: 80px;
+    height: 80px;
+  }
+
+  .achievement-celebration__star {
+    font-size: 1.25rem;
+  }
+
+  .achievement-celebration__close-button {
+    padding: 0.65rem 1.5rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Ultra responsive */
+@media (max-width: 480px) {
+  .achievement-celebration__modal {
+    padding: 1.5rem 1rem;
+    max-width: calc(100% - 2rem);
+  }
+
+  .achievement-celebration__title {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .achievement-celebration__achievement-name {
+    font-size: 1.1rem;
+  }
+
+  .achievement-celebration__achievement-description {
+    font-size: 0.85rem;
+  }
+
+  .achievement-celebration__trophy-emoji {
+    font-size: 3rem;
+  }
+
+  .achievement-celebration__achievement-emoji {
+    font-size: 2.5rem;
+  }
+
+  .achievement-celebration__badge {
+    width: 70px;
+    height: 70px;
+    margin: 1rem 0;
+  }
+
+  .achievement-celebration__stars {
+    gap: 0.5rem;
+    margin: 1rem 0;
+  }
+
+  .achievement-celebration__star {
+    font-size: 1rem;
+  }
+
+  .achievement-celebration__decorative-line--top {
+    top: 120px;
+  }
+
+  .achievement-celebration__decorative-line--bottom {
+    bottom: 85px;
+  }
+}

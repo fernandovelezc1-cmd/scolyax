@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Extensión Scolyax — Instalación</title>
+  <style>
+    :root { --indigo: #6366f1; --green: #22c55e; --yellow: #eab308; --red: #ef4444; }
+    * { box-sizing: border-box; }
+    body { font-family: system-ui, -apple-system, sans-serif; max-width: 740px; margin: 48px auto; padding: 0 24px; color: #1e293b; line-height: 1.6; }
+    h1 { color: var(--indigo); display: flex; align-items: center; gap: 10px; }
+    h2 { margin-top: 40px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; }
+    .badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 12px; font-weight: 700; }
+    .badge-free { background: #dcfce7; color: #15803d; }
+    .badge-paid { background: #fef9c3; color: #854d0e; }
+    .tabs { display: flex; gap: 8px; margin: 24px 0 0; border-bottom: 2px solid #e2e8f0; }
+    .tab { padding: 10px 20px; cursor: pointer; border: none; background: none; font-size: 15px; font-family: inherit; color: #64748b; border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all .2s; }
+    .tab.active { color: var(--indigo); border-color: var(--indigo); font-weight: 600; }
+    .panel { display: none; padding: 24px 0; }
+    .panel.active { display: block; }
+    .step { display: flex; gap: 16px; margin-bottom: 20px; align-items: flex-start; }
+    .num { background: var(--indigo); color: white; border-radius: 50%; min-width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; }
+    .num.green { background: var(--green); }
+    .step-body h3 { margin: 0 0 4px; font-size: 15px; }
+    .step-body p  { margin: 0; color: #475569; font-size: 14px; }
+    code { background: #f1f5f9; padding: 2px 7px; border-radius: 5px; font-size: 13px; }
+    .warn { background: #fef9c3; border-left: 4px solid var(--yellow); padding: 12px 16px; border-radius: 8px; font-size: 14px; margin: 16px 0; }
+    .info { background: #eff6ff; border-left: 4px solid #3b82f6; padding: 12px 16px; border-radius: 8px; font-size: 14px; margin: 16px 0; }
+    .price-card { border: 2px solid #e2e8f0; border-radius: 16px; padding: 24px; margin: 16px 0; display: flex; gap: 20px; align-items: flex-start; }
+    .price-card .amount { font-size: 36px; font-weight: 800; color: var(--indigo); white-space: nowrap; }
+    .price-card p { color: #475569; font-size: 14px; margin: 4px 0 0; }
+    .btn { display: inline-block; padding: 10px 20px; background: var(--indigo); color: white; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 14px; margin-top: 8px; }
+    .btn:hover { background: #4f46e5; }
+    .checklist li { margin-bottom: 8px; font-size: 14px; }
+    .checklist li::marker { content: "☐  "; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    td, th { padding: 8px 12px; border: 1px solid #e2e8f0; }
+    th { background: #f8fafc; }
+  </style>
+</head>
+<body>
+  <h1>🛡️ Scolyax Anti-Distracciones</h1>
+  <p>Esta extensión permite que Iris detecte plataformas de distracción (Netflix, YouTube, redes sociales…) en tiempo real durante tus sesiones de estudio.</p>
+
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('store')">🏪 Chrome Web Store</button>
+    <button class="tab" onclick="showTab('local')">🧪 Instalación local (dev)</button>
+  </div>
+
+  <!-- ─── LOCAL ─── -->
+  <div id="tab-local" class="panel">
+    <div class="info">Este método funciona solo en tu PC. Es ideal para pruebas antes de publicar en el Store.</div>
+    <div class="step"><div class="num">1</div><div class="step-body"><h3>Descarga la carpeta de la extensión</h3><p>Localiza <code>frontend/public/scolyax-extension/</code> en el repositorio del proyecto.</p></div></div>
+    <div class="step"><div class="num">2</div><div class="step-body"><h3>Genera los iconos</h3><p>Desde <code>scolyax-extension/</code> ejecuta: <code>node generate-icons.js</code><br>(requiere <code>npm install sharp</code> la primera vez)</p></div></div>
+    <div class="step"><div class="num">3</div><div class="step-body"><h3>Abre el panel de extensiones</h3><p><code>chrome://extensions</code> (o <code>edge://extensions</code>)</p></div></div>
+    <div class="step"><div class="num">4</div><div class="step-body"><h3>Activa el Modo desarrollador</h3><p>Interruptor en la esquina superior derecha.</p></div></div>
+    <div class="step"><div class="num">5</div><div class="step-body"><h3>Carga la extensión sin empaquetar</h3><p>Clic en <strong>"Cargar extensión sin empaquetar"</strong> → selecciona la carpeta <code>scolyax-extension</code>.</p></div></div>
+    <div class="step"><div class="num green">✓</div><div class="step-body"><h3>Verifica en Scolyax</h3><p>Abre <a href="https://scolyax.vercel.app" target="_blank">scolyax.vercel.app</a> o localhost, ve a <strong>Study Flow → Elige método</strong> y deberías ver <strong>✅ Extensión activa</strong>.</p></div></div>
+  </div>
+
+  <!-- ─── STORE ─── -->
+  <div id="tab-store" class="panel active">
+    <div style="background:#dcfce7;border-left:4px solid #22c55e;padding:16px 20px;border-radius:10px;margin-bottom:24px;font-size:15px;">
+      ✅ <strong>¡Extensión publicada en el Chrome Web Store!</strong><br>
+      <span style="color:#15803d;font-size:13px;">Ya está disponible para cualquier usuario de Chrome.</span>
+    </div>
+
+    <div class="step"><div class="num green">✓</div><div class="step-body"><h3>Disponible en Chrome Web Store</h3><p><a href="https://chromewebstore.google.com/detail/djapikklcmfeldpdbfejodnhdfpbjbaj" target="_blank" rel="noreferrer">Instalar Scolyax Anti-Distracciones →</a></p></div></div>
+    <div class="step"><div class="num green">✓</div><div class="step-body"><h3>Cómo instalar</h3><p>Abre el link de arriba → clic en <strong>"Agregar a Chrome"</strong> → confirma. Listo.</p></div></div>
+    <div class="step"><div class="num green">✓</div><div class="step-body"><h3>Verifica en Scolyax</h3><p>Ve a <a href="https://scolyax.vercel.app" target="_blank">Scolyax</a> → Study Flow → elige método → deberías ver <strong>✅ Extensión activa</strong>.</p></div></div>
+  </div>
+
+  <!-- ─── PAY (hidden, kept for reference) ─── -->
+  <div id="tab-pay" class="panel">
+    <div class="price-card">
+      <div class="amount">USD 5</div>
+      <div>
+        <strong>Tarifa de registro — Chrome Web Store Developer</strong>
+        <p>Pago único. Da acceso permanente para publicar extensiones ilimitadas con tu cuenta de Google.</p>
+      </div>
+    </div>
+
+    <h3>Cómo pagar paso a paso</h3>
+    <div class="step"><div class="num">1</div><div class="step-body"><h3>Entra al registro con tu cuenta Google</h3><p><a href="https://chrome.google.com/webstore/devconsole/register" target="_blank" rel="noreferrer">chrome.google.com/webstore/devconsole/register</a></p></div></div>
+    <div class="step"><div class="num">2</div><div class="step-body"><h3>Acepta los términos del Developer Agreement</h3><p>Lee y marca la casilla de aceptación de términos de servicio.</p></div></div>
+    <div class="step"><div class="num">3</div><div class="step-body"><h3>Paga USD 5 con tarjeta</h3><p>Se acepta Visa, Mastercard, American Express. El pago se procesa vía Google Pay / plataforma de Google.</p></div></div>
+    <div class="step"><div class="num green">✓</div><div class="step-body"><h3>Accede al Developer Dashboard</h3><p>Una vez confirmado el pago, tendrás acceso a <a href="https://chrome.google.com/webstore/devconsole" target="_blank">chrome.google.com/webstore/devconsole</a>.</p></div></div>
+
+    <div class="info">💡 El pago puede tardar unos minutos en procesarse. Si la página no redirige sola, recarga el Dashboard.</div>
+  </div>
+
+  <!-- ─── PUBLISH (hidden, kept for reference) ─── -->
+  <div id="tab-publish" class="panel">
+    <h3>Lista de verificación antes de enviar</h3>
+    <ul class="checklist">
+      <li>Ejecutar <code>.\build-extension.ps1</code> → obtienes <code>scolyax-extension.zip</code></li>
+      <li>El ZIP contiene: <code>manifest.json</code>, <code>background.js</code>, <code>content.js</code>, carpeta <code>icons/</code></li>
+      <li>Tener al menos 2 capturas de pantalla (1280×800 px) de la extensión en uso</li>
+      <li>Política de privacidad accesible en <code>/privacy-extension.html</code> (ya está deployada con Vercel)</li>
+    </ul>
+
+    <h3>Pasos en el Developer Dashboard</h3>
+    <div class="step"><div class="num">1</div><div class="step-body"><h3>Clic en "New Item"</h3><p>Botón azul en la esquina superior derecha del Dashboard.</p></div></div>
+    <div class="step"><div class="num">2</div><div class="step-body"><h3>Sube el ZIP</h3><p>Arrastra o selecciona <code>scolyax-extension.zip</code>. Google parseará el manifest automáticamente.</p></div></div>
+    <div class="step"><div class="num">3</div><div class="step-body"><h3>Completa la ficha del Store</h3><p>
+      <strong>Nombre:</strong> Scolyax Anti-Distracciones<br>
+      <strong>Descripción corta:</strong> Detecta Netflix, YouTube y redes sociales durante sesiones de estudio Scolyax.<br>
+      <strong>Categoría:</strong> Productivity<br>
+      <strong>Idioma principal:</strong> Español<br>
+      <strong>Política de privacidad:</strong> <code>https://scolyax.vercel.app/privacy-extension.html</code>
+    </p></div></div>
+    <div class="step"><div class="num">4</div><div class="step-body"><h3>Sube capturas de pantalla</h3><p>Mínimo 1 imagen de 1280×800 px. Se recomienda mostrar el panel "🛡️ Anti-distracción" en StudyFlow y la alerta al detectar YouTube.</p></div></div>
+    <div class="step"><div class="num">5</div><div class="step-body"><h3>Elige visibilidad y envía</h3><p>Visibilidad: <strong>Público</strong>. Luego clic en <strong>"Submit for Review"</strong>. La revisión suele tardar 1–3 días hábiles.</p></div></div>
+    <div class="step"><div class="num green">✓</div><div class="step-body"><h3>Actualiza el link en Scolyax</h3><p>Una vez aprobada, reemplaza el link de instalación en <code>StudyFlow.jsx</code> por la URL del Store:<br><code>https://chromewebstore.google.com/detail/ID_DE_TU_EXTENSION</code></p></div></div>
+
+    <div class="warn">⏱️ Futuras actualizaciones: sube un ZIP nuevo con la versión incrementada en <code>manifest.json</code> (e.g. <code>1.1.0</code>) y vuelve a enviar para revisión.</div>
+  </div>
+
+  <br><br>
+  <p><a href="/">← Volver a Scolyax</a> &nbsp;|&nbsp; <a href="/privacy-extension.html">Política de Privacidad</a></p>
+
+  <script>
+    function showTab(id) {
+      document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'))
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'))
+      document.getElementById('tab-' + id).classList.add('active')
+      event.currentTarget.classList.add('active')
+    }
+  </script>
+</body>
+</html>
+

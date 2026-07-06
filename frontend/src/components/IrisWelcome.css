@@ -1,0 +1,163 @@
+/* ============================================================
+   Iris — pantalla de bienvenida de asistente IA profesional.
+   Light + dark via DS tokens. Sobrescribe el legacy .ai-assistant__welcome.
+   ============================================================ */
+.iris-welcome {
+  position: static !important;
+  display: flex !important; justify-content: center !important; align-items: flex-start !important;
+  flex: 1 1 auto; min-height: 0;
+  width: 100%; padding: clamp(10px, 1.6vw, 18px) !important;
+  overflow-y: auto !important;
+  background: transparent !important;
+  font-family: var(--font-body);
+}
+.iris-welcome__card {
+  width: min(720px, 100%);
+  background: var(--sx-card); border: 1px solid var(--sx-border);
+  border-radius: var(--sx-radius-lg); box-shadow: var(--sx-shadow-lg);
+  padding: clamp(14px, 2vw, 22px); display: flex; flex-direction: column; gap: 14px;
+  margin: auto 0; /* centra si sobra espacio; si no, arranca arriba sin cortarse */
+}
+
+/* Header / identidad */
+.iris-welcome__head { display: flex; align-items: center; gap: 14px; }
+.iris-welcome__avatar {
+  position: relative; width: 56px; height: 56px; flex-shrink: 0; border-radius: 15px;
+  display: grid; place-items: center;
+  background: var(--sx-accent-soft); border: 1px solid var(--sx-border);
+}
+.iris-welcome__avatar img { width: 88%; height: 88%; object-fit: contain; }
+.iris-welcome__pulse {
+  position: absolute; inset: -5px; border-radius: 18px; pointer-events: none;
+  box-shadow: 0 0 0 1px var(--sx-accent-ring); opacity: .6;
+  animation: iris-pulse 2.6s ease-in-out infinite;
+}
+@keyframes iris-pulse { 0%,100% { transform: scale(1); opacity: .55 } 50% { transform: scale(1.04); opacity: .15 } }
+.iris-welcome__id { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.iris-welcome__status {
+  display: inline-flex; align-items: center; gap: 6px; align-self: flex-start;
+  font-family: var(--font-mono); font-size: .6rem; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--sx-text-2); background: var(--sx-bg-2); border: 1px solid var(--sx-border);
+  padding: 3px 8px; border-radius: 999px; margin-bottom: 4px;
+}
+.iris-welcome__online { width: 6px; height: 6px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 0 3px rgba(34,197,94,.2); }
+.iris-welcome__name {
+  font-family: var(--font-display) !important; font-weight: 400 !important;
+  font-size: clamp(1.7rem, 3.6vw, 2.2rem) !important; line-height: .95 !important; margin: 0 !important;
+  color: var(--sx-text) !important; letter-spacing: .02em;
+}
+.iris-welcome__role { margin: 2px 0 0 !important; color: var(--sx-text-2) !important; font-size: .85rem !important; font-weight: 400 !important; }
+
+/* Grupos de capacidades */
+.iris-welcome__group { display: flex; flex-direction: column; gap: 8px; }
+.iris-welcome__group-label {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-family: var(--font-mono); font-size: .66rem; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--sx-text-3);
+}
+.iris-welcome__group-label .sx-sticker { color: var(--sx-accent); }
+.iris-welcome__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; }
+.iris-welcome__cap {
+  display: flex; align-items: center; gap: 9px; cursor: pointer; text-align: left; width: 100%;
+  padding: 8px 11px; border-radius: 11px; background: var(--sx-card-2); border: 1px solid var(--sx-border);
+  color: var(--sx-text); transition: border-color .15s, background .15s, transform .15s;
+}
+.iris-welcome__cap:hover { border-color: var(--sx-accent); background: var(--sx-accent-soft); transform: translateY(-2px); }
+.iris-welcome__cap-ic {
+  width: 30px; height: 30px; flex-shrink: 0; border-radius: 8px; display: grid; place-items: center;
+  background: var(--sx-bg-2); color: var(--sx-accent); border: 1px solid var(--sx-border);
+}
+.iris-welcome__cap-ic .sx-sticker { width: 17px; height: 17px; }
+.iris-welcome__cap:hover .iris-welcome__cap-ic { background: var(--sx-card); }
+.iris-welcome__cap-label { font-size: .82rem; font-weight: 600; line-height: 1.18; }
+
+/* Tip */
+.iris-welcome__tip {
+  display: flex; gap: 10px; align-items: flex-start; padding: 9px 12px; border-radius: 12px;
+  background: var(--sx-accent-soft); border: 1px solid var(--sx-border);
+}
+.iris-welcome__tip-ic { color: var(--sx-accent); flex-shrink: 0; display: inline-flex; }
+.iris-welcome__tip p { margin: 0; font-size: .78rem; color: var(--sx-text-2); line-height: 1.45; }
+
+/* Zona de mensajes: fuera el gradiente índigo legacy */
+.ai-assistant__messages,
+body.theme-dark .ai-assistant__messages {
+  background: transparent !important;
+  background-image: none !important;
+}
+
+@media (max-width: 520px) {
+  .iris-welcome__grid { grid-template-columns: 1fr 1fr; }
+  .iris-welcome__head { flex-direction: column; text-align: center; align-items: center; }
+  .iris-welcome__status { align-self: center; }
+}
+
+/* ============================================================
+   Barra de entrada de Iris (rediseñada)
+   ============================================================ */
+.ai-assistant__input-area {
+  position: relative;
+  display: flex !important; flex-wrap: wrap; align-items: center; gap: 6px;
+  width: min(820px, 100%); margin: 0 auto 4px !important;
+  background: var(--sx-card) !important; border: 1px solid var(--sx-border-2) !important;
+  border-radius: 18px !important; padding: 7px 8px !important;
+  box-shadow: var(--sx-shadow) !important; transition: border-color .15s, box-shadow .15s;
+}
+.ai-assistant__input-area:focus-within {
+  border-color: var(--sx-accent) !important;
+  box-shadow: 0 0 0 3px var(--sx-accent-ring) !important;
+}
+.ai-assistant__textarea {
+  order: 2; flex: 1 1 220px; min-width: 120px;
+  background: transparent !important; border: none !important; outline: none !important;
+  box-shadow: none !important; resize: none; max-height: 160px;
+  color: var(--sx-text) !important; font-family: var(--font-body) !important; font-size: .95rem !important;
+  padding: 9px 8px !important; line-height: 1.5;
+}
+.ai-assistant__textarea::placeholder { color: var(--sx-text-3) !important; }
+.ai-assistant__input-controls { order: 1; display: flex; gap: 2px; }
+.ai-assistant__actions { order: 3; display: flex; gap: 4px; align-items: center; margin-left: auto; }
+.ai-assistant__audio-canvas { order: 4; flex-basis: 100%; }
+.ai-assistant__uploaded-files { order: 5; flex-basis: 100%; display: flex; flex-wrap: wrap; gap: 6px; padding: 4px 2px 2px; }
+
+.ai-assistant__btn {
+  width: 40px; height: 40px; flex-shrink: 0; border-radius: 12px; cursor: pointer;
+  display: grid !important; place-items: center; padding: 0 !important;
+  background: transparent !important; border: 1px solid transparent !important;
+  color: var(--sx-text-2) !important; font-size: 1rem; transition: .15s;
+}
+.ai-assistant__btn:hover:not(:disabled) { background: var(--sx-bg-2) !important; color: var(--sx-text) !important; }
+.ai-assistant__btn:disabled { opacity: .4; cursor: default; }
+.ai-assistant__btn--send {
+  background: var(--sx-grad) !important; color: var(--sx-on-accent) !important; border: none !important;
+  box-shadow: 0 6px 16px -8px var(--sx-accent-ring) !important;
+}
+.ai-assistant__btn--send:hover:not(:disabled) { filter: brightness(1.05); transform: translateY(-1px); }
+.ai-assistant__btn--voice.is-listening,
+.ai-assistant__btn--command.is-commanding,
+.ai-assistant__btn--listen.is-speaking {
+  background: var(--sx-accent) !important; color: var(--sx-on-accent) !important;
+  animation: iris-rec 1.3s ease-in-out infinite;
+}
+@keyframes iris-rec { 0%,100% { box-shadow: 0 0 0 0 var(--sx-accent-ring) } 50% { box-shadow: 0 0 0 6px transparent } }
+
+.ai-assistant__spin {
+  width: 16px; height: 16px; border-radius: 50%;
+  border: 2px solid color-mix(in srgb, var(--sx-on-accent) 35%, transparent);
+  border-top-color: var(--sx-on-accent); animation: iris-spin .7s linear infinite;
+}
+@keyframes iris-spin { to { transform: rotate(360deg) } }
+
+.ai-assistant__file-chip {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: var(--sx-bg-2); border: 1px solid var(--sx-border); border-radius: 999px;
+  padding: 5px 6px 5px 11px; font-size: .78rem; color: var(--sx-text-2);
+}
+.ai-assistant__file-chip-icon { color: var(--sx-accent); display: inline-flex; }
+.ai-assistant__file-chip-name { font-weight: 600; color: var(--sx-text); }
+.ai-assistant__file-chip-size { color: var(--sx-text-3); }
+.ai-assistant__file-chip-remove {
+  width: 20px; height: 20px; border-radius: 50%; border: none; cursor: pointer;
+  background: var(--sx-border); color: var(--sx-text); font-size: .7rem; line-height: 1;
+}
+.ai-assistant__file-chip-remove:hover { background: #ef4444; color: #fff; }

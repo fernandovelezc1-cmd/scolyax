@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reset Manual de Logros - Scolyax</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            max-width: 800px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f5f5f5;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        .section h2 {
+            font-size: 18px;
+            color: #667eea;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        code {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            display: inline-block;
+            margin: 5px 0;
+        }
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+        button:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+        }
+        button.copy {
+            background: #27ae60;
+            font-size: 12px;
+            padding: 8px 12px;
+        }
+        button.copy:hover {
+            background: #229954;
+        }
+        .success {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        .warning {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        .steps {
+            list-style: none;
+            margin: 15px 0;
+        }
+        .steps li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            line-height: 1.6;
+        }
+        .steps li:before {
+            content: attr(data-step);
+            position: absolute;
+            left: 0;
+            background: #667eea;
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 12px;
+        }
+        .info-box {
+            background: #e8f4f8;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔥 Reset Manual de Logros</h1>
+        
+        <div class="info-box">
+            <strong>ℹ️ Situación:</strong> El endpoint de reset tiene limitaciones por RLS (Row Level Security) de Supabase. 
+            Usa este método manual para limpiar todos los logros directamente desde la BD.
+        </div>
+
+        <div class="section">
+            <h2>🔐 Opción 1: Desde Supabase Console (RECOMENDADO)</h2>
+            <ol class="steps">
+                <li data-step="1">
+                    Abre: <code>https://supabase.com/dashboard</code>
+                </li>
+                <li data-step="2">
+                    Selecciona proyecto: <code>scolyax-mvp</code>
+                </li>
+                <li data-step="3">
+                    Ve a: <strong>SQL Editor</strong>
+                </li>
+                <li data-step="4">
+                    Click: <strong>New Query</strong>
+                </li>
+                <li data-step="5">
+                    Copia y pega este SQL:
+                    <div class="code-block">
+-- Resetear logros
+DELETE FROM public.user_stats;
+
+-- Resetear reseñas/feedback
+DELETE FROM public.user_feedback;
+                    </div>
+                    <button class="copy" onclick="copySql('-- Resetear logros\nDELETE FROM public.user_stats;\n\n-- Resetear reseñas/feedback\nDELETE FROM public.user_feedback;')">📋 Copiar SQL</button>
+                </li>
+                <li data-step="6">
+                    Click: <strong>Run</strong> (botón azul)
+                </li>
+                <li data-step="7">
+                    Verifica que dice <span class="success">✅ Success - 5 rows deleted</span> (o el número de registros)
+                </li>
+            </ol>
+        </div>
+
+        <div class="section">
+            <h2>✅ Opción 2: Después del Reset</h2>
+            <ol class="steps">
+                <li data-step="1">
+                    Abre: https://scolyax.vercel.app/debug-storage.html
+                </li>
+                <li data-step="2">
+                    Click: <strong>🔥 Limpiar TODO localStorage</strong>
+                </li>
+                <li data-step="3">
+                    Confirma
+                </li>
+                <li data-step="4">
+                    Cierra sesión
+                </li>
+                <li data-step="5">
+                    Haz login nuevamente
+                </li>
+                <li data-step="6">
+                    Verifica que aparecen 0 logros ✅
+                </li>
+            </ol>
+        </div>
+
+        <div class="section">
+            <h2>📊 Verificar que funcionó</h2>
+            <p>Después de ejecutar el SQL, verifica:</p>
+            <ol class="steps">
+                <li data-step="1">
+                    Abre admin: https://scolyax.vercel.app/admin.html
+                </li>
+                <li data-step="2">
+                    Click: <strong>Usuarios</strong>
+                </li>
+                <li data-step="3">
+                    Verifica que todas las cuentas muestren <code>Racha: 0</code>
+                </li>
+            </ol>
+        </div>
+
+        <div class="section">
+            <h2>🧪 Para Nuevo Testing</h2>
+            <p>Una vez reseteado, puedes:</p>
+            <ol class="steps">
+                <li data-step="1">
+                    Hacer logout
+                </li>
+                <li data-step="2">
+                    Hacer login nuevamente
+                </li>
+                <li data-step="3">
+                    Completar una tarea para generar nuevo logro
+                </li>
+                <li data-step="4">
+                    Calificar el logro
+                </li>
+                <li data-step="5">
+                    Verificar en Admin → Calificaciones que aparezca ✅
+                </li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        function copySql(sql) {
+            navigator.clipboard.writeText(sql).then(() => {
+                alert('✅ SQL copiado al portapapeles');
+            }).catch(err => {
+                alert('❌ Error al copiar: ' + err);
+            });
+        }
+    </script>
+</body>
+</html>

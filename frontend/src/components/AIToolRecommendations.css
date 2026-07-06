@@ -1,0 +1,367 @@
+/* ========== AI TOOL RECOMMENDATIONS ========== */
+
+.ai-recommendations-container {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 32px 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+  background: #0d1117;
+  border-radius: 12px;
+  color: #c9d1d9;
+}
+
+/* Header */
+.recommendations-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.recommendations-header h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #58a6ff;
+  margin: 0 0 8px 0;
+  letter-spacing: 0.5px;
+}
+
+.recommendations-header p {
+  font-size: 16px;
+  color: #8b949e;
+  margin: 0;
+}
+
+/* Recomendación de Iris */
+.iris-recommendation {
+  background: linear-gradient(135deg, rgba(88, 166, 255, 0.1), rgba(31, 111, 235, 0.05));
+  border: 1px solid rgba(88, 166, 255, 0.3);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 32px;
+}
+
+.recommendation-badge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.iris-avatar {
+  font-size: 28px;
+  filter: drop-shadow(0 2px 8px rgba(88, 166, 255, 0.3));
+}
+
+.recommendation-badge h2 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #58a6ff;
+  margin: 0;
+}
+
+.recommended-tool-highlight {
+  background: rgba(31, 111, 235, 0.1);
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.recommended-tool-highlight h3 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #79c0ff;
+  margin: 0 0 12px 0;
+}
+
+.recommendation-reason {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #c9d1d9;
+  margin: 0 0 16px 0;
+}
+
+/* Medidor de confianza */
+.confidence-meter {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.confidence-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.confidence-label span:first-child {
+  color: #8b949e;
+}
+
+.confidence-value {
+  color: #58a6ff;
+  font-size: 18px;
+}
+
+.confidence-bar {
+  width: 100%;
+  height: 6px;
+  background: #161b22;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.confidence-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #1f6feb, #58a6ff);
+  border-radius: 3px;
+  transition: width 0.6s ease;
+}
+
+/* Grid de herramientas */
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.tool-card {
+  display: flex;
+  flex-direction: column;
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 12px;
+  padding: 24px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  --tool-color: #1f6feb;
+}
+
+.tool-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--tool-color);
+  transition: all 0.3s ease;
+}
+
+.tool-card:hover {
+  border-color: var(--tool-color);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  transform: translateY(-4px);
+}
+
+.tool-card.recommended {
+  border-color: var(--tool-color);
+  background: rgba(31, 111, 235, 0.08);
+  box-shadow: 0 0 20px rgba(31, 111, 235, 0.2);
+}
+
+.tool-card.selected {
+  border: 2px solid var(--tool-color);
+  background: rgba(31, 111, 235, 0.12);
+}
+
+.recommended-badge-small {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: var(--tool-color);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.tool-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.tool-card h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #c9d1d9;
+  margin: 0 0 8px 0;
+}
+
+.tool-subtitle {
+  font-size: 14px;
+  color: #8b949e;
+  margin: 0 0 12px 0;
+}
+
+.tool-description {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #c9d1d9;
+  margin: 0 0 20px 0;
+  flex-grow: 1;
+}
+
+.tool-details {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #30363d;
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+}
+
+.detail-label {
+  color: #8b949e;
+}
+
+.detail-value {
+  color: #58a6ff;
+  font-weight: 600;
+}
+
+.tool-benefits {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tool-benefits li {
+  font-size: 13px;
+  color: #c9d1d9;
+  padding-left: 20px;
+  position: relative;
+}
+
+.tool-benefits li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--tool-color);
+  font-weight: bold;
+}
+
+.btn-select {
+  width: 100%;
+  padding: 12px;
+  background: var(--tool-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-select:hover:not(:disabled) {
+  background: var(--tool-color);
+  filter: brightness(1.2);
+  transform: scale(1.02);
+}
+
+.btn-select:disabled,
+.btn-select.btn-loading {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+/* Tips de Iris */
+.iris-tips {
+  background: rgba(34, 197, 94, 0.08);
+  border-left: 4px solid #22c55e;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.iris-tips h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #22c55e;
+  margin: 0 0 16px 0;
+}
+
+.iris-tips ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.iris-tips li {
+  font-size: 14px;
+  color: #c9d1d9;
+  padding-left: 24px;
+  position: relative;
+  line-height: 1.5;
+}
+
+.iris-tips li::before {
+  content: '💡';
+  position: absolute;
+  left: 0;
+}
+
+/* Close button */
+.btn-close-recommendations {
+  align-self: center;
+  padding: 10px 20px;
+  background: #30363d;
+  color: #c9d1d9;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-close-recommendations:hover {
+  background: #434c57;
+  color: #e8eef2;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .ai-recommendations-container {
+    padding: 20px;
+    gap: 24px;
+  }
+
+  .recommendations-header h1 {
+    font-size: 24px;
+  }
+
+  .tools-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tool-card {
+    padding: 20px;
+  }
+
+  .tool-icon {
+    font-size: 40px;
+  }
+
+  .tool-card h3 {
+    font-size: 18px;
+  }
+}

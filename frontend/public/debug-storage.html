@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Storage - Scolyax</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        .section {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f5f5f5;
+            border-radius: 8px;
+        }
+        .section h2 {
+            font-size: 16px;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        button:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+        }
+        button.danger {
+            background: #e74c3c;
+        }
+        button.danger:hover {
+            background: #c0392b;
+        }
+        .storage-list {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 10px;
+            max-height: 300px;
+            overflow-y: auto;
+            font-size: 12px;
+            font-family: monospace;
+            margin: 10px 0;
+        }
+        .storage-item {
+            padding: 5px;
+            border-bottom: 1px solid #eee;
+            word-break: break-all;
+        }
+        .storage-item:last-child {
+            border-bottom: none;
+        }
+        .key {
+            color: #667eea;
+            font-weight: bold;
+        }
+        .value {
+            color: #333;
+        }
+        .success {
+            color: #27ae60;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .info {
+            color: #3498db;
+            font-size: 12px;
+            margin-top: 10px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 Debug Storage</h1>
+        
+        <div class="section">
+            <h2>📦 localStorage Actual</h2>
+            <div class="storage-list" id="storageList">
+                <div class="storage-item">Cargando...</div>
+            </div>
+            <button onclick="viewStorage()">🔄 Actualizar</button>
+        </div>
+
+        <div class="section">
+            <h2>🗑️ Limpiar TODO localStorage</h2>
+            <p class="info">⚠️ PELIGROSO: Elimina completamente TODO el localStorage</p>
+            <button onclick="clearAllStorage()" class="danger">🔥 Limpiar TODO localStorage</button>
+            <div id="clearAllResult"></div>
+        </div>
+
+        <div class="section">
+            <h2>🗑️ Limpiar ratedAchievements</h2>
+            <p class="info">Elimina el registro de logros ya calificados para poder calificar de nuevo</p>
+            <button onclick="clearRatedAchievements()" class="danger">Limpiar ratedAchievements</button>
+            <div id="clearResult"></div>
+        </div>
+
+        <div class="section">
+            <h2>🌐 Info de Red</h2>
+            <p class="info" id="networkInfo">Cargando...</p>
+        </div>
+
+        <div class="section">
+            <h2>✅ Test API</h2>
+            <button onclick="testFeedbackAPI()">Test GET /api/admin/feedback</button>
+            <div class="storage-list" id="apiResult" style="max-height: 200px;">
+                <div class="storage-item">Resultado aparecerá aquí</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function viewStorage() {
+            const list = document.getElementById('storageList');
+            const items = [];
+            
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                const value = localStorage.getItem(key);
+                items.push(`<div class="storage-item"><span class="key">${key}:</span> <span class="value">${value}</span></div>`);
+            }
+            
+            list.innerHTML = items.length > 0 
+                ? items.join('') 
+                : '<div class="storage-item">localStorage vacío</div>';
+        }
+
+        function clearRatedAchievements() {
+            localStorage.removeItem('ratedAchievements');
+            document.getElementById('clearResult').innerHTML = '<p class="success">✅ ratedAchievements eliminado!</p>';
+            viewStorage();
+        }
+
+        function clearAllStorage() {
+            const confirmed = confirm('⚠️ ¿Estás seguro? Esto borrará TODO el localStorage');
+            if (!confirmed) return;
+            
+            localStorage.clear();
+            document.getElementById('clearAllResult').innerHTML = '<p class="success">✅ localStorage completamente limpiado!</p>';
+            viewStorage();
+        }
+
+        function showNetworkInfo() {
+            const isOnline = navigator.onLine;
+            const hostname = window.location.hostname;
+            const protocol = window.location.protocol;
+            const apiUrl = `${protocol}//${hostname === 'localhost' ? 'localhost:8000' : 'scolyax-production.up.railway.app'}`;
+            
+            document.getElementById('networkInfo').innerHTML = `
+                <strong>Estado:</strong> ${isOnline ? '🟢 Online' : '🔴 Offline'}<br>
+                <strong>Hostname:</strong> ${hostname}<br>
+                <strong>Protocol:</strong> ${protocol}<br>
+                <strong>API URL detectada:</strong> ${apiUrl}
+            `;
+        }
+
+        async function testFeedbackAPI() {
+            const result = document.getElementById('apiResult');
+            try {
+                result.innerHTML = '<div class="storage-item">Probando...</div>';
+                const response = await fetch('https://scolyax-production.up.railway.app/api/admin/feedback');
+                const data = await response.json();
+                result.innerHTML = `<div class="storage-item"><strong>Status:</strong> ${response.status}<br><strong>Respuesta:</strong> ${JSON.stringify(data, null, 2)}</div>`;
+            } catch (error) {
+                result.innerHTML = `<div class="storage-item"><strong>❌ Error:</strong> ${error.message}</div>`;
+            }
+        }
+
+        // Inicializar
+        viewStorage();
+        showNetworkInfo();
+    </script>
+</body>
+</html>

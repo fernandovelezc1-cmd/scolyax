@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scolyax — Panel Administrativo</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/admin-styles.css">
+</head>
+<body>
+    <!-- Iconos SVG reutilizables (estilo Sticker: trazo currentColor, duotono) -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <defs>
+            <symbol id="i-target" viewBox="0 0 48 48"><circle cx="24" cy="24" r="18" fill="currentColor" fill-opacity=".1"/><circle cx="24" cy="24" r="18"/><circle cx="24" cy="24" r="11"/><circle cx="24" cy="24" r="4" fill="currentColor" stroke="none"/></symbol>
+            <symbol id="i-users" viewBox="0 0 48 48"><circle cx="18" cy="17" r="8" fill="currentColor" fill-opacity=".14"/><circle cx="18" cy="17" r="8"/><path d="M4 41c0-8 6-13 14-13s14 5 14 13"/><circle cx="34" cy="15" r="6"/><path d="M36 27c6 1 9 6 9 12"/></symbol>
+            <symbol id="i-star" viewBox="0 0 48 48"><path d="M24 5l5.5 12.5L43 19l-10 9 3 14-12-7-12 7 3-14L5 19l13.5-1.5Z" fill="currentColor" fill-opacity=".18"/><path d="M24 5l5.5 12.5L43 19l-10 9 3 14-12-7-12 7 3-14L5 19l13.5-1.5Z"/></symbol>
+            <symbol id="i-check" viewBox="0 0 48 48"><circle cx="24" cy="24" r="18" fill="currentColor" fill-opacity=".14"/><circle cx="24" cy="24" r="18"/><path d="M16 24l6 6 11-12"/></symbol>
+            <symbol id="i-trend" viewBox="0 0 48 48"><path d="M6 40h36" /><path d="M8 32l10-10 8 7L40 15" fill="none"/><path d="M32 14h9v9"/></symbol>
+            <symbol id="i-robot" viewBox="0 0 48 48"><rect x="10" y="16" width="28" height="22" rx="7" fill="currentColor" fill-opacity=".16"/><rect x="10" y="16" width="28" height="22" rx="7"/><path d="M24 8v8M24 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/><circle cx="19" cy="27" r="2.4" fill="currentColor" stroke="none"/><circle cx="29" cy="27" r="2.4" fill="currentColor" stroke="none"/><path d="M4 26v6M44 26v6"/></symbol>
+            <symbol id="i-doc" viewBox="0 0 48 48"><path d="M13 5h14l8 8v30H13Z" fill="currentColor" fill-opacity=".14"/><path d="M13 5h14l8 8v30H13Z"/><path d="M27 5v8h8"/><path d="M18 24h12M18 30h12M18 36h7"/></symbol>
+            <symbol id="i-search" viewBox="0 0 48 48"><circle cx="21" cy="21" r="13" fill="currentColor" fill-opacity=".14"/><circle cx="21" cy="21" r="13"/><path d="M31 31l10 10"/></symbol>
+            <symbol id="i-bolt" viewBox="0 0 48 48"><path d="M26 4 10 26h11l-3 18 18-24H24Z" fill="currentColor" fill-opacity=".18"/><path d="M26 4 10 26h11l-3 18 18-24H24Z"/></symbol>
+            <symbol id="i-tasks" viewBox="0 0 48 48"><rect x="6" y="8" width="36" height="32" rx="5" fill="currentColor" fill-opacity=".14"/><rect x="6" y="8" width="36" height="32" rx="5"/><path d="M13 18h8M13 24h8M13 30h5"/><path d="M28 23l3 3 6-6"/></symbol>
+            <symbol id="i-battery" viewBox="0 0 48 48"><rect x="5" y="15" width="33" height="18" rx="4" fill="currentColor" fill-opacity=".14"/><rect x="5" y="15" width="33" height="18" rx="4"/><path d="M42 21v6"/><path d="M23 18l-5 8h5l-2 6 7-9h-5Z" fill="currentColor" stroke="none"/></symbol>
+            <symbol id="i-flame" viewBox="0 0 48 48"><path d="M24 4c5 7-3 9-3 15a8 8 0 0 0 16 0c0-2-1-4-2-6 4 3 6 7 6 12a15 15 0 1 1-30 0C11 26 24 22 24 4Z" fill="currentColor" fill-opacity=".18"/><path d="M24 4c5 7-3 9-3 15a8 8 0 0 0 16 0c0-2-1-4-2-6 4 3 6 7 6 12a15 15 0 1 1-30 0C11 26 24 22 24 4Z"/></symbol>
+            <symbol id="i-logout" viewBox="0 0 48 48"><path d="M18 42H10a4 4 0 0 1-4-4V10a4 4 0 0 1 4-4h8"/><path d="M32 34l10-10-10-10"/><path d="M42 24H18"/></symbol>
+        </defs>
+    </svg>
+
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <img src="/scolyax-icon.svg" alt="Scolyax">
+                    <div>
+                        <span class="sidebar-logo__name">Scolyax</span>
+                        <span class="sidebar-logo__tag">Admin Console</span>
+                    </div>
+                </div>
+            </div>
+            <div class="sidebar-nav-label">Secciones</div>
+            <nav class="sidebar-nav">
+                <li class="sidebar-nav-item">
+                    <a href="#dashboard" class="sidebar-nav-link active" onclick="navigateTo('dashboard')">
+                        <span class="sidebar-nav-link-icon"><svg><use href="#i-target"/></svg></span>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a href="#usuarios" class="sidebar-nav-link" onclick="navigateTo('usuarios')">
+                        <span class="sidebar-nav-link-icon"><svg><use href="#i-users"/></svg></span>
+                        <span>Usuarios</span>
+                    </a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a href="#calificaciones" class="sidebar-nav-link" onclick="navigateTo('calificaciones')">
+                        <span class="sidebar-nav-link-icon"><svg><use href="#i-star"/></svg></span>
+                        <span>Calificaciones</span>
+                    </a>
+                </li>
+            </nav>
+            <div class="sidebar-foot">Scolyax · panel interno</div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="admin-header">
+                <div>
+                    <span class="admin-eyebrow">Consola de administración</span>
+                    <h1 class="admin-title">Panel Administrativo</h1>
+                </div>
+                <div class="admin-actions">
+                    <div class="user-profile">
+                        <div class="user-avatar" id="userAvatar">A</div>
+                        <div class="user-meta">
+                            <div class="user-name">Administrador</div>
+                            <div class="user-email" id="userEmail">appscolyax@gmail.com</div>
+                        </div>
+                    </div>
+                    <button class="btn-danger-ghost" onclick="resetAllAchievements()" title="Eliminar logros y estadísticas de todos los usuarios">
+                        <svg class="btn-ic"><use href="#i-flame"/></svg> Reset logros
+                    </button>
+                    <button class="logout-btn" onclick="logout()">
+                        <svg class="btn-ic"><use href="#i-logout"/></svg> Cerrar sesión
+                    </button>
+                </div>
+            </header>
+
+            <!-- Dashboard Section -->
+            <section id="dashboard-section" class="dashboard-section">
+                <div class="dashboard-grid">
+                    <div class="admin-card">
+                        <div class="card-header">
+                            <div>
+                                <div class="card-title">Usuarios activos</div>
+                                <div class="card-label">Últimos 30 días</div>
+                            </div>
+                            <div class="card-icon"><svg><use href="#i-users"/></svg></div>
+                        </div>
+                        <div class="card-value" id="activeUsers">-</div>
+                    </div>
+
+                    <div class="admin-card">
+                        <div class="card-header">
+                            <div>
+                                <div class="card-title">En línea ahora</div>
+                                <div class="card-label realtime-label"><span class="realtime-dot"></span>Activos últimos 5 min</div>
+                            </div>
+                            <div class="card-icon"><svg><use href="#i-bolt"/></svg></div>
+                        </div>
+                        <div class="card-value" id="realtimeUsers">-</div>
+                    </div>
+
+                    <div class="admin-card">
+                        <div class="card-header">
+                            <div>
+                                <div class="card-title">Tareas completadas</div>
+                                <div class="card-label">Total en el sistema</div>
+                            </div>
+                            <div class="card-icon"><svg><use href="#i-check"/></svg></div>
+                        </div>
+                        <div class="card-value" id="tasksCompleted">-</div>
+                    </div>
+
+                    <div class="admin-card">
+                        <div class="card-header">
+                            <div>
+                                <div class="card-title">Tasa de retención</div>
+                                <div class="card-label">% usuarios que regresan</div>
+                            </div>
+                            <div class="card-icon"><svg><use href="#i-trend"/></svg></div>
+                        </div>
+                        <div class="card-value" id="retentionRate">-</div>
+                    </div>
+                </div>
+
+                <!-- Iris IA Activity Card -->
+                <div class="admin-card iris-ia-card">
+                    <div class="card-header">
+                        <div>
+                            <div class="card-title">Iris IA — Centro de actividad</div>
+                            <div class="card-label">Funciones de inteligencia artificial en el sistema</div>
+                        </div>
+                        <div class="card-icon card-icon--lg"><svg><use href="#i-robot"/></svg></div>
+                    </div>
+                    <div class="iris-stats-grid">
+                        <div class="iris-stat-item">
+                            <span class="iris-stat-ic"><svg><use href="#i-doc"/></svg></span>
+                            <div class="iris-stat-value" id="irisSummaries">-</div>
+                            <div class="iris-stat-label">Resúmenes generados</div>
+                        </div>
+                        <div class="iris-stat-item">
+                            <span class="iris-stat-ic"><svg><use href="#i-search"/></svg></span>
+                            <div class="iris-stat-value" id="irisAiRequests">-</div>
+                            <div class="iris-stat-label">Consultas IA (sesión)</div>
+                        </div>
+                        <div class="iris-stat-item">
+                            <span class="iris-stat-ic"><svg><use href="#i-bolt"/></svg></span>
+                            <div class="iris-stat-value" id="irisCacheHits">-</div>
+                            <div class="iris-stat-label">Respuestas en caché</div>
+                        </div>
+                        <div class="iris-stat-item">
+                            <span class="iris-stat-ic"><svg><use href="#i-target"/></svg></span>
+                            <div class="iris-stat-value" id="irisFocusSessions">-</div>
+                            <div class="iris-stat-label">Sesiones de enfoque</div>
+                        </div>
+                        <div class="iris-stat-item">
+                            <span class="iris-stat-ic"><svg><use href="#i-tasks"/></svg></span>
+                            <div class="iris-stat-value" id="irisTasksTotal">-</div>
+                            <div class="iris-stat-label">Tareas en sistema</div>
+                        </div>
+                        <div class="iris-stat-item">
+                            <span class="iris-stat-ic"><svg><use href="#i-battery"/></svg></span>
+                            <div class="iris-stat-value" id="irisApiRemaining">-</div>
+                            <div class="iris-stat-label">API Gemini restante</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Usuarios Section -->
+            <section id="usuarios-section" style="display: none;">
+                <h2 class="section-title"><svg class="section-title-ic"><use href="#i-users"/></svg> Gestión de usuarios</h2>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Email</th>
+                                <th>Creado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="allUsuariosTableBody">
+                            <tr>
+                                <td colspan="5" class="empty-state">
+                                    <div class="empty-state-title">Cargando usuarios…</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Calificaciones Section -->
+            <section id="calificaciones-section" style="display: none;">
+                <h2 class="section-title"><svg class="section-title-ic"><use href="#i-star"/></svg> Panel de calificaciones</h2>
+
+                <div class="dashboard-grid dashboard-grid--2">
+                    <div class="admin-card">
+                        <div class="card-header">
+                            <div>
+                                <div class="card-title">Total calificaciones</div>
+                                <div class="card-label">Feedback recibido</div>
+                            </div>
+                            <div class="card-icon"><svg><use href="#i-star"/></svg></div>
+                        </div>
+                        <div class="card-value" id="totalRatings">-</div>
+                    </div>
+
+                    <div class="admin-card">
+                        <div class="card-header">
+                            <div>
+                                <div class="card-title">Promedio</div>
+                                <div class="card-label">Sobre 5 estrellas</div>
+                            </div>
+                            <div class="card-icon"><svg><use href="#i-trend"/></svg></div>
+                        </div>
+                        <div class="card-value" id="avgRating">-</div>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Usuario</th>
+                                <th>Calificación</th>
+                                <th>Comentario</th>
+                                <th>Fecha</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ratingsTableBody">
+                            <tr>
+                                <td colspan="5" class="empty-state">
+                                    <div class="empty-state-title">Cargando…</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="/admin-app.js"></script>
+</body>
+</html>

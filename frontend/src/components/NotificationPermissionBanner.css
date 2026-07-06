@@ -1,0 +1,212 @@
+/* Banner de permisos de notificaciones */
+.notification-banner {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 10000;
+  animation: slide-up 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.notification-banner__container {
+  background: linear-gradient(135deg, #c9d62f 0%, #c8de1f 100%);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2), 
+              0 4px 16px rgba(201, 214, 47, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  max-width: 500px;
+  color: white;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.notification-banner__icon {
+  font-size: 40px;
+  flex-shrink: 0;
+  animation: bell-ring 2s ease-in-out infinite;
+}
+
+@keyframes bell-ring {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  10%, 30% {
+    transform: rotate(-10deg);
+  }
+  20%, 40% {
+    transform: rotate(10deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+}
+
+.notification-banner__content {
+  flex: 1;
+}
+
+.notification-banner__title {
+  margin: 0 0 8px 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: white;
+}
+
+.notification-banner__description {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.notification-banner__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.notification-banner__btn {
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.notification-banner__btn--primary {
+  background: white;
+  color: #c9d62f;
+}
+
+.notification-banner__btn--primary:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.95);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.notification-banner__btn--primary:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.notification-banner__btn--primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.notification-banner__btn--secondary {
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  backdrop-filter: blur(10px);
+}
+
+.notification-banner__btn--secondary:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* Dark mode */
+body.theme-dark .notification-banner__container {
+  background: linear-gradient(135deg, #a9b71a 0%, #dde77a 100%);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 
+              0 4px 16px rgba(52, 211, 153, 0.3);
+}
+
+body.theme-dark .notification-banner__btn--primary {
+  background: rgba(15, 23, 42, 0.95);
+  color: #a9b71a;
+}
+
+body.theme-dark .notification-banner__btn--primary:hover:not(:disabled) {
+  background: rgba(15, 23, 42, 1);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .notification-banner {
+    bottom: 10px;
+    right: 10px;
+    left: 10px;
+  }
+
+  .notification-banner__container {
+    padding: 16px;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .notification-banner__icon {
+    font-size: 32px;
+  }
+
+  .notification-banner__title {
+    font-size: 16px;
+  }
+
+  .notification-banner__description {
+    font-size: 13px;
+  }
+
+  .notification-banner__actions {
+    width: 100%;
+  }
+
+  .notification-banner__btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .notification-banner__container {
+    padding: 14px;
+  }
+
+  .notification-banner__icon {
+    font-size: 28px;
+  }
+
+  .notification-banner__title {
+    font-size: 15px;
+  }
+
+  .notification-banner__description {
+    font-size: 12px;
+  }
+}
+
+/* ========================================
+   RESPONSIVE - Mobile (Dark Mode)
+   ======================================== */
+
+@media (max-width: 480px) {
+  body.theme-dark .notification-banner__container {
+    padding: 14px;
+  }
+
+  body.theme-dark .notification-banner__icon {
+    font-size: 28px;
+  }
+
+  body.theme-dark .notification-banner__title {
+    font-size: 15px;
+  }
+
+  body.theme-dark .notification-banner__description {
+    font-size: 12px;
+  }
+}

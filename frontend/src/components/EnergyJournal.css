@@ -1,0 +1,380 @@
+/* ══════════════════════════════════════════════════════════════
+   EnergyJournal.css – Diario de energía post-sesión
+   
+   Modal compacto con selección rápida de energía,
+   mini-gráfico semanal, cero fricción.
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── Overlay ── */
+.energy-journal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9500;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  animation: ejFadeIn 0.25s ease-out;
+}
+
+@keyframes ejFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── Modal ── */
+.energy-journal-modal {
+  background: #1e1e2e;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 24px;
+  width: 100%;
+  max-width: 360px;
+  animation: ejSlideUp 0.3s ease-out;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* Light mode */
+body.theme-light .energy-journal-modal {
+  background: #fff;
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+}
+
+@keyframes ejSlideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Header ── */
+.energy-journal-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.energy-journal-title {
+  color: #e2e8f0;
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 0 4px;
+}
+
+body.theme-light .energy-journal-title {
+  color: #1e293b;
+}
+
+.energy-journal-sub {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 13px;
+  margin: 0;
+}
+
+body.theme-light .energy-journal-sub {
+  color: rgba(0, 0, 0, 0.45);
+}
+
+/* ── Energy levels ── */
+.energy-journal-levels {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.energy-journal-level {
+  flex: 1;
+  background: var(--energy-bg);
+  border: 2px solid transparent;
+  border-radius: 14px;
+  padding: 14px 8px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  transition: border-color 0.2s, transform 0.15s, background 0.2s;
+}
+
+.energy-journal-level:hover {
+  border-color: var(--energy-color);
+  transform: translateY(-2px);
+}
+
+.energy-journal-level--active {
+  border-color: var(--energy-color);
+  background: color-mix(in srgb, var(--energy-color) 20%, transparent);
+  transform: scale(1.05);
+}
+
+.energy-journal-level-emoji {
+  font-size: 28px;
+}
+
+.energy-journal-level-label {
+  color: #e2e8f0;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+body.theme-light .energy-journal-level-label {
+  color: #475569;
+}
+
+/* ── Mood selection ── */
+.energy-journal-mood-section {
+  margin-bottom: 12px;
+  animation: ejFadeIn 0.2s ease-out;
+}
+
+.energy-journal-mood-label {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 12px;
+  margin: 0 0 8px;
+}
+
+body.theme-light .energy-journal-mood-label {
+  color: rgba(0, 0, 0, 0.45);
+}
+
+.energy-journal-mood-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  width: 100%;
+}
+
+.energy-journal-mood-btn {
+  width: 100%;
+  aspect-ratio: 1;
+  font-size: 24px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, border-color 0.15s, transform 0.15s;
+  min-height: 50px;
+}
+
+.energy-journal-mood-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: scale(1.1);
+}
+
+.energy-journal-mood-btn--active {
+  background: rgba(201, 214, 47, 0.2);
+  border-color: rgba(201, 214, 47, 0.5);
+  transform: scale(1.1);
+}
+
+body.theme-light .energy-journal-mood-btn {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+/* ── Notes ── */
+.energy-journal-notes {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  color: #e2e8f0;
+  font-size: 13px;
+  padding: 10px 12px;
+  resize: none;
+  margin-bottom: 16px;
+  font-family: inherit;
+  animation: ejFadeIn 0.2s ease-out;
+}
+
+.energy-journal-notes::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.energy-journal-notes:focus {
+  outline: none;
+  border-color: rgba(201, 214, 47, 0.4);
+}
+
+body.theme-light .energy-journal-notes {
+  background: rgba(0, 0, 0, 0.03);
+  border-color: rgba(0, 0, 0, 0.1);
+  color: #1e293b;
+}
+
+body.theme-light .energy-journal-notes::placeholder {
+  color: rgba(0, 0, 0, 0.3);
+}
+
+/* ── Weekly chart ── */
+.energy-journal-chart {
+  margin-bottom: 16px;
+}
+
+.energy-journal-chart-label {
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0 0 8px;
+}
+
+body.theme-light .energy-journal-chart-label {
+  color: rgba(0, 0, 0, 0.35);
+}
+
+.energy-journal-bars {
+  display: flex;
+  gap: 6px;
+  align-items: flex-end;
+  height: 48px;
+}
+
+.energy-journal-bar-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.energy-journal-bar-track {
+  width: 100%;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+}
+
+body.theme-light .energy-journal-bar-track {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.energy-journal-bar-fill {
+  width: 100%;
+  border-radius: 4px;
+  transition: height 0.5s ease-out;
+  min-height: 0;
+}
+
+.energy-journal-bar-day {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 10px;
+  font-weight: 500;
+}
+
+body.theme-light .energy-journal-bar-day {
+  color: rgba(0, 0, 0, 0.35);
+}
+
+.energy-journal-bar-col--today .energy-journal-bar-day {
+  color: #c9d62f;
+  font-weight: 700;
+}
+
+/* ── Actions ── */
+.energy-journal-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.energy-journal-skip {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.8);
+  border-radius: 12px;
+  padding: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.energy-journal-skip:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+body.theme-light .energy-journal-skip {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.1);
+  color: #475569;
+}
+
+.energy-journal-submit {
+  flex: 2;
+  background: linear-gradient(135deg, #c9d62f, #c8de1f);
+  border: none;
+  color: #fff;
+  border-radius: 12px;
+  padding: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s, opacity 0.2s;
+}
+.energy-journal-submit:hover:not(:disabled) {
+  transform: scale(1.02);
+}
+.energy-journal-submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ── Saved confirmation ── */
+.energy-journal-saved {
+  text-align: center;
+  padding: 32px 0;
+  animation: ejSlideUp 0.3s ease-out;
+}
+
+.energy-journal-saved-emoji {
+  font-size: 48px;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.energy-journal-saved p {
+  color: #a9b71a;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 380px) {
+  .energy-journal-modal {
+    padding: 18px 14px;
+  }
+  .energy-journal-level {
+    padding: 10px 6px;
+  }
+  .energy-journal-level-emoji {
+    font-size: 24px;
+  }
+  .energy-journal-mood-btn {
+    font-size: 20px;
+    min-height: 45px;
+  }
+}
+
+@media (min-width: 481px) {
+  .energy-journal-mood-btn {
+    font-size: 28px;
+    min-height: 60px;
+  }
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .energy-journal-overlay,
+  .energy-journal-modal,
+  .energy-journal-saved,
+  .energy-journal-mood-section {
+    animation: none;
+  }
+}

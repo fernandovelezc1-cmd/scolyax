@@ -1,0 +1,74 @@
+/* ============================================================
+   Gamificación / Logros (gm-*). Light + dark via DS tokens.
+   ============================================================ */
+.gm { max-width: 1080px; margin: 0 auto; padding: clamp(12px, 2vw, 22px); display: flex; flex-direction: column; gap: 18px; font-family: 'DM Sans', system-ui, sans-serif; color: var(--sx-text); }
+
+/* Hero */
+.gm__hero {
+  border-radius: 22px; padding: clamp(20px, 3vw, 28px); overflow: hidden;
+  background: var(--sx-grad); color: var(--sx-on-accent); box-shadow: 0 22px 56px -28px var(--sx-accent-ring);
+}
+.gm__hero-top { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+.gm__level { display: grid; place-items: center; width: 78px; height: 78px; border-radius: 20px; background: rgba(255,255,255,.28); flex-shrink: 0; }
+.gm__level-num { font-size: 2.1rem; font-weight: 800; line-height: 1; color: var(--sx-on-accent); }
+.gm__level-lbl { font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; opacity: .8; }
+.gm__hero-main { flex: 1; min-width: 220px; }
+.gm__quote { margin: 0 0 12px; font-size: 1.1rem; font-weight: 700; }
+.gm__xpbar-head { display: flex; justify-content: space-between; font-size: .78rem; font-weight: 600; opacity: .85; margin-bottom: 6px; }
+.gm__xpbar-track { height: 9px; border-radius: 999px; background: rgba(0,0,0,.15); overflow: hidden; }
+.gm__xpbar-fill { height: 100%; border-radius: 999px; background: #080c14; transition: width .5s ease; }
+.gm__stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 20px; }
+.gm__stat { background: rgba(255,255,255,.22); border-radius: 14px; padding: 12px 14px; display: flex; flex-direction: column; gap: 2px; }
+.gm__stat-num { font-size: 1.5rem; font-weight: 800; line-height: 1; color: var(--sx-on-accent); }
+.gm__stat-lbl { font-size: .7rem; font-weight: 600; opacity: .8; }
+
+/* Blocks */
+.gm__block { background: var(--sx-card); border: 1px solid var(--sx-border); border-radius: 18px; padding: 20px; box-shadow: var(--sx-shadow); }
+.gm__block-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 16px; }
+.gm__block-title { font-size: 1.05rem; font-weight: 800; margin: 0 0 16px; color: var(--sx-text) !important; }
+.gm__block-head .gm__block-title { margin: 0; }
+.gm__block-count { font-size: .8rem; font-weight: 700; color: var(--sx-accent-700); background: var(--sx-accent-soft); padding: 3px 10px; border-radius: 999px; }
+body.theme-dark .gm__block-count { color: var(--sx-accent); }
+
+/* Challenges */
+.gm__challenges { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+.gm__challenge { display: flex; align-items: center; gap: 12px; padding: 14px; border-radius: 14px; background: var(--sx-card-2); border: 1px solid var(--sx-border); }
+.gm__challenge-emoji { font-size: 1.6rem; }
+.gm__challenge-body { flex: 1; min-width: 0; }
+.gm__challenge-name { margin: 0; font-size: .92rem; font-weight: 700; color: var(--sx-text); }
+.gm__challenge-desc { margin: 2px 0 0; font-size: .78rem; color: var(--sx-text-3); }
+.gm__challenge-reward { font-weight: 800; font-size: .85rem; color: var(--sx-accent-700); background: var(--sx-accent-soft); padding: 4px 10px; border-radius: 999px; }
+body.theme-dark .gm__challenge-reward { color: var(--sx-accent); }
+
+/* Badges */
+.gm__badges { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 12px; }
+.gm__badge {
+  position: relative; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 8px;
+  padding: 18px 12px; border-radius: 16px; border: 1px solid var(--sx-border); background: var(--sx-card);
+  transition: transform .15s, border-color .15s, box-shadow .15s; --c: var(--sx-accent);
+}
+.gm__badge:hover { transform: translateY(-3px); }
+.gm__badge.is-unlocked { border-color: color-mix(in srgb, var(--c) 45%, transparent); box-shadow: 0 10px 26px -16px var(--c); }
+.gm__badge.is-unlocked:hover { box-shadow: 0 16px 34px -16px var(--c); }
+.gm__badge.is-locked { opacity: .7; }
+.gm__badge-emoji { width: 52px; height: 52px; border-radius: 14px; display: grid; place-items: center; font-size: 1.7rem; background: var(--sx-bg-2); }
+.gm__badge.is-unlocked .gm__badge-emoji { background: color-mix(in srgb, var(--c) 16%, transparent); }
+.gm__badge-name { font-size: .8rem; font-weight: 700; text-align: center; color: var(--sx-text) !important; line-height: 1.25; }
+.gm__badge.is-locked .gm__badge-name { color: var(--sx-text-3) !important; }
+.gm__badge-tag { position: absolute; top: 8px; right: 8px; font-size: .58rem; font-weight: 800; text-transform: uppercase; letter-spacing: .05em; color: var(--c); background: color-mix(in srgb, var(--c) 14%, transparent); padding: 2px 6px; border-radius: 999px; }
+
+/* Milestone */
+.gm__milestone { display: flex; align-items: center; gap: 12px; padding: 16px 18px; border-radius: 16px; background: var(--sx-accent-soft); border: 1px solid var(--sx-border); }
+.gm__milestone-icon { font-size: 1.3rem; }
+.gm__milestone-text { margin: 0; font-size: .9rem; font-weight: 600; color: var(--sx-text); }
+
+/* Modal */
+.gm__modal-overlay { position: fixed; inset: 0; z-index: 1100; display: flex; align-items: center; justify-content: center; padding: 20px; background: rgba(10,16,28,.55); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+.gm__modal { position: relative; width: min(360px, 100%); text-align: center; padding: 32px 26px; border-radius: 22px; background: var(--sx-card); border: 1px solid var(--sx-border); box-shadow: var(--sx-shadow-lg); --c: var(--sx-accent); }
+.gm__modal-close { position: absolute; top: 14px; right: 14px; width: 32px; height: 32px; border-radius: 9px; cursor: pointer; background: var(--sx-bg-2); color: var(--sx-text-2); border: 1px solid var(--sx-border); }
+.gm__modal-emoji { width: 84px; height: 84px; margin: 0 auto 14px; border-radius: 22px; display: grid; place-items: center; font-size: 2.6rem; background: color-mix(in srgb, var(--c) 16%, transparent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--c) 22%, transparent); }
+.gm__modal-name { font-size: 1.3rem; font-weight: 800; margin: 0 0 8px; color: var(--sx-text); }
+.gm__modal-desc { font-size: .92rem; color: var(--sx-text-2); margin: 0; line-height: 1.5; }
+.gm__modal-tag { display: inline-block; margin-top: 14px; font-size: .75rem; font-weight: 700; color: var(--c); background: color-mix(in srgb, var(--c) 14%, transparent); padding: 5px 12px; border-radius: 999px; }
+
+@media (max-width: 560px) { .gm__stats { grid-template-columns: repeat(2, 1fr); } }

@@ -1,0 +1,134 @@
+/* ============================================================
+   Install Prompt — tarjeta flotante de instalación PWA.
+   Diseño editorial Scolyax (tokens --sx-*), light + dark.
+   ============================================================ */
+.install-prompt {
+  position: fixed;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  z-index: 9998;
+  width: min(660px, calc(100% - 24px));
+  background: color-mix(in srgb, var(--sx-card) 94%, transparent);
+  -webkit-backdrop-filter: blur(12px) saturate(1.1);
+  backdrop-filter: blur(12px) saturate(1.1);
+  border: 1px solid var(--sx-border-2);
+  border-radius: 18px;
+  box-shadow: var(--sx-shadow-lg), 0 0 0 1px color-mix(in srgb, var(--sx-accent) 10%, transparent);
+  padding: 14px 16px;
+  color: var(--sx-text);
+  animation: sx-install-in .35s cubic-bezier(.2, .8, .2, 1);
+}
+@keyframes sx-install-in {
+  from { opacity: 0; transform: translate(-50%, 14px); }
+  to   { opacity: 1; transform: translate(-50%, 0); }
+}
+
+.install-prompt__content {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* Icono de marca con insignia de descarga */
+.install-prompt__icon {
+  position: relative;
+  flex-shrink: 0;
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border-radius: 13px;
+  background: var(--sx-accent-soft);
+  border: 1px solid var(--sx-border);
+}
+.install-prompt__icon img {
+  width: 30px;
+  height: 30px;
+  display: block;
+}
+.install-prompt__badge {
+  position: absolute;
+  right: -6px;
+  bottom: -6px;
+  width: 20px;
+  height: 20px;
+  display: grid;
+  place-items: center;
+  border-radius: 7px;
+  background: var(--sx-accent);
+  color: var(--sx-on-accent);
+  border: 2px solid var(--sx-card);
+}
+.install-prompt__badge svg { width: 11px; height: 11px; }
+
+/* Texto */
+.install-prompt__text { flex: 1; min-width: 0; }
+.install-prompt__text h3 {
+  margin: 0 0 3px;
+  font-family: var(--font-body);
+  font-size: .98rem;
+  font-weight: 800;
+  letter-spacing: -.2px;
+  color: var(--sx-text);
+}
+.install-prompt__text p {
+  margin: 0;
+  font-size: .82rem;
+  line-height: 1.45;
+  color: var(--sx-text-2);
+}
+
+/* Acciones */
+.install-prompt__actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.install-prompt__button {
+  padding: 10px 18px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  font-family: var(--font-body);
+  font-size: .86rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: .15s;
+}
+.install-prompt__button--primary {
+  background: var(--sx-grad);
+  color: var(--sx-on-accent);
+  box-shadow: 0 10px 24px -12px var(--sx-accent-ring);
+}
+.install-prompt__button--primary:hover {
+  filter: brightness(1.05);
+  transform: translateY(-1px);
+}
+.install-prompt__button--secondary {
+  background: transparent;
+  color: var(--sx-text-2);
+  border-color: var(--sx-border-2);
+}
+.install-prompt__button--secondary:hover {
+  color: var(--sx-text);
+  background: var(--sx-bg-2);
+}
+
+/* Instalación nativa disponible: leve énfasis en el primario */
+.install-prompt--native-ready .install-prompt__button--primary {
+  animation: sx-install-pulse 2.2s ease-in-out infinite;
+}
+@keyframes sx-install-pulse {
+  0%, 100% { box-shadow: 0 10px 24px -12px var(--sx-accent-ring); }
+  50%      { box-shadow: 0 0 0 5px color-mix(in srgb, var(--sx-accent) 14%, transparent); }
+}
+
+/* Móvil */
+@media (max-width: 520px) {
+  .install-prompt { bottom: 12px; padding: 14px; }
+  .install-prompt__content { flex-wrap: wrap; }
+  .install-prompt__text { flex: 1 1 calc(100% - 60px); }
+  .install-prompt__actions { width: 100%; }
+  .install-prompt__button { flex: 1; padding: 12px 14px; }
+}

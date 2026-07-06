@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Limpiar Cache - Scolyax</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+        }
+        .container {
+            text-align: center;
+            max-width: 500px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+        h1 {
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+        p {
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        button {
+            background: white;
+            color: #667eea;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.2s;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+        #status {
+            margin-top: 20px;
+            padding: 12px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            min-height: 20px;
+        }
+        .success {
+            background: rgba(74, 222, 128, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧹 Limpiar Cache</h1>
+        <p>Este script eliminará todos los caches y service workers para forzar una recarga completa.</p>
+        
+        <button onclick="clearAll()">Limpiar Todo el Cache</button>
+        <button onclick="unregisterSW()">Desregistrar Service Worker</button>
+        <button onclick="clearCaches()">Limpiar Solo Caches</button>
+        
+        <div id="status"></div>
+    </div>
+
+    <script>
+        const statusDiv = document.getElementById('status');
+
+        async function clearAll() {
+            statusDiv.textContent = '🔄 Limpiando...';
+            
+            try {
+                // Limpiar caches
+                await clearCaches();
+                
+                // Desregistrar service workers
+                await unregisterSW();
+                
+                statusDiv.className = 'success';
+                statusDiv.textContent = '✅ ¡Cache y Service Worker limpiados!\n\nRedirigiendo a admin...';
+                
+                setTimeout(() => {
+                    window.location.href = '/admin.html';
+                }, 2000);
+            } catch (error) {
+                statusDiv.textContent = '❌ Error: ' + error.message;
+            }
+        }
+
+        async function clearCaches() {
+            statusDiv.textContent = '🗑️ Limpiando caches...';
+            
+            if (!caches) {
+                statusDiv.textContent = '⚠️ Caches API no disponible';
+                return;
+            }
+
+            const cacheNames = await caches.keys();
+            console.log('Caches encontrados:', cacheNames);
+
+            await Promise.all(
+                cacheNames.map(cacheName => {
+                    console.log('Eliminando cache:', cacheName);
+                    return caches.delete(cacheName);
+                })
+            );
+
+            statusDiv.className = 'success';
+            statusDiv.textContent = `✅ ${cacheNames.length} cache(s) eliminados`;
+        }
+
+        async function unregisterSW() {
+            statusDiv.textContent = '🔄 Desregistrando Service Workers...';
+            
+            if (!navigator.serviceWorker) {
+                statusDiv.textContent = '⚠️ Service Worker no disponible';
+                return;
+            }
+
+            const registrations = await navigator.serviceWorker.getRegistrations();
+            console.log('Service Workers encontrados:', registrations.length);
+
+            await Promise.all(
+                registrations.map(registration => {
+                    console.log('Desregistrando:', registration.scope);
+                    return registration.unregister();
+                })
+            );
+
+            statusDiv.className = 'success';
+            statusDiv.textContent = `✅ ${registrations.length} Service Worker(s) desregistrados`;
+        }
+
+        // Auto-limpiar cuando se carga la página
+        window.addEventListener('load', () => {
+            // Opcional: descomenta para limpiar automáticamente
+            // clearAll();
+        });
+    </script>
+</body>
+</html>

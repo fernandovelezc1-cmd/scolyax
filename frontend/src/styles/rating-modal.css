@@ -1,0 +1,686 @@
+/* ═══════════════════════════════════════════════════════════════
+   Rating Modal - Diseño Responsivo Claro/Oscuro
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ────────────────────────────────────────────────────────────────
+   OVERLAY - Fondo semitransparente
+   ──────────────────────────────────────────────────────────────── */
+.rating-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeIn 0.3s ease-out;
+  backdrop-filter: blur(2px);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ────────────────────────────────────────────────────────────────
+   MODAL - Contenedor principal
+   ──────────────────────────────────────────────────────────────── */
+.rating-modal {
+  background-color: #f8f9fa;
+  border-radius: 20px;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+  max-width: 420px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: slideUp 0.4s ease-out;
+  position: relative;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Scrollbar personalizado */
+.rating-modal::-webkit-scrollbar {
+  width: 6px;
+}
+
+.rating-modal::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.rating-modal::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 3px;
+}
+
+.rating-modal::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
+
+/* ────────────────────────────────────────────────────────────────
+   CLOSE BUTTON - Botón de cerrar
+   ──────────────────────────────────────────────────────────────── */
+.rating-modal__close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  min-height: 36px;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  font-size: 28px;
+  color: #666;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  z-index: 10;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.rating-modal__close:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+  color: #333;
+  transform: scale(1.1);
+}
+
+.rating-modal__close:active {
+  transform: scale(0.95);
+}
+
+/* ────────────────────────────────────────────────────────────────
+   CONTENT - Contenedor de contenido
+   ──────────────────────────────────────────────────────────────── */
+.rating-modal__content {
+  padding: 40px 28px 32px;
+  text-align: center;
+}
+
+/* ────────────────────────────────────────────────────────────────
+   TITLE - Título del modal
+   ──────────────────────────────────────────────────────────────── */
+.rating-modal__title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 28px 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  letter-spacing: -0.3px;
+}
+
+/* ────────────────────────────────────────────────────────────────
+   FORM - Contenedor del formulario
+   ──────────────────────────────────────────────────────────────── */
+.rating-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ────────────────────────────────────────────────────────────────
+   STARS - Sistema de estrellas
+   ──────────────────────────────────────────────────────────────── */
+.rating-stars {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin: 0;
+  padding: 12px 0;
+}
+
+.star {
+  background: none;
+  border: none;
+  font-size: 48px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  padding: 4px;
+  color: #ddd;
+  line-height: 1;
+  display: inline-block;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.star.filled {
+  color: #ffc107;
+  transform: scale(1.2) rotate(15deg);
+  text-shadow: 0 3px 8px rgba(255, 193, 7, 0.4);
+  filter: drop-shadow(0 2px 6px rgba(255, 193, 7, 0.3));
+}
+
+.star.empty {
+  color: #e0e0e0;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.star:hover:not(.filled) {
+  color: #ffd54f;
+  transform: scale(1.15);
+}
+
+.star:active {
+  transform: scale(1.25);
+}
+
+/* ────────────────────────────────────────────────────────────────
+   COMMENT TEXTAREA - Área de comentarios
+   ──────────────────────────────────────────────────────────────── */
+.rating-comment {
+  width: 100%;
+  min-height: 110px;
+  padding: 14px 16px;
+  border: 2px solid #000;
+  border-radius: 12px;
+  font-family: monospace;
+  font-size: 20px;
+  font-weight: 900;
+  resize: vertical;
+  box-sizing: border-box;
+  background: #ff0000 !important;
+  color: #fff !important;
+  line-height: 1.8;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  caret-color: #fff !important;
+  color-scheme: light !important;
+}
+
+.rating-comment::placeholder {
+  color: #555 !important;
+  font-weight: 500;
+  opacity: 0.8;
+}
+
+.rating-comment::selection {
+  background-color: #a8a8a8 !important;
+  color: #000 !important;
+}
+
+.rating-comment::-moz-selection {
+  background-color: #a8a8a8 !important;
+  color: #000 !important;
+}
+
+.rating-comment:hover {
+  border-color: #666;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.rating-comment:focus,
+.rating-comment:focus-visible {
+  outline: 2px solid #000 !important;
+  outline-offset: 2px;
+  border-color: #000 !important;
+  box-shadow: none !important;
+  background-color: #d0d0d0 !important;
+  color: #000 !important;
+}
+
+.rating-comment:-webkit-autofill,
+.rating-comment:-webkit-autofill:hover,
+.rating-comment:-webkit-autofill:focus,
+.rating-comment:-webkit-autofill:focus-visible {
+  -webkit-box-shadow: 0 0 0 1000px #d0d0d0 inset !important;
+  -webkit-text-fill-color: #000 !important;
+  background-color: #d0d0d0 !important;
+  color: #000 !important;
+}
+
+.rating-comment::-moz-focus-inner {
+  border: none;
+}
+
+/* ────────────────────────────────────────────────────────────────
+   BUTTONS - Botones de acción
+   ──────────────────────────────────────────────────────────────── */
+.rating-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+.btn-primary,
+.btn-secondary {
+  padding: 12px 28px;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  min-width: 120px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #c9d62f 0%, #c8de1f 100%);
+  color: white;
+  box-shadow: 0 4px 12px rgba(201, 214, 47, 0.3);
+  flex: 1;
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(201, 214, 47, 0.4);
+  background: linear-gradient(135deg, #5a6fd8 0%, #6d3a8e 100%);
+}
+
+.btn-primary:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(201, 214, 47, 0.3);
+}
+
+.btn-primary:disabled {
+  background: #ccc;
+  color: #999;
+  cursor: not-allowed;
+  opacity: 0.6;
+  box-shadow: none;
+}
+
+.btn-secondary {
+  background-color: #e8e8e8;
+  color: #333;
+  flex: 1;
+  border: 1px solid #ddd;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background-color: #d8d8d8;
+  border-color: #ccc;
+  transform: translateY(-1px);
+}
+
+.btn-secondary:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn-secondary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ────────────────────────────────────────────────────────────────
+   SUCCESS STATE - Estado de éxito
+   ──────────────────────────────────────────────────────────────── */
+.rating-success {
+  padding: 60px 28px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  animation: scaleIn 0.4s ease-out;
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.success-icon {
+  font-size: 72px;
+  color: #c9d62f;
+  font-weight: bold;
+  animation: bounceIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  line-height: 1;
+}
+
+@keyframes bounceIn {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.rating-success p {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   LIGHT MODE - Esquema claro (defecto)
+   ═══════════════════════════════════════════════════════════════ */
+@media (prefers-color-scheme: light) {
+  .rating-comment {
+    background-color: #d0d0d0 !important;
+    border-color: #999 !important;
+    color: #000 !important;
+    font-weight: 600 !important;
+    caret-color: #000 !important;
+    color-scheme: light !important;
+  }
+
+  .rating-comment::placeholder {
+    color: #555 !important;
+    font-weight: 500 !important;
+  }
+
+  .rating-comment::selection {
+    background-color: #a8a8a8 !important;
+    color: #000 !important;
+  }
+
+  .rating-comment::-moz-selection {
+    background-color: #a8a8a8 !important;
+    color: #000 !important;
+  }
+
+  .rating-comment:hover {
+    border-color: #666 !important;
+    background-color: #d0d0d0 !important;
+  }
+
+  .rating-comment:focus,
+  .rating-comment:focus-visible {
+    outline: 2px solid #000 !important;
+    outline-offset: 2px;
+    border-color: #000 !important;
+    box-shadow: none !important;
+    background-color: #d0d0d0 !important;
+    color: #000 !important;
+    caret-color: #000 !important;
+  }
+
+  .rating-comment:-webkit-autofill,
+  .rating-comment:-webkit-autofill:hover,
+  .rating-comment:-webkit-autofill:focus,
+  .rating-comment:-webkit-autofill:focus-visible {
+    -webkit-box-shadow: 0 0 0 1000px #d0d0d0 inset !important;
+    -webkit-text-fill-color: #000 !important;
+    background-color: #d0d0d0 !important;
+    color: #000 !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   DARK MODE - Esquema oscuro
+   ═══════════════════════════════════════════════════════════════ */
+@media (prefers-color-scheme: dark) {
+  .rating-modal {
+    background-color: #2d2d2d;
+    color: #f0f0f0;
+  }
+
+  .rating-modal__close {
+    color: #aaa;
+  }
+
+  .rating-modal__close:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+  }
+
+  .rating-modal__title {
+    color: #ffffff;
+  }
+
+  /* Stars in dark mode */
+  .star {
+    color: #444;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  }
+
+  .star.filled {
+    color: #ffeb3b;
+    text-shadow: 0 3px 10px rgba(255, 235, 59, 0.5);
+    filter: drop-shadow(0 2px 8px rgba(255, 235, 59, 0.4));
+  }
+
+  .star.empty {
+    color: #555;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  }
+
+  .star:hover:not(.filled) {
+    color: #ffd54f;
+  }
+
+  /* Textarea in dark mode */
+  .rating-comment {
+    background-color: #1a1a1a !important;
+    border-color: #555 !important;
+    color: #fff !important;
+    font-weight: 600 !important;
+    caret-color: #fff !important;
+    color-scheme: dark !important;
+  }
+
+  .rating-comment::placeholder {
+    color: #888 !important;
+    font-weight: 500 !important;
+  }
+
+  .rating-comment::selection {
+    background-color: #444 !important;
+    color: #fff !important;
+  }
+
+  .rating-comment::-moz-selection {
+    background-color: #444 !important;
+    color: #fff !important;
+  }
+
+  .rating-comment:hover {
+    border-color: #777 !important;
+    background-color: #1a1a1a !important;
+  }
+
+  .rating-comment:focus,
+  .rating-comment:focus-visible {
+    outline: 2px solid #fff !important;
+    outline-offset: 2px;
+    border-color: #fff !important;
+    box-shadow: none !important;
+    background-color: #1a1a1a !important;
+    color: #fff !important;
+    caret-color: #fff !important;
+  }
+
+  .rating-comment:-webkit-autofill,
+  .rating-comment:-webkit-autofill:hover,
+  .rating-comment:-webkit-autofill:focus,
+  .rating-comment:-webkit-autofill:focus-visible {
+    -webkit-box-shadow: 0 0 0 1000px #1a1a1a inset !important;
+    -webkit-text-fill-color: #fff !important;
+    background-color: #1a1a1a !important;
+    color: #fff !important;
+  }
+
+  /* Buttons in dark mode */
+  .btn-secondary {
+    background-color: #444;
+    color: #f0f0f0;
+    border-color: #555;
+  }
+
+  .btn-secondary:hover:not(:disabled) {
+    background-color: #555;
+    border-color: #666;
+  }
+
+  .rating-success p {
+    color: #ffffff;
+  }
+
+  /* Scrollbar dark mode */
+  .rating-modal::-webkit-scrollbar-thumb {
+    background: #555;
+  }
+
+  .rating-modal::-webkit-scrollbar-thumb:hover {
+    background: #777;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MOBILE - Diseño responsivo
+   ═══════════════════════════════════════════════════════════════ */
+@media (max-width: 480px) {
+  .rating-modal {
+    width: 92%;
+    max-height: 85vh;
+  }
+
+  .rating-modal__content {
+    padding: 32px 20px 24px;
+  }
+
+  .rating-modal__close {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    min-height: 48px;
+    font-size: 32px;
+    top: 8px;
+    right: 8px;
+  }
+
+  .rating-modal__title {
+    font-size: 19px;
+    margin-bottom: 24px;
+  }
+
+  .rating-form {
+    gap: 20px;
+  }
+
+  .star {
+    font-size: 42px;
+  }
+
+  .star.filled {
+    transform: scale(1.18) rotate(15deg);
+  }
+
+  .rating-stars {
+    gap: 10px;
+    padding: 8px 0;
+  }
+
+  .rating-comment {
+    min-height: 100px;
+    font-size: 13px;
+    padding: 12px 14px;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    padding: 11px 20px;
+    font-size: 13px;
+    min-width: 100px;
+  }
+
+  .rating-buttons {
+    flex-direction: column-reverse;
+    gap: 10px;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+  }
+
+  .rating-success {
+    padding: 48px 20px;
+  }
+
+  .success-icon {
+    font-size: 64px;
+  }
+
+  .rating-success p {
+    font-size: 15px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MOBILE + DARK MODE - Botón cerrar igual que en escritorio
+   ═══════════════════════════════════════════════════════════════ */
+@media (max-width: 480px) and (prefers-color-scheme: dark) {
+  .rating-modal__close {
+    width: 36px !important;
+    height: 36px !important;
+    min-width: 36px !important;
+    min-height: 36px !important;
+    font-size: 28px !important;
+    top: 12px !important;
+    right: 12px !important;
+    background-color: rgba(255, 255, 255, 0.12) !important;
+    border-radius: 50% !important;
+  }
+
+  .rating-modal__close:hover {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .rating-modal__content {
+    padding: 28px 16px 20px;
+  }
+
+  .rating-modal__title {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+
+  .star {
+    font-size: 38px;
+  }
+
+  .rating-stars {
+    gap: 8px;
+  }
+
+  .rating-comment {
+    min-height: 90px;
+    font-size: 12px;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    padding: 10px 16px;
+    font-size: 12px;
+  }
+}

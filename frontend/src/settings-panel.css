@@ -1,0 +1,106 @@
+/* ============================================================
+   Configuración — Scolyax (rediseño). Light + dark via DS tokens.
+   ============================================================ */
+.settings-overlay {
+  position: fixed; inset: 0; z-index: 1000; display: flex; align-items: center; justify-content: center;
+  padding: 20px; background: rgba(10, 16, 28, .55); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  animation: sx-fade .2s ease;
+}
+@keyframes sx-fade { from { opacity: 0 } to { opacity: 1 } }
+
+.settings-panel {
+  position: relative; width: min(560px, 100%); max-height: 90vh; overflow-y: auto;
+  background: var(--sx-card); color: var(--sx-text);
+  border: 1px solid var(--sx-border); border-radius: 24px; box-shadow: var(--sx-shadow-lg);
+  font-family: 'DM Sans', system-ui, sans-serif;
+  animation: sx-pop .25s cubic-bezier(.2,.8,.2,1);
+}
+@keyframes sx-pop { from { transform: translateY(10px) scale(.98); opacity: 0 } to { transform: none; opacity: 1 } }
+
+.settings-panel__header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 22px 24px; border-bottom: 1px solid var(--sx-border);
+  position: sticky; top: 0; background: var(--sx-card); z-index: 2; border-radius: 24px 24px 0 0;
+}
+.settings-panel__title { display: flex; align-items: center; gap: 10px; font-size: 1.25rem; font-weight: 800; letter-spacing: -.3px; margin: 0; color: var(--sx-text); }
+.settings-panel__title-icon { font-size: 1.2rem; }
+.settings-panel__close {
+  width: 38px; height: 38px; border-radius: 11px; display: grid; place-items: center; cursor: pointer;
+  background: var(--sx-bg-2); color: var(--sx-text-2); border: 1px solid var(--sx-border); transition: .15s;
+}
+.settings-panel__close:hover { background: var(--sx-border); color: var(--sx-text); }
+
+.settings-section { padding: 22px 24px; border-bottom: 1px solid var(--sx-border); }
+.settings-section:last-child { border-bottom: none; }
+.settings-section__title { font-size: .78rem; font-weight: 700; text-transform: uppercase; letter-spacing: .09em; color: var(--sx-text-3); margin: 0 0 16px; }
+
+/* Auto toggle */
+.settings-auto-toggle {
+  display: flex; align-items: center; justify-content: space-between; gap: 14px;
+  padding: 14px 16px; border-radius: 14px; background: var(--sx-card-2); border: 1px solid var(--sx-border); margin-bottom: 16px;
+}
+.settings-auto-toggle__info { display: flex; flex-direction: column; gap: 3px; }
+.settings-auto-toggle__label { font-weight: 700; font-size: .95rem; color: var(--sx-text); }
+.settings-auto-toggle__desc { font-size: .8rem; color: var(--sx-text-3); }
+.settings-switch {
+  width: 50px; height: 28px; border-radius: 999px; flex-shrink: 0; cursor: pointer; position: relative;
+  background: var(--sx-border-2); border: none; transition: background .2s;
+}
+.settings-switch--on { background: var(--sx-accent); }
+.settings-switch__thumb { position: absolute; top: 3px; left: 3px; width: 22px; height: 22px; border-radius: 50%; background: #fff; transition: transform .2s; box-shadow: 0 2px 5px rgba(0,0,0,.25); }
+.settings-switch--on .settings-switch__thumb { transform: translateX(22px); }
+
+/* Theme cards */
+.settings-theme-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.settings-theme-cards--disabled { opacity: .5; pointer-events: none; }
+.settings-theme-card {
+  position: relative; cursor: pointer; text-align: left; padding: 10px; border-radius: 16px;
+  background: var(--sx-card); border: 2px solid var(--sx-border); transition: border-color .15s, transform .15s;
+}
+.settings-theme-card:hover { transform: translateY(-2px); }
+.settings-theme-card--active { border-color: var(--sx-accent); box-shadow: 0 0 0 3px var(--sx-accent-ring); }
+.settings-theme-card__preview { border-radius: 11px; padding: 12px; display: flex; flex-direction: column; gap: 8px; min-height: 130px; }
+.settings-theme-card__preview--light { background: linear-gradient(160deg, #f4f6f8, #ffffff); color: #1c2433; }
+.settings-theme-card__preview--dark { background: linear-gradient(160deg, #0c1220, #131c2e); color: #e8edf5; }
+.preview-header { }
+.preview-greeting { display: flex; align-items: center; gap: 8px; }
+.preview-icon { font-size: 1.1rem; }
+.preview-text-group { display: flex; flex-direction: column; }
+.preview-title { font-weight: 700; font-size: .82rem; }
+.preview-subtitle { font-size: .64rem; opacity: .7; }
+.preview-stats { display: flex; gap: 6px; }
+.preview-stat { flex: 1; background: rgba(201, 214, 47,.14); border-radius: 7px; padding: 5px 7px; display: flex; flex-direction: column; }
+.settings-theme-card__preview--dark .preview-stat { background: rgba(201, 214, 47,.16); }
+.preview-stat-value { font-weight: 800; font-size: .75rem; }
+.preview-stat-label { font-size: .55rem; opacity: .65; letter-spacing: .05em; }
+.settings-theme-card__label { display: block; text-align: center; font-weight: 700; font-size: .9rem; margin-top: 10px; color: var(--sx-text); }
+.settings-theme-card__check { position: absolute; top: 14px; right: 14px; width: 24px; height: 24px; border-radius: 50%; background: var(--sx-grad); color: var(--sx-on-accent); display: grid; place-items: center; font-weight: 800; font-size: .8rem; }
+
+/* Account / danger */
+.settings-account { display: flex; flex-direction: column; gap: 14px; padding: 16px; border-radius: 14px; background: rgba(239,68,68,.06); border: 1px solid rgba(239,68,68,.2); }
+body.theme-dark .settings-account { background: rgba(239,68,68,.1); }
+.settings-account__info { display: flex; flex-direction: column; gap: 5px; }
+.settings-account__label { font-weight: 800; font-size: .9rem; color: #dc2626; }
+body.theme-dark .settings-account__label { color: #fca5a5; }
+.settings-account__desc { font-size: .82rem; color: var(--sx-text-2); line-height: 1.5; }
+.settings-delete-btn {
+  align-self: flex-start; cursor: pointer; padding: 11px 18px; border-radius: 12px; font-weight: 700; font-size: .9rem;
+  background: #ef4444; color: #fff; border: none; transition: .15s;
+}
+.settings-delete-btn:hover { background: #dc2626; }
+
+/* Confirm */
+.settings-confirm-modal { position: fixed; inset: 0; z-index: 1100; display: flex; align-items: center; justify-content: center; padding: 20px; background: rgba(10,16,28,.6); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+.settings-confirm-content { width: min(460px, 100%); background: var(--sx-card); border: 1px solid var(--sx-border); border-radius: 20px; box-shadow: var(--sx-shadow-lg); padding: 24px; color: var(--sx-text); }
+.settings-confirm__title { font-size: 1.1rem; font-weight: 800; margin: 0 0 12px; }
+.settings-confirm__message { font-size: .9rem; color: var(--sx-text-2); margin: 0 0 12px; }
+.settings-confirm__list { list-style: none; padding: 0; margin: 0 0 14px; display: flex; flex-direction: column; gap: 8px; }
+.settings-confirm__list li { font-size: .86rem; color: var(--sx-text); background: var(--sx-card-2); border: 1px solid var(--sx-border); border-radius: 10px; padding: 9px 12px; }
+.settings-confirm__warning { font-size: .85rem; color: var(--sx-text-2); margin: 0 0 16px; }
+.settings-confirm__actions { display: flex; gap: 10px; justify-content: flex-end; }
+.settings-confirm-btn { cursor: pointer; padding: 11px 18px; border-radius: 12px; font-weight: 700; font-size: .88rem; border: none; }
+.settings-confirm-btn--cancel { background: var(--sx-card); color: var(--sx-text); border: 1px solid var(--sx-border-2); }
+.settings-confirm-btn--cancel:hover { border-color: var(--sx-accent); }
+.settings-confirm-btn--delete { background: #ef4444; color: #fff; }
+.settings-confirm-btn--delete:hover { background: #dc2626; }
+.settings-confirm-btn:disabled { opacity: .6; cursor: default; }

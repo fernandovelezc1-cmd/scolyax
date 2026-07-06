@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Scolyax">
+  <defs>
+    <linearGradient id="sxBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0d1320"/>
+      <stop offset="1" stop-color="#060a10"/>
+    </linearGradient>
+    <linearGradient id="sxMark" x1="0.1" y1="0" x2="0.9" y2="1">
+      <stop offset="0" stop-color="#dde77a"/>
+      <stop offset="0.5" stop-color="#c9d62f"/>
+      <stop offset="1" stop-color="#a9b71a"/>
+    </linearGradient>
+    <radialGradient id="sxGlow" cx="0.5" cy="0.42" r="0.6">
+      <stop offset="0" stop-color="#c9d62f" stop-opacity="0.30"/>
+      <stop offset="1" stop-color="#c9d62f" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="sxBlur" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="9"/>
+    </filter>
+  </defs>
+
+  <circle cx="256" cy="280" r="170" fill="url(#sxGlow)"/>
+
+  <!-- glow pass -->
+  <g fill="none" stroke="url(#sxMark)" stroke-width="40" stroke-linecap="round" stroke-linejoin="round" filter="url(#sxBlur)" opacity="0.7">
+    <polyline points="150,228 256,168 362,228"/>
+    <polyline points="150,304 256,244 362,304"/>
+    <polyline points="150,380 256,320 362,380"/>
+  </g>
+  <!-- sharp pass -->
+  <g fill="none" stroke="url(#sxMark)" stroke-width="40" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="150,228 256,168 362,228"/>
+    <polyline points="150,304 256,244 362,304" opacity="0.9"/>
+    <polyline points="150,380 256,320 362,380" opacity="0.72"/>
+  </g>
+</svg>

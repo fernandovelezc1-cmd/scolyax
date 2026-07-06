@@ -1,0 +1,39 @@
+/* ========================================
+   LOADING BAR - Barra de carga personalizada
+   ======================================== */
+
+.loading-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 99999;
+  pointer-events: none;
+  background: transparent;
+}
+
+.loading-bar__fill {
+  height: 100%;
+  background: linear-gradient(90deg, #c9d62f 0%, #c8de1f 50%, #c9d62f 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+  box-shadow: 0 0 10px rgba(201, 214, 47, 0.5);
+  transition: width 0.2s ease-out;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Dark mode */
+.theme-dark .loading-bar__fill {
+  background: linear-gradient(90deg, #a5b4fc 0%, #dde77a 50%, #a5b4fc 100%);
+  background-size: 200% 100%;
+  box-shadow: 0 0 10px rgba(165, 180, 252, 0.5);
+}

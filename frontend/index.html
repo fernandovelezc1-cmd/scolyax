@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="es" style="overflow-x: hidden; overflow-y: auto;">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover" />
+
+    <!-- Fuentes editoriales: Bebas Neue (display), DM Sans (body), DM Mono (labels) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+    <!-- PWA Meta Tags -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Scolyax" />
+    <meta name="application-name" content="Scolyax" />
+    <meta name="theme-color" content="#0a0f1e" />
+    <meta name="description" content="Plataforma de productividad académica con IA - Organiza tus tareas, horarios y aumenta tu concentración" />
+
+    <!-- Para Android: ocultar barras del navegador -->
+    <meta name="mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#0a0f1e" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#06080f" />
+    <meta name="color-scheme" content="light dark" />
+    
+    <!-- Chrome Fullscreen Hints -->
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="apple-touch-fullscreen" content="yes" />
+    <meta name="web-app-user-installable" content="true" />
+    <meta name="chrome-mobile-web-app" content="yes" />
+    <meta name="mobile-web-app-manifest" content="/manifest.json" />
+    
+    <!-- Prevent browser chrome from showing on navigation -->
+    <meta name="format-detection" content="telephone=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    
+    <!-- iOS Splash Screens -->
+    <link rel="apple-touch-startup-image" href="/splash-640x1136.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)">
+    <link rel="apple-touch-startup-image" href="/splash-750x1334.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)">
+    <link rel="apple-touch-startup-image" href="/splash-1242x2208.png" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3)">
+    <link rel="apple-touch-startup-image" href="/splash-1125x2436.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)">
+    <link rel="apple-touch-startup-image" href="/splash-1242x2688.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3)">
+    
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/manifest.json" />
+    
+    <!-- Icons -->
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/web-app-manifest-192x192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/web-app-manifest-512x512.png" />
+    
+    <title>Scolyax - Productividad Académica con IA</title>
+    <!-- Force rebuild - Build trigger 2025-11-18 v2.1.0 API URL fix -->
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    
+    <style>
+      /* Ocultar barra de navegador y hacer PWA más nativa */
+      html {
+        overscroll-behavior: none;
+        -webkit-overflow-scrolling: touch;
+        /* Prevenir que la barra de direcciones interfiera */
+        height: 100%;
+        width: 100%;
+      }
+      
+      body {
+        overscroll-behavior-y: contain;
+        -webkit-tap-highlight-color: transparent;
+        /* Asegurar que el contenido use todo el viewport */
+        min-height: 100vh;
+        min-height: -webkit-fill-available;
+        position: relative;
+      }
+      
+      /* Ocultar la barra de progreso del navegador en PWA */
+      @media all and (display-mode: standalone) {
+        html, body {
+          overflow: hidden;
+          position: fixed;
+          width: 100%;
+          height: 100%;
+        }
+        
+        #root {
+          overflow: auto;
+          height: 100%;
+          width: 100%;
+          position: relative;
+        }
+
+        /* Ocultar elementos del navegador en modo PWA */
+        /* Esto asegura que NADA del navegador se muestre */
+        body {
+          overscroll-behavior: none;
+          -webkit-overflow-scrolling: touch;
+        }
+
+        /* Prevenir pull-to-refresh en PWA */
+        body {
+          overscroll-behavior-y: contain;
+        }
+      }
+      
+      /* Safe area para dispositivos con notch */
+      body {
+        padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+      }
+      
+      /* Prevenir barra de progreso del navegador durante navegación */
+      @media all and (display-mode: standalone) {
+        /* Ocultar cualquier indicador de carga del navegador */
+        ::-webkit-progress-bar,
+        ::-webkit-progress-value,
+        ::-webkit-progress-inner-element {
+          display: none !important;
+          opacity: 0 !important;
+          visibility: hidden !important;
+        }
+
+        /* Ocultar barra de carga superior de Android Chrome */
+        body::before {
+          content: none !important;
+        }
+        
+        /* Asegurar que las transiciones de navegación sean suaves */
+        * {
+          -webkit-tap-highlight-color: transparent;
+          -webkit-touch-callout: none;
+        }
+
+        /* Prevenir zoom en inputs (comportamiento nativo) */
+        input, select, textarea {
+          font-size: 16px !important;
+        }
+      }
+      
+      /* Splash screen personalizado mientras carga */
+      #root:empty::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(130% 130% at 12% -10%, #0c1730 0%, #0a0f1e 46%, #06080f 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

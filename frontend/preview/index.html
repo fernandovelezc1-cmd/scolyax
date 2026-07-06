@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scolyax · Vista previa del dashboard</title>
+    <link rel="stylesheet" href="../src/styles.css" />
+    <style>
+      body {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 24px 32px 64px;
+        background: radial-gradient(120% 120% at 50% 0%, #f0f5ff 0%, #f9fbff 50%, #ffffff 100%);
+      }
+      .preview-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+      }
+      .preview-notice {
+        background: rgba(52, 84, 209, 0.08);
+        border: 1px solid rgba(52, 84, 209, 0.24);
+        border-radius: 20px;
+        padding: 16px 20px;
+        color: #1f265e;
+        font-size: 0.95rem;
+      }
+      .preview-tabs {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 12px;
+      }
+      .preview-tab {
+        border-radius: 16px;
+        padding: 12px 16px;
+        text-align: center;
+        font-weight: 600;
+        color: #1f265e;
+        background: rgba(255, 255, 255, 0.8);
+        border: 1px solid rgba(31, 38, 94, 0.1);
+        box-shadow: 0 12px 30px rgba(31, 38, 94, 0.08);
+      }
+      .preview-grid {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 24px;
+      }
+      .preview-column {
+        grid-column: span 6;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      }
+      .preview-panel {
+        border-radius: 28px;
+        background: rgba(255, 255, 255, 0.82);
+        border: 1px solid rgba(31, 38, 94, 0.08);
+        box-shadow: 0 18px 40px rgba(31, 38, 94, 0.12);
+        padding: 24px 28px;
+      }
+      .preview-panel header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 16px;
+      }
+      .preview-panel h2 {
+        margin: 0;
+        font-size: 1.25rem;
+        color: #1f265e;
+      }
+      .preview-empty {
+        margin: 24px 0 8px;
+        padding: 24px;
+        border-radius: 20px;
+        border: 1px dashed rgba(31, 38, 94, 0.18);
+        background: rgba(31, 38, 94, 0.04);
+        text-align: center;
+        color: #4b5581;
+        font-size: 0.95rem;
+      }
+      .preview-calendar {
+        margin-top: 24px;
+        border-radius: 20px;
+        border: 1px dashed rgba(31, 38, 94, 0.18);
+        padding: 24px;
+        display: grid;
+        grid-template-columns: repeat(7, minmax(120px, 1fr));
+        gap: 12px;
+        overflow-x: auto;
+      }
+      .preview-calendar-day {
+        min-width: 120px;
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px solid rgba(31, 38, 94, 0.12);
+        padding: 12px;
+        font-size: 0.9rem;
+        color: #1f265e;
+      }
+      .preview-calendar-day strong {
+        display: block;
+        margin-bottom: 12px;
+        font-size: 0.95rem;
+      }
+      .preview-calendar-slot {
+        padding: 12px;
+        border-radius: 12px;
+        background: rgba(31, 38, 94, 0.05);
+        border: 1px dashed rgba(31, 38, 94, 0.15);
+        color: #4b5581;
+        text-align: center;
+        font-size: 0.85rem;
+      }
+      @media (max-width: 960px) {
+        .preview-column {
+          grid-column: span 12;
+        }
+      }
+    </style>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+</head>
+  <body>
+    <main class="preview-wrapper">
+      <section class="overview" aria-labelledby="preview-welcome">
+        <div class="overview__topbar">
+          <div class="overview__brand">
+            <div class="brand-icon" aria-hidden="true">CC</div>
+            <div class="overview__intro">
+              <p class="overview__eyebrow">Tu agenda universitaria</p>
+              <h1 id="preview-welcome" class="overview__title">Scolyax</h1>
+              <p class="overview__description">
+                Organiza tareas, sesiones de enfoque, recordatorios y resúmenes accesibles en un mismo lugar.
+              </p>
+              <p class="overview__helper">Accede con Google o Microsoft para activar las notificaciones por correo.</p>
+            </div>
+          </div>
+          <div class="profile-menu profile-menu--placeholder" aria-hidden="true">
+            <span class="profile-menu__avatar">🙂</span>
+          </div>
+        </div>
+        <div class="overview__stickers" aria-hidden="true">
+          <span class="sticker sticker--pulse">Pomodoro flexible</span>
+          <span class="sticker sticker--accent">Recordatorios por correo</span>
+          <span class="sticker sticker--outline">Resúmenes con audio</span>
+        </div>
+        <div class="overview__metrics" role="list" aria-label="Indicadores de progreso">
+          <article class="metric" role="listitem">
+            <span class="metric__label">Tareas completadas</span>
+            <strong class="metric__value">0</strong>
+            <span class="metric__hint">Aún no hay datos</span>
+          </article>
+          <article class="metric" role="listitem">
+            <span class="metric__label">Sesiones de enfoque</span>
+            <strong class="metric__value">0</strong>
+            <span class="metric__hint">Registra tu primer ciclo</span>
+          </article>
+          <article class="metric" role="listitem">
+            <span class="metric__label">Recordatorios próximos</span>
+            <strong class="metric__value">0</strong>
+            <span class="metric__hint">Sin avisos programados</span>
+          </article>
+        </div>
+      </section>
+
+      <div class="preview-notice">
+        Navega entre pestañas para registrar tu información. Todas las secciones comienzan vacías para que añadas tus propios datos.
+      </div>
+
+      <nav class="preview-tabs" aria-label="Pestañas principales">
+        <span class="preview-tab">Tareas</span>
+        <span class="preview-tab">Pomodoro</span>
+        <span class="preview-tab">Calendario</span>
+        <span class="preview-tab">Recordatorios</span>
+        <span class="preview-tab">Resúmenes</span>
+      </nav>
+
+      <section class="preview-grid" aria-label="Contenido del dashboard">
+        <div class="preview-column">
+          <article class="preview-panel">
+            <header>
+              <div>
+                <h2>Tareas</h2>
+                <p>Completa el formulario para registrar cada tarea y marca el progreso cuando finalices tus actividades.</p>
+              </div>
+            </header>
+            <div class="preview-empty">Sin tareas registradas. Añade la primera desde la pestaña correspondiente.</div>
+          </article>
+
+          <article class="preview-panel">
+            <header>
+              <div>
+                <h2>Calendario semanal</h2>
+                <p>Planifica clases, tutorías y bloques personales para equilibrar la carga académica.</p>
+              </div>
+            </header>
+            <div class="preview-calendar" role="grid" aria-label="Calendario vacío">
+              <div class="preview-calendar-day">
+                <strong>Lunes</strong>
+                <div class="preview-calendar-slot">Sin actividades</div>
+              </div>
+              <div class="preview-calendar-day">
+                <strong>Martes</strong>
+                <div class="preview-calendar-slot">Sin actividades</div>
+              </div>
+              <div class="preview-calendar-day">
+                <strong>Miércoles</strong>
+                <div class="preview-calendar-slot">Sin actividades</div>
+              </div>
+              <div class="preview-calendar-day">
+                <strong>Jueves</strong>
+                <div class="preview-calendar-slot">Sin actividades</div>
+              </div>
+              <div class="preview-calendar-day">
+                <strong>Viernes</strong>
+                <div class="preview-calendar-slot">Sin actividades</div>
+              </div>
+              <div class="preview-calendar-day">
+                <strong>Sábado</strong>
+                <div class="preview-calendar-slot">Sin actividades</div>
+              </div>
+              <div class="preview-calendar-day">
+                <strong>Domingo</strong>
+                <div class="preview-calendar-slot">Sin actividades</div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="preview-column">
+          <article class="preview-panel">
+            <header>
+              <div>
+                <h2>Pomodoro</h2>
+                <p>Ajusta la duración del ciclo y recibe una alarma al terminar el tiempo.</p>
+              </div>
+            </header>
+            <div class="preview-empty">Configura el temporizador para iniciar tu primera sesión.</div>
+          </article>
+
+          <article class="preview-panel">
+            <header>
+              <div>
+                <h2>Recordatorios</h2>
+                <p>Programa avisos por correo y ajusta la hora cuantas veces necesites antes de la entrega.</p>
+              </div>
+            </header>
+            <div class="preview-empty">No hay recordatorios configurados.</div>
+          </article>
+
+          <article class="preview-panel">
+            <header>
+              <div>
+                <h2>Resúmenes</h2>
+                <p>Sube un archivo compatible o pega texto para generar un resumen detallado y revisar el contenido original.</p>
+              </div>
+            </header>
+            <div class="preview-empty">Aún no se ha generado ningún resumen.</div>
+          </article>
+
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

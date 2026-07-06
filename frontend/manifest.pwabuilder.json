@@ -1,0 +1,189 @@
+{
+  "$schema": "https://json.schemastore.org/web-manifest-combined.json",
+  "name": "Scolyax - Productividad Académica con IA",
+  "short_name": "Scolyax",
+  "description": "Plataforma inteligente de productividad académica con IA. Organiza tareas, gestiona tiempo con Pomodoro, recibe recordatorios y mejora tu rendimiento estudiantil.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+  "orientation": "portrait-primary",
+  "background_color": "#0f172a",
+  "theme_color": "#667eea",
+  "lang": "es-ES",
+  "dir": "ltr",
+  "categories": ["productivity", "education", "utilities", "lifestyle"],
+  "icons": [
+    {
+      "src": "/web-app-manifest-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/web-app-manifest-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshot-wide.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Vista principal de Scolyax en desktop"
+    },
+    {
+      "src": "/screenshot-mobile.png",
+      "sizes": "750x1334",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Vista principal de Scolyax en móvil"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Nueva Tarea",
+      "short_name": "Tarea",
+      "description": "Crear una nueva tarea rápidamente",
+      "url": "/#tasks",
+      "icons": [
+        {
+          "src": "/web-app-manifest-192x192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Iniciar Pomodoro",
+      "short_name": "Pomodoro",
+      "description": "Iniciar sesión de concentración",
+      "url": "/#timer",
+      "icons": [
+        {
+          "src": "/web-app-manifest-192x192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Recordatorios",
+      "short_name": "Recordar",
+      "description": "Ver y gestionar recordatorios",
+      "url": "/#reminders",
+      "icons": [
+        {
+          "src": "/web-app-manifest-192x192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Calendario",
+      "short_name": "Agenda",
+      "description": "Ver calendario académico",
+      "url": "/#calendar",
+      "icons": [
+        {
+          "src": "/web-app-manifest-192x192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
+  "share_target": {
+    "action": "/share",
+    "method": "POST",
+    "enctype": "multipart/form-data",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url",
+      "files": [
+        {
+          "name": "document",
+          "accept": [
+            "application/pdf",
+            ".pdf",
+            "application/msword",
+            ".doc",
+            ".docx",
+            "text/plain",
+            ".txt"
+          ]
+        }
+      ]
+    }
+  },
+  "file_handlers": [
+    {
+      "action": "/open-file",
+      "accept": {
+        "application/pdf": [".pdf"],
+        "application/msword": [".doc", ".docx"],
+        "text/plain": [".txt"]
+      }
+    }
+  ],
+  "protocol_handlers": [
+    {
+      "protocol": "web+scolyax",
+      "url": "/handler?url=%s"
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "iarc_rating_id": "",
+  "handle_links": "preferred",
+  "launch_handler": {
+    "client_mode": ["navigate-existing", "auto"]
+  },
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  "widgets": [
+    {
+      "name": "Próximas tareas",
+      "short_name": "Tareas",
+      "description": "Widget mostrando tus próximas tareas",
+      "tag": "tasks-widget",
+      "template": "tasks-template",
+      "ms_ac_template": "adaptive-card.json",
+      "data": "tasks-data.json",
+      "type": "application/json",
+      "screenshots": [
+        {
+          "src": "/widget-screenshot.png",
+          "sizes": "400x320",
+          "label": "Widget de tareas"
+        }
+      ],
+      "icons": [
+        {
+          "src": "/web-app-manifest-192x192.png",
+          "sizes": "192x192"
+        }
+      ],
+      "auth": false,
+      "update": 3600
+    }
+  ]
+}

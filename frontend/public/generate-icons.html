@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Generador de Íconos PWA</title>
+    <style>
+        body {
+            font-family: system-ui;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .container {
+            background: rgba(255,255,255,0.95);
+            padding: 30px;
+            border-radius: 20px;
+            color: #333;
+        }
+        h1 { color: #667eea; margin-top: 0; }
+        canvas { display: none; }
+        .icon-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .icon-item {
+            text-align: center;
+            padding: 15px;
+            background: #f5f5f5;
+            border-radius: 10px;
+        }
+        .icon-item img {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover { background: #5568d3; }
+        .status {
+            padding: 15px;
+            background: #e8f5e9;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #4caf50;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 Generador de Íconos PWA para Scolyax</h1>
+        <p>Esta herramienta genera todos los íconos necesarios para tu PWA desde el logo SVG.</p>
+        
+        <button onclick="generateIcons()">✨ Generar Todos los Íconos</button>
+        
+        <div id="status" style="display:none" class="status">
+            <strong>✅ Íconos generados!</strong><br>
+            Click derecho en cada imagen → "Guardar imagen como..." → Guarda en <code>frontend/public/</code>
+        </div>
+        
+        <div id="icons" class="icon-preview"></div>
+    </div>
+
+    <canvas id="canvas"></canvas>
+
+    <script>
+        const sizes = [
+            { name: 'icon-192.png', size: 192 },
+            { name: 'icon-512.png', size: 512 },
+            { name: 'icon-192-maskable.png', size: 192, padding: 0.15 },
+            { name: 'icon-512-maskable.png', size: 512, padding: 0.15 }
+        ];
+
+        function generateIcons() {
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+            const iconsDiv = document.getElementById('icons');
+            const statusDiv = document.getElementById('status');
+            
+            iconsDiv.innerHTML = '';
+            statusDiv.style.display = 'block';
+
+            // SVG del logo
+            const svgContent = `
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+                    <defs>
+                        <linearGradient id="iconGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                            <stop offset="50%" style="stop-color:#764ba2;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <circle cx="100" cy="100" r="95" fill="url(#iconGrad)"/>
+                    <g transform="translate(100, 100)" fill="#ffffff">
+                        <path d="M -35,-25 Q -50,-15 -50,0 Q -50,15 -35,25 Q -25,18 -24,8 Q -23,0 -24,-8 Q -25,-18 -35,-25 Z" opacity="0.95"/>
+                        <path d="M 35,-25 Q 50,-15 50,0 Q 50,15 35,25 Q 25,18 24,8 Q 23,0 24,-8 Q 25,-18 35,-25 Z" opacity="0.95"/>
+                        <line x1="-24" y1="0" x2="24" y2="0" stroke="#ffffff" stroke-width="4" stroke-linecap="round" opacity="0.9"/>
+                        <line x1="-20" y1="-14" x2="20" y2="-14" stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+                        <line x1="-20" y1="14" x2="20" y2="14" stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+                        <circle cx="-24" cy="0" r="5" fill="#ffffff"/>
+                        <circle cx="24" cy="0" r="5" fill="#ffffff"/>
+                        <circle cx="0" cy="0" r="6" fill="#ffffff"/>
+                    </g>
+                </svg>
+            `;
+
+            const blob = new Blob([svgContent], { type: 'image/svg+xml' });
+            const url = URL.createObjectURL(blob);
+            const img = new Image();
+
+            img.onload = function() {
+                sizes.forEach(({ name, size, padding = 0 }) => {
+                    canvas.width = size;
+                    canvas.height = size;
+
+                    // Limpiar canvas
+                    ctx.clearRect(0, 0, size, size);
+
+                    // Calcular tamaño con padding
+                    const drawSize = size * (1 - padding * 2);
+                    const offset = size * padding;
+
+                    // Dibujar imagen
+                    ctx.drawImage(img, offset, offset, drawSize, drawSize);
+
+                    // Crear preview
+                    const dataUrl = canvas.toDataURL('image/png');
+                    const iconDiv = document.createElement('div');
+                    iconDiv.className = 'icon-item';
+                    iconDiv.innerHTML = `
+                        <img src="${dataUrl}" alt="${name}" style="width: ${Math.min(size, 150)}px">
+                        <p><strong>${name}</strong></p>
+                        <small>${size}x${size}px${padding ? ' (maskable)' : ''}</small>
+                    `;
+                    iconsDiv.appendChild(iconDiv);
+                });
+
+                URL.revokeObjectURL(url);
+            };
+
+            img.src = url;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,167 @@
+/* ========================================
+   PERFORMANCE OPTIMIZATIONS
+   Global CSS for smooth 60fps PWA interactions
+   ======================================== */
+
+/* === GPU Compositing Hints === */
+.tool-selector,
+.tool-selector__container,
+.cognitive-test,
+.cognitive-test__container,
+.dashboard-transition,
+.loading-screen,
+.onboarding-loader,
+.achievement-celebration,
+.streak-celebration,
+.confetti-container {
+  will-change: transform, opacity;
+}
+
+/* === Layout Containment for Cards/Panels === */
+.tool-selector__tool,
+.task-list-item,
+.reminder-item,
+.schedule-item,
+.home-panel__card,
+.gamification-bar,
+.settings-panel {
+  contain: layout style paint;
+}
+
+/* === Content Visibility for Off-Screen Panels === */
+.tab-panel[hidden],
+.panel-hidden {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 500px;
+}
+
+/* ========================================
+   MOBILE PERFORMANCE: Remove expensive effects
+   ======================================== */
+@media (max-width: 768px) {
+  /* Remove all backdrop-filter on mobile - massive perf gain */
+  .tool-selector__container,
+  .cognitive-test__container,
+  .loading-screen__content,
+  .onboarding-loader__content,
+  .dashboard-transition__content,
+  .auth-modal,
+  .task-modal__content,
+  .reminder-modal__content,
+  .schedule-modal__content,
+  .rating-modal__content,
+  .settings-panel,
+  .avatar-modal,
+  .admin-panel-modal__content {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  /* Replace with semi-transparent backgrounds (keep animation visible) */
+  .tool-selector__container {
+    background: rgba(255, 255, 255, 0.55) !important;
+  }
+  .cognitive-test__container {
+    background: rgba(255, 255, 255, 0.90) !important;
+  }
+
+  /* Reduce heavy blur filters on shapes */
+  .shape {
+    filter: blur(30px) !important;
+    opacity: 0.05 !important;
+  }
+
+  /* Simplify particle animations */
+  .tool-selector__particle,
+  .confetti-particle {
+    box-shadow: none !important;
+    filter: none !important;
+  }
+
+  /* Disable expensive pseudo-element animations */
+  .tool-selector::before,
+  .tool-selector::after,
+  .cognitive-test::before,
+  .cognitive-test::after,
+  .loading-screen::before,
+  .loading-screen::after,
+  .onboarding-loader::before,
+  .onboarding-loader::after {
+    animation: none !important;
+  }
+
+  /* Simplify background animations - static gradient on mobile */
+  .tool-selector,
+  .cognitive-test,
+  .loading-screen,
+  .onboarding-loader {
+    background-size: 100% 100% !important;
+    animation-duration: 0.6s !important;
+    animation-iteration-count: 1 !important;
+  }
+
+  /* Remove drop-shadow filters on mobile */
+  .tool-selector__iris-avatar,
+  .tool-selector__tool-icon,
+  .streak-celebration__emoji,
+  .achievement-celebration__trophy {
+    filter: none !important;
+  }
+
+  /* Reduce box-shadow on hover states */
+  .tool-selector__tool:hover,
+  .tool-selector__tool:active {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+  }
+}
+
+/* ========================================
+   PREFERS REDUCED MOTION
+   Respect user's OS accessibility settings
+   ======================================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ========================================
+   DARK MODE: Remove backdrop-filter on mobile too
+   ======================================== */
+@media (max-width: 768px) {
+  .theme-dark .tool-selector__container {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: rgba(15, 23, 42, 0.50) !important;
+  }
+  .theme-dark .cognitive-test__container,
+  .theme-dark .task-modal__content,
+  .theme-dark .reminder-modal__content,
+  .theme-dark .schedule-modal__content {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: rgba(30, 30, 40, 0.95) !important;
+  }
+}
+
+/* ========================================
+   OPTIMIZE TRANSITIONS: Use GPU-only properties
+   Override costly transition: all on interactive elements
+   ======================================== */
+@media (max-width: 768px) {
+  .tool-selector__tool,
+  .task-list-item,
+  .reminder-item,
+  .home-panel__card,
+  .gamification-bar__item,
+  button,
+  .btn,
+  [role="button"] {
+    transition: transform 0.2s ease, opacity 0.2s ease !important;
+  }
+}

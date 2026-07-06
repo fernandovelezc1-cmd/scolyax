@@ -1,0 +1,285 @@
+/* ══════════════════════════════════════════════════════════════
+   MoodEvaluator.css – Evaluador de estado emocional post-login
+   Namespace: me-*
+   Glassmorphism sobre gradiente oscuro, mismo espíritu que IrisResults
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── Overlay ── */
+.me-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+  padding: 24px 16px;
+  opacity: 0;
+  transform: scale(0.98);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+.me-overlay--visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ── Card ── */
+.me-card {
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+/* ── Iris Avatar ── */
+.me-avatar-wrap {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin-bottom: 20px;
+}
+.me-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #c9d62f 0%, #c8de1f 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: 800;
+  color: #fff;
+  position: relative;
+  z-index: 1;
+  animation: meAvatarFloat 3s ease-in-out infinite;
+}
+.me-avatar-ring {
+  position: absolute;
+  inset: -5px;
+  border-radius: 50%;
+  border: 2px solid rgba(201, 214, 47, 0.4);
+  animation: meRingPulse 2s ease-in-out infinite;
+}
+@keyframes meAvatarFloat {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-5px); }
+}
+@keyframes meRingPulse {
+  0%, 100% { transform: scale(1);    opacity: 0.5; }
+  50%       { transform: scale(1.1); opacity: 1; }
+}
+
+/* ── Title ── */
+.me-title {
+  color: #f1f5f9;
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0 0 8px;
+  text-align: center;
+  line-height: 1.3;
+}
+.me-name {
+  background: linear-gradient(90deg, #a9b71a, #60a5fa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.me-subtitle {
+  color: rgba(241, 245, 249, 0.6);
+  font-size: 17px;
+  text-align: center;
+  margin: 0 0 28px;
+}
+
+/* ── Mood grid ── */
+.me-moods-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  width: 100%;
+}
+.me-mood-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 16px 8px 14px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.2s, border-color 0.2s, transform 0.15s;
+}
+.me-mood-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: var(--mood-color, rgba(201, 214, 47, 0.5));
+  transform: translateY(-3px);
+}
+.me-mood-btn:active {
+  transform: scale(0.95);
+}
+.me-mood-emoji {
+  font-size: 30px;
+  line-height: 1;
+}
+.me-mood-label {
+  color: rgba(226, 232, 240, 0.7);
+  font-size: 11px;
+  font-weight: 500;
+  text-align: center;
+  line-height: 1.3;
+}
+
+/* ── Response phase ── */
+.me-response {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  width: 100%;
+  animation: meSlideUp 0.35s ease-out;
+}
+@keyframes meSlideUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.me-response-mood {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.me-response-emoji {
+  font-size: 28px;
+}
+.me-response-mood-label {
+  color: rgba(226, 232, 240, 0.6);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Speech bubble */
+.me-speech-bubble {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(52, 211, 153, 0.3);
+  border-radius: 18px 18px 18px 4px;
+  padding: 18px 20px;
+  width: 100%;
+  position: relative;
+}
+.me-speech-text {
+  color: #e2e8f0;
+  font-size: 15px;
+  line-height: 1.6;
+  margin: 0;
+  font-style: italic;
+}
+
+/* Strategy card */
+.me-strategy-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  padding: 14px 18px;
+  width: 100%;
+}
+.me-strategy-tip {
+  font-size: 22px;
+  flex-shrink: 0;
+  line-height: 1;
+  margin-top: 2px;
+}
+.me-strategy-text {
+  color: rgba(226, 232, 240, 0.8);
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Continue button */
+.me-continue-btn {
+  background: linear-gradient(135deg, #c9d62f 0%, #c8de1f 100%);
+  color: #fff;
+  border: none;
+  padding: 15px 36px;
+  border-radius: 50px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 4px 18px rgba(201, 214, 47, 0.35);
+  margin-top: 4px;
+}
+.me-continue-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(201, 214, 47, 0.5);
+}
+.me-continue-btn:active {
+  transform: scale(0.97);
+}
+
+/* ── Responsive ── */
+@media (max-width: 400px) {
+  .me-moods-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .me-title {
+    font-size: 20px;
+  }
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .me-avatar, .me-avatar-ring {
+    animation: none;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   DAY MODE — .me-light class (when isDark=false)
+   ══════════════════════════════════════════════════════════════ */
+.me-overlay.me-light {
+  background: linear-gradient(135deg, #e0e7ff 0%, #ecfdf5 50%, #f0fdf4 100%);
+}
+.me-light .me-title {
+  color: #1e1b4b;
+}
+.me-light .me-subtitle {
+  color: rgba(30, 27, 75, 0.65);
+}
+.me-light .me-mood-btn {
+  background: rgba(255, 255, 255, 0.75);
+  border-color: rgba(169, 183, 26, 0.18);
+}
+.me-light .me-mood-btn:hover {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: var(--mood-color, rgba(201, 214, 47, 0.5));
+}
+.me-light .me-mood-label {
+  color: rgba(30, 27, 75, 0.75);
+}
+.me-light .me-speech-bubble {
+  background: rgba(255, 255, 255, 0.85);
+  border-color: rgba(169, 183, 26, 0.25);
+}
+.me-light .me-speech-text {
+  color: #1e1b4b;
+}
+.me-light .me-strategy-card {
+  background: rgba(255, 255, 255, 0.75);
+  border-color: rgba(169, 183, 26, 0.15);
+}
+.me-light .me-strategy-text {
+  color: rgba(30, 27, 75, 0.8);
+}
+.me-light .me-response-mood-label {
+  color: rgba(30, 27, 75, 0.65);
+}
+.me-light .me-avatar-ring {
+  border-color: rgba(169, 183, 26, 0.35);
+}
